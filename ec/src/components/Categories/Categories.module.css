@@ -1,0 +1,17 @@
+/* .container {
+  background-color: rebeccapurple;
+} */
+
+.thumbnail {
+  border-radius: 10px;
+}
+
+.category_name {
+  font-weight: 600;
+  text-transform: capitalize;
+  width: 220px;
+  /* height: 40px; */
+  text-align: center;
+  margin-top: 15px;
+  /* background-color: red; */
+}

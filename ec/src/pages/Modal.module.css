@@ -1,0 +1,175 @@
+.container_overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background-color: #222222a6;
+  animation: fadeIn 0.3s ease-in-out 0.3s forwards;
+}
+
+.modal {
+  width: 320px;
+  height: 640px;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  -ms-transform: translate(-50%, -50%);
+  animation: scaleIn 0.3s ease-in-out 0.3s forwards;
+  transition: transform 0.3s, opacity 0.3s;
+  transform: translate(-50%, 100%);
+  position: relative;
+}
+
+.close_modal {
+  cursor: pointer;
+  position: absolute;
+  top: 2px;
+  right: 16px;
+  font-size: 2rem;
+  border-radius: 60%;
+  width: 40px;
+  border: none;
+  background-color: transparent;
+}
+
+.close_modal:hover {
+  background-color: #c0b1b1a6;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.input_registration > * {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+.input_registration > * > * {
+  height: 30px;
+}
+
+.input_registration > * > *:focus {
+  outline: none;
+}
+
+.tab_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab_btn > * {
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--primary);
+}
+
+.tab_btn > *:hover {
+  font-weight: bold;
+  border: 1px solid var(--secondary);
+}
+
+.tab_btn_log:focus,
+.tab_btn_sign:focus {
+  font-weight: bold;
+  border: 1px solid var(--secondary);
+}
+
+.sign_in,
+.log_in {
+  color: var(--secondary);
+  font-weight: bold;
+  text-align: center;
+}
+
+.forgot {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.sign_btn_sign,
+.log_btn_log {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  height: 3rem;
+  padding: 0px 20px;
+  background-color: var(--btn_bg);
+  border: 1px solid var(--secondary);
+  border-radius: 20px;
+  color: var(--secondary);
+  cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 18px;
+}
+
+.sign_btn_sign:hover,
+.log_btn_log:hover {
+  background-color: var(--btn_bg_hover);
+}
+
+.divider_line_log,
+.divider_line_sign {
+  border-bottom: 1px solid black;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.big_tech_companies_registration_sign,
+.big_tech_companies_registration_log {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 20px;
+}
+
+.big_tech_companies_registration_sign > *,
+.big_tech_companies_registration_log > * {
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  height: 3rem;
+  padding: 0px 20px;
+  background-color: var(--btn_bg_hover);
+  border: 1px solid var(--secondary);
+  border-radius: 20px;
+  cursor: pointer;
+  color: whitesmoke;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0 20px;
+}
+
+.big_tech_companies_registration_sign > *:hover,
+.big_tech_companies_registration_log > *:hover {
+  background-color: var(--btn_bg);
+}

@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap");
+
+:root {
+  --primary: hsl(190, 100%, 25%);
+  --secondary: #027184;
+  --btn_bg: #027184;
+  --btn_bg_hover: hsl(189, 97%, 30%);
+}
+
+* {
+  font-family: "Quicksand", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
