@@ -75,6 +75,9 @@
 .thumbnail {
   border-radius: 10px;
 }
+.thumbnail:hover {
+  opacity: 0.7;
+}
 
 .product_title {
   text-transform: capitalize;

@@ -28,7 +28,6 @@ export default function CategoryPage() {
           <span>Back</span>
         </button>
       </div>
-
       <div className={styles.container}>
         <h3 className={styles.category_title}>{category}</h3>
 
