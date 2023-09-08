@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom"
+import { NavLink, useParams } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
 import { useNavigation } from "../../hook/useNavigation"
 import styles from "./ProductPromotionPage.module.css"
+import ColorStarRating from "../../utilities/ColorStarRating"
 
 export default function ProductPromotionPage() {
   const { productId } = useParams<{ productId: string | undefined }>()
@@ -17,7 +18,7 @@ export default function ProductPromotionPage() {
   const product = data.find((p) => p.id === productIdAsInt)
 
   if (!product) {
-    return <div>Produto não encontrado.</div>
+    return <div>Product not found.</div>
   }
 
   return (
@@ -36,6 +37,7 @@ export default function ProductPromotionPage() {
           <span>Back</span>
         </button>
       </div>
+
       <div className={styles.container}>
         <div className={styles.thumbnail}>
           <img
@@ -44,18 +46,29 @@ export default function ProductPromotionPage() {
             alt={product.title}
           />
         </div>
+
         <div className={styles.info_product_container}>
           <div className={styles.info_product}>
             <div className={styles.product_discount}>
               {product.discountPercentage}
             </div>
             <div className={styles.title}> {product.title}</div>
-            <div className={styles.rating}> {product.rating}</div>
+            <div className={styles.rating}>
+              Rating of {product.rating}
+              <ColorStarRating rating={product.rating} />
+            </div>
             <div className={styles.description}> {product.description}</div>
-            <div className={styles.btn_category_id_container}>
-              {" "}
-              See other products like this{" "}
-              <button className={styles.btn_category_id}>Here</button>
+
+            <div className={styles.nav_link_container}>
+              <div className={styles.nav_link}>
+                See other products like this
+                <NavLink
+                  to={`/category/${product.category}`}
+                  className={styles.nav_link_category}
+                >
+                  Here!
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>

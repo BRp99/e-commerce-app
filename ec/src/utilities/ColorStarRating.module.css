@@ -1,0 +1,23 @@
+.star_icon {
+  color: var(--secondary);
+  animation: bounce 0.5s infinite alternate;
+}
+
+.star_icon_filled {
+  color: var(--secondary);
+  animation: bounce 0.5s infinite alternate;
+}
+
+.star_icon_empty {
+  color: grey;
+  animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}

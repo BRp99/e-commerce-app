@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
-import { starIcon } from "../../icons/icons"
 import styles from "./ProductPage.module.css"
 import { useNavigation } from "../../hook/useNavigation"
+import ColorStarRating from "../../utilities/ColorStarRating"
 
 export default function ProductPage() {
   const { title } = useParams<{ title: string }>()
@@ -13,12 +13,6 @@ export default function ProductPage() {
 
   if (!product) {
     return <div>Product not found</div>
-  }
-
-  const star = starIcon
-  const iconArray = []
-  for (let i = 0; i < 5; i++) {
-    iconArray.push(star)
   }
 
   return (
@@ -37,6 +31,7 @@ export default function ProductPage() {
           <span>Back</span>
         </button>
       </div>
+
       <div>
         <h3 className={styles.title_h3}>{product.title}</h3>
       </div>
@@ -72,10 +67,12 @@ export default function ProductPage() {
             <div className={styles.product_price}>
               <div> Price: ${product.price}</div>
             </div>
+
             <div className={styles.product_rating}>
-              Rating of {product.rating} {starIcon}
-              {/* <div className={styles.star_icon}>{iconArray}</div> */}
+              Rating of {product.rating}
+              <ColorStarRating rating={product.rating} />
             </div>
+
             <div className={styles.product_description}>
               {product.description}
             </div>
