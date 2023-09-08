@@ -4,6 +4,7 @@ import Layout from "../layout/Layout"
 import CategoryPage from "../CategoryPage/CategoryPage"
 import HomePage from "../../pages/HomePage"
 import ProductPage from "../ProductPage/ProductPage"
+import ProductPromotionPage from "../ProductPromotionPage/ProductPromotionPage"
 
 export default function App() {
   return (
@@ -14,6 +15,10 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="category/:category" element={<CategoryPage />} />
             <Route path="product/:title" element={<ProductPage />} />
+            <Route
+              path="product-promotion/:productId"
+              element={<ProductPromotionPage />}
+            />
           </Routes>
         </Layout>
       </CartProvider>

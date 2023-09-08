@@ -3,6 +3,7 @@ import { Product } from "../context/CartContext"
 import Categories from "../components/Categories/Categories"
 import styles from "./HomePage.module.css"
 import { NavLink } from "react-router-dom"
+import Promotions from "../components/Promotions/Promotions"
 
 export type CategoryThumbnails = Record<string, Product>
 
@@ -23,49 +24,41 @@ export default function HomePage() {
       product.discountPercentage >= 17 && product.discountPercentage <= 20
   )
 
-  const uniqueCategories = Array.from(
-    new Set(
-      productsWithDiscountBetween17And20Percent.map(
-        (product) => product.category
-      )
-    )
-  )
-
   return (
     <div>
-      <h2 className={styles.our_categories}>Our Categories</h2>
-      <div className={styles.container}>
-        <div className={styles.container_promotions}>
-          <div>
-            <h3>Promoções</h3>
-            {productsWithDiscountBetween17And20Percent.map((product) => (
-              <div key={product.id}>
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                  width={100}
-                  height={100}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+      <h2 className={styles.h2_promotions}>Promotions</h2>
 
-        <div className={styles.container_categories}>
-          {Object.keys(categoryThumbnails).map((category) => (
-            <NavLink
+      <div className={styles.container_promotions}>
+        {productsWithDiscountBetween17And20Percent.map((product) => (
+          <NavLink
+            key={product.id}
+            to={`/product-promotion/${product.id}`}
+            className={styles.nav_link_promotions}
+          >
+            <Promotions
+              id={product.id}
+              thumbnail={product.thumbnail}
+              title={product.title}
+            />
+          </NavLink>
+        ))}
+      </div>
+
+      <h2 className={styles.h2_our_categories}>Our Categories</h2>
+      <div className={styles.container_categories}>
+        {Object.keys(categoryThumbnails).map((category) => (
+          <NavLink
+            key={category}
+            to={`/category/${category}`}
+            className={styles.nav_link_categories}
+          >
+            <Categories
               key={category}
-              to={`/category/${category}`}
-              className={styles.category_name}
-            >
-              <Categories
-                key={category}
-                category={category}
-                thumbnail={categoryThumbnails[category].thumbnail}
-              />
-            </NavLink>
-          ))}
-        </div>
+              category={category}
+              thumbnail={categoryThumbnails[category].thumbnail}
+            />
+          </NavLink>
+        ))}
       </div>
     </div>
   )
