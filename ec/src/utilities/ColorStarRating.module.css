@@ -1,15 +1,8 @@
 .star_icon {
   color: var(--secondary);
-  animation: bounce 0.5s infinite alternate;
 }
 
-.star_icon_filled {
-  color: var(--secondary);
-  animation: bounce 0.5s infinite alternate;
-}
-
-.star_icon_empty {
-  color: grey;
+.bounce {
   animation: bounce 0.5s infinite alternate;
 }
 

@@ -1,5 +1,6 @@
 import { CategoryThumbnails } from "../../pages/HomePage"
 import styles from "./Categories.module.css"
+import { heartIcon } from "../../icons/icons"
 
 interface CategoriesProps {
   category: string
@@ -9,7 +10,7 @@ interface CategoriesProps {
 export default function Categories({ category, thumbnail }: CategoriesProps) {
   return (
     <div className={styles.container}>
-      <div key={category}>
+      <div key={category} className={styles.img_container}>
         <img
           className={styles.thumbnail}
           src={thumbnail}
@@ -17,6 +18,7 @@ export default function Categories({ category, thumbnail }: CategoriesProps) {
           width={220}
           height={150}
         />
+        <button className={styles.heart_icon}>{heartIcon}</button>
 
         <div className={styles.category_name}> {category} </div>
       </div>

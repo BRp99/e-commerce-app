@@ -1,14 +1,39 @@
 .container {
   width: 220px;
+  /* border: 1px solid red; */
+  position: relative;
+  /* display: inline-block; */
   /* background-color: rebeccapurple; */
 }
 
+/* .img_container {
+  border: 1px solid green;
+  
+} */
+
 .thumbnail {
   border-radius: 10px;
+  /* border: 1px solid green; */
 }
 
 .thumbnail:hover {
   box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+}
+
+.heart_icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+  color: var(--btn_bg);
+  /* padding: 2px; */
+  /* background-color: #f0e8e8a6; */
+  border-radius: 5px;
+  opacity: 0;
+}
+
+.img_container:hover .heart_icon {
+  opacity: 1;
 }
 
 .category_name {
