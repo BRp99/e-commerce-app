@@ -6,7 +6,8 @@ import { heartIcon } from "../../icons/icons"
 
 export default function CategoryPage() {
   const { category } = useParams<string>()
-  const { data } = useCartContext()
+  const { data, addToCart } = useCartContext()
+
   const { navigateBack } = useNavigation()
 
   const categoryProducts: Product[] = data.filter(
@@ -15,6 +16,7 @@ export default function CategoryPage() {
 
   return (
     <div>
+      CATEGORY PAGE
       <div className={styles.back}>
         <button className={styles.btn_back} onClick={navigateBack}>
           <svg
@@ -57,7 +59,14 @@ export default function CategoryPage() {
                 <button className={styles.heart_icon}>{heartIcon}</button>
               </div>
               <div className={styles.container_btn_add}>
-                <button className={styles.add_btn_cart}>
+                <button
+                  className={styles.add_btn_cart}
+                  onClick={() => {
+                    if (product) {
+                      addToCart(product)
+                    }
+                  }}
+                >
                   Add item to cart
                 </button>
               </div>

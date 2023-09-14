@@ -7,7 +7,7 @@ import { heartIcon } from "../../icons/icons"
 
 export default function ProductPromotionPage() {
   const { productId } = useParams<{ productId: string | undefined }>()
-  const { data } = useCartContext()
+  const { data, addToCart } = useCartContext()
   const { navigateBack } = useNavigation()
 
   if (productId === undefined) {
@@ -61,6 +61,19 @@ export default function ProductPromotionPage() {
             </div>
             <div className={styles.description}> {product.description}</div>
 
+            <div className={styles.container_btn_add}>
+              <button
+                className={styles.add_btn_cart}
+                onClick={() => {
+                  if (product) {
+                    addToCart(product)
+                  }
+                }}
+              >
+                Add item to cart
+              </button>
+            </div>
+
             <div className={styles.nav_link_container}>
               <div className={styles.nav_link}>
                 <NavLink
@@ -70,9 +83,6 @@ export default function ProductPromotionPage() {
                   See other products like this!
                 </NavLink>
               </div>
-            </div>
-            <div className={styles.container_btn_add}>
-              <button className={styles.add_btn_cart}>Add item to cart</button>
             </div>
           </div>
         </div>

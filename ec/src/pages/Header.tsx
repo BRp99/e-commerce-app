@@ -1,12 +1,15 @@
 import styles from "./Header.module.css"
 import { cartIcon, heartIcon, searchIcon } from "../icons/icons"
 import { NavLink } from "react-router-dom"
+import { useCartContext } from "../context/CartContext"
 
 interface HeaderProps {
   openModal(): void
 }
 
 export default function Header({ openModal }: HeaderProps) {
+  const { totalQuantity } = useCartContext()
+
   return (
     <div className={styles.container}>
       <NavLink to="/" className={styles.market_fusion}>
@@ -32,6 +35,7 @@ export default function Header({ openModal }: HeaderProps) {
         <button className={styles.fav_link}> {heartIcon} </button>
         <NavLink to="/shopping-cart" className={styles.cart_link}>
           {cartIcon}
+          <div className={styles.quantity_cart}> {totalQuantity} </div>
         </NavLink>
       </div>
     </div>

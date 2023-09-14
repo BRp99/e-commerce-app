@@ -39,8 +39,11 @@ type CartContext = {
   data: Product[]
   cartItems: CartItem[]
   addToCart: (product: Product) => void
+  increaseCartQuantity(id: number): void
   decreaseCartQuantity(id: number): void
   removeFromCart(id: number): void
+  totalQuantity: number
+  totalPrice: number
 }
 
 const CartContext = createContext({} as CartContext)
@@ -72,12 +75,10 @@ export default function CartProvider({ children }: CartProviderProps) {
 
   const addToCart = (product: Product) => {
     const existingCartItem = cartItems.find((item) => item.id === product.id)
-
     if (existingCartItem) {
       // O produto já está no carrinho, não faz nada
       return
     }
-
     // Se o produto não existe no carrinho, adicione-o com quantidade 1
     setCartItems((prevCartItems) => [
       ...prevCartItems,
@@ -90,6 +91,18 @@ export default function CartProvider({ children }: CartProviderProps) {
         thumbnail: product.thumbnail,
       },
     ])
+  }
+
+  function increaseCartQuantity(id: number) {
+    setCartItems((currItems) => {
+      return currItems.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: item.quantity + 1 }
+        } else {
+          return item
+        }
+      })
+    })
   }
 
   function decreaseCartQuantity(id: number) {
@@ -114,14 +127,26 @@ export default function CartProvider({ children }: CartProviderProps) {
     })
   }
 
+  const totalQuantity = cartItems.reduce(
+    (quantity, item) => item.quantity + quantity,
+    0
+  )
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  )
+
   return (
     <CartContext.Provider
       value={{
         data,
         cartItems,
         addToCart,
+        increaseCartQuantity,
         decreaseCartQuantity,
         removeFromCart,
+        totalQuantity,
+        totalPrice,
       }}
     >
       {children}

@@ -3,7 +3,14 @@ import styles from "./ShoppingCartPage.module.css"
 import { useNavigation } from "../hook/useNavigation"
 
 export default function ShoppingCartPage() {
-  const { cartItems } = useCartContext()
+  const {
+    cartItems,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+    totalQuantity,
+    totalPrice,
+  } = useCartContext()
   const { navigateBack } = useNavigation()
 
   return (
@@ -33,9 +40,12 @@ export default function ShoppingCartPage() {
                 className={styles.img_thumb}
               />
               <div className={styles.btn}>
-                <button>+</button>
+                <button onClick={() => increaseCartQuantity(item.id)}>+</button>
                 <p>Quantity: {item.quantity}</p>
-                <button>-</button>
+                <button onClick={() => decreaseCartQuantity(item.id)}>-</button>
+                <button onClick={() => removeFromCart(item.id)}>
+                  Remove Item
+                </button>
               </div>
             </div>
 
@@ -45,6 +55,9 @@ export default function ShoppingCartPage() {
             </div>
           </div>
         ))}
+        <div>
+          TOTAL = ${totalPrice} for {totalQuantity} item
+        </div>
       </div>
     </div>
   )

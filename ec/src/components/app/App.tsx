@@ -6,6 +6,7 @@ import HomePage from "../../pages/HomePage"
 import ProductPage from "../ProductPage/ProductPage"
 import ProductPromotionPage from "../ProductPromotionPage/ProductPromotionPage"
 import ShoppingCartPage from "../../pages/ShoppingCartPage"
+import FavPage from "../../pages/FavPage"
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
               element={<ProductPromotionPage />}
             />
             <Route path="/shopping-cart" element={<ShoppingCartPage />} />
+            <Route path="/favorites" element={<FavPage />} />
           </Routes>
         </Layout>
       </CartProvider>

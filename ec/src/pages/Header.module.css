@@ -99,12 +99,12 @@
   color: var(--secondary);
 }
 
-.cart {
+.cart_link {
   position: relative;
   width: fit-content;
 }
 
-.cart div {
+/* .cart div {
   position: absolute;
   inset: 0;
   display: grid;
@@ -112,4 +112,15 @@
   font-weight: bold;
   padding-bottom: 10px;
   padding-left: 5px;
+} */
+
+.quantity_cart {
+  position: absolute;
+  top: -15px;
+  left: 25px;
+  background-color: orangered;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-weight: bold;
 }

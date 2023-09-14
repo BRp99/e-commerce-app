@@ -4,33 +4,21 @@ import styles from "./ProductPage.module.css"
 import { useNavigation } from "../../hook/useNavigation"
 import ColorStarRating from "../../utilities/ColorStarRating"
 import { heartIcon } from "../../icons/icons"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function ProductPage() {
   const { title } = useParams<{ title: string }>()
-  const { data } = useCartContext()
+  const { data, addToCart } = useCartContext()
   const { navigateBack } = useNavigation()
+
   const [imgClic, setImgClic] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const { addToCart } = useCartContext()
   const [addedToCart, setAddedToCart] = useState(false) // Variável para controlar se o item foi adicionado
-
-  // useEffect(() => {
-  //   console.log("ProductPage rendered")
-  // }, [])
 
   const product = data.find((product) => product.title === title)
 
   if (!product) {
     return <div>Product not found</div>
-  }
-
-  const handleAddToCart = () => {
-    if (!addedToCart) {
-      // Adicione o item ao carrinho apenas se ainda não foi adicionado
-      addToCart(product)
-      setAddedToCart(true) // Marque como adicionado ao carrinho
-    }
   }
 
   return (
@@ -104,12 +92,11 @@ export default function ProductPage() {
             <div className={styles.container_btn_add}>
               <button
                 className={styles.add_btn_cart}
-                onClick={handleAddToCart}
-                // onClick={() => {
-                //   if (product) {
-                //     addToCart(product)
-                //   }
-                // }}
+                onClick={() => {
+                  if (product) {
+                    addToCart(product)
+                  }
+                }}
               >
                 Add item to cart
               </button>
