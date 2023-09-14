@@ -39,6 +39,7 @@ export default function HomePage() {
               id={product.id}
               thumbnail={product.thumbnail}
               title={product.title}
+              product={product}
             />
           </NavLink>
         ))}
@@ -56,6 +57,7 @@ export default function HomePage() {
               key={category}
               category={category}
               thumbnail={categoryThumbnails[category].thumbnail}
+              product={categoryThumbnails[category]}
             />
           </NavLink>
         ))}

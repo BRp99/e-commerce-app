@@ -8,9 +8,10 @@ export default function ShoppingCartPage() {
     increaseCartQuantity,
     decreaseCartQuantity,
     removeFromCart,
-    totalQuantity,
-    totalPrice,
+    totalQuantityCart,
+    totalPriceCart,
   } = useCartContext()
+
   const { navigateBack } = useNavigation()
 
   return (
@@ -56,7 +57,7 @@ export default function ShoppingCartPage() {
           </div>
         ))}
         <div>
-          TOTAL = ${totalPrice} for {totalQuantity} item
+          TOTAL = ${totalPriceCart} for {totalQuantityCart} item
         </div>
       </div>
     </div>

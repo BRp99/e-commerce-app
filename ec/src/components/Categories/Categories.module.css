@@ -30,15 +30,12 @@
   right: 0;
   margin: 5px;
   color: var(--btn_bg);
-  color: #02718455;
+  color: orangered;
   cursor: pointer;
-  /* padding: 2px; */
   background-color: transparent;
   border-radius: 5px;
   opacity: 0;
   border: none;
-  /* box-shadow: 0 0 10px white; */
-  /* filter: drop-shadow(0 0 10px white); */
 }
 
 .heart_icon:hover {

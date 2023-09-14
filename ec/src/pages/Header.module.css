@@ -71,8 +71,7 @@
   gap: 1rem;
 }
 
-.log_btn,
-.sign_in {
+.log_btn {
   height: 2.5rem;
   padding: 0px 20px;
   background-color: var(--btn_bg);
@@ -99,21 +98,13 @@
   color: var(--secondary);
 }
 
+.fav_link,
 .cart_link {
   position: relative;
   width: fit-content;
 }
 
-/* .cart div {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-weight: bold;
-  padding-bottom: 10px;
-  padding-left: 5px;
-} */
-
+.quantity_fav,
 .quantity_cart {
   position: absolute;
   top: -15px;

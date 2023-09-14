@@ -42,8 +42,8 @@ type CartContext = {
   increaseCartQuantity(id: number): void
   decreaseCartQuantity(id: number): void
   removeFromCart(id: number): void
-  totalQuantity: number
-  totalPrice: number
+  totalQuantityCart: number
+  totalPriceCart: number
 }
 
 const CartContext = createContext({} as CartContext)
@@ -127,11 +127,11 @@ export default function CartProvider({ children }: CartProviderProps) {
     })
   }
 
-  const totalQuantity = cartItems.reduce(
+  const totalQuantityCart = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
     0
   )
-  const totalPrice = cartItems.reduce(
+  const totalPriceCart = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   )
@@ -145,8 +145,8 @@ export default function CartProvider({ children }: CartProviderProps) {
         increaseCartQuantity,
         decreaseCartQuantity,
         removeFromCart,
-        totalQuantity,
-        totalPrice,
+        totalQuantityCart,
+        totalPriceCart,
       }}
     >
       {children}

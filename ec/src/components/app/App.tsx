@@ -7,25 +7,28 @@ import ProductPage from "../ProductPage/ProductPage"
 import ProductPromotionPage from "../ProductPromotionPage/ProductPromotionPage"
 import ShoppingCartPage from "../../pages/ShoppingCartPage"
 import FavPage from "../../pages/FavPage"
+import { FavProvider } from "../../context/FavContext"
 
 export default function App() {
   return (
     <BrowserRouter>
-      <CartProvider>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="category/:category" element={<CategoryPage />} />
-            <Route path="product/:title" element={<ProductPage />} />
-            <Route
-              path="product-promotion/:productId"
-              element={<ProductPromotionPage />}
-            />
-            <Route path="/shopping-cart" element={<ShoppingCartPage />} />
-            <Route path="/favorites" element={<FavPage />} />
-          </Routes>
-        </Layout>
-      </CartProvider>
+      <FavProvider>
+        <CartProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="category/:category" element={<CategoryPage />} />
+              <Route path="product/:title" element={<ProductPage />} />
+              <Route
+                path="product-promotion/:productId"
+                element={<ProductPromotionPage />}
+              />
+              <Route path="/shopping-cart" element={<ShoppingCartPage />} />
+              <Route path="/favorites" element={<FavPage />} />
+            </Routes>
+          </Layout>
+        </CartProvider>
+      </FavProvider>
     </BrowserRouter>
   )
 }
