@@ -10,17 +10,13 @@ interface CategoriesProps {
 export default function Categories({ category, thumbnail }: CategoriesProps) {
   return (
     <div className={styles.container}>
-      <div key={category} className={styles.img_container}>
-        <img
-          className={styles.thumbnail}
-          src={thumbnail}
-          alt={category}
-          width={220}
-          height={150}
-        />
-        <button className={styles.heart_icon}>{heartIcon}</button>
+      <div key={category}>
+        <img className={styles.thumbnail} src={thumbnail} alt={category} />
+      </div>
+      <button className={styles.heart_icon}>{heartIcon}</button>
 
-        <div className={styles.category_name}> {category} </div>
+      <div className={styles.category_name}>
+        {category.replaceAll("-", " ")}{" "}
       </div>
     </div>
   )

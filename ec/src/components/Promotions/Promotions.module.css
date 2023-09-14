@@ -4,7 +4,6 @@
   border-radius: 10px;
   background-color: rgb(238, 238, 238);
   position: relative;
-
   /* background-color: green; */
 }
 
@@ -79,12 +78,12 @@
   right: 0;
   margin: 5px;
   color: var(--btn_bg);
-  /* padding: 2px; */
-  /* background-color: #f0e8e8a6; */
+  cursor: pointer;
   border-radius: 5px;
   opacity: 0;
+  border: none;
 }
 
-.img_container:hover .heart_icon {
+.container:hover .heart_icon {
   opacity: 1;
 }

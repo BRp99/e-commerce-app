@@ -2,6 +2,7 @@ import { NavLink, useParams } from "react-router-dom"
 import styles from "./CategoryPage.module.css"
 import { useCartContext, Product } from "../../context/CartContext"
 import { useNavigation } from "../../hook/useNavigation"
+import { heartIcon } from "../../icons/icons"
 
 export default function CategoryPage() {
   const { category } = useParams<string>()
@@ -45,6 +46,8 @@ export default function CategoryPage() {
                 width={220}
                 height={150}
               />
+              <button className={styles.heart_icon}>{heartIcon}</button>
+
               <div className={styles.product_title}>{product.title}</div>
               <div className={styles.product_price}>
                 Price: ${product.price}

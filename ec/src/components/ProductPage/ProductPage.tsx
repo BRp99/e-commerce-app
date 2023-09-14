@@ -3,11 +3,15 @@ import { useCartContext } from "../../context/CartContext"
 import styles from "./ProductPage.module.css"
 import { useNavigation } from "../../hook/useNavigation"
 import ColorStarRating from "../../utilities/ColorStarRating"
+import { heartIcon } from "../../icons/icons"
+import { useState } from "react"
 
 export default function ProductPage() {
   const { title } = useParams<{ title: string }>()
   const { data } = useCartContext()
   const { navigateBack } = useNavigation()
+  const [imgClic, setImgClic] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const product = data.find((product) => product.title === title)
 
@@ -35,17 +39,24 @@ export default function ProductPage() {
       <div>
         <h3 className={styles.title_h3}>{product.title}</h3>
       </div>
+
       <div className={styles.container}>
         <div className={styles.container_images}>
           <div className={styles.product_images}>
             {product.images.map((image, index) => (
               <img
                 key={`image-${index}`}
-                className={styles.images}
+                className={`${styles.images} ${
+                  selectedImage === image ? styles.selected : ""
+                }`}
                 src={image}
                 alt={`Product Image ${index}`}
                 width={220}
                 height={150}
+                onClick={() => {
+                  setImgClic(true)
+                  setSelectedImage(image)
+                }}
               />
             ))}
           </div>
@@ -55,10 +66,11 @@ export default function ProductPage() {
           <div key={product.id} className={styles.product_thumbnail}>
             <img
               className={styles.thumbnail}
-              src={product.thumbnail}
+              src={selectedImage || product.thumbnail}
               alt={product.title}
               width={500}
             />
+            <button className={styles.heart_icon}>{heartIcon}</button>
           </div>
         </div>
 

@@ -41,9 +41,9 @@
   justify-content: space-between;
   margin: 0rem 5rem;
   padding: 40px 40px;
-  /* background-color: rgba(114, 121, 122, 0.3); */
   background-color: white;
   border-radius: 10px;
+  position: relative;
 }
 
 .container:hover {
@@ -51,11 +51,28 @@
   /* transform: translateY(-2px); */
 }
 
+.thumbnail_container {
+  /* border: 1px solid red; */
+  position: relative;
+}
+
 .img_thumbnail {
   /* border: 1px solid red; */
   width: 380px;
   height: 250px;
   border-radius: 10px;
+}
+
+.heart_icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+  color: var(--btn_bg);
+
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
 }
 
 .info_product_container {

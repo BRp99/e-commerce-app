@@ -3,6 +3,7 @@ import { useCartContext } from "../../context/CartContext"
 import { useNavigation } from "../../hook/useNavigation"
 import styles from "./ProductPromotionPage.module.css"
 import ColorStarRating from "../../utilities/ColorStarRating"
+import { heartIcon } from "../../icons/icons"
 
 export default function ProductPromotionPage() {
   const { productId } = useParams<{ productId: string | undefined }>()
@@ -39,12 +40,13 @@ export default function ProductPromotionPage() {
       </div>
 
       <div className={styles.container}>
-        <div className={styles.thumbnail}>
+        <div className={styles.thumbnail_container}>
           <img
             className={styles.img_thumbnail}
             src={product.thumbnail}
             alt={product.title}
           />
+          <button className={styles.heart_icon}>{heartIcon}</button>
         </div>
 
         <div className={styles.info_product_container}>
