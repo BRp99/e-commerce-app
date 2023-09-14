@@ -5,6 +5,7 @@ import CategoryPage from "../CategoryPage/CategoryPage"
 import HomePage from "../../pages/HomePage"
 import ProductPage from "../ProductPage/ProductPage"
 import ProductPromotionPage from "../ProductPromotionPage/ProductPromotionPage"
+import ShoppingCartPage from "../../pages/ShoppingCartPage"
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
               path="product-promotion/:productId"
               element={<ProductPromotionPage />}
             />
+            <Route path="/shopping-cart" element={<ShoppingCartPage />} />
           </Routes>
         </Layout>
       </CartProvider>

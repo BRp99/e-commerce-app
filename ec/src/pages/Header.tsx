@@ -29,15 +29,11 @@ export default function Header({ openModal }: HeaderProps) {
         <button onClick={openModal} className={styles.log_btn}>
           Log in
         </button>
-        <div className={styles.fav_link}> {heartIcon} </div>
-        <div className={styles.cart_link}>{cartIcon}</div>
+        <button className={styles.fav_link}> {heartIcon} </button>
+        <NavLink to="/shopping-cart" className={styles.cart_link}>
+          {cartIcon}
+        </NavLink>
       </div>
-
-      {/* <div className={styles.cart}>
-        <div>7</div>
-        <FavIcon />
-        <CartIcon />
-      </div> */}
     </div>
   )
 }

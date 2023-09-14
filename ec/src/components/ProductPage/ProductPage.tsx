@@ -4,7 +4,7 @@ import styles from "./ProductPage.module.css"
 import { useNavigation } from "../../hook/useNavigation"
 import ColorStarRating from "../../utilities/ColorStarRating"
 import { heartIcon } from "../../icons/icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function ProductPage() {
   const { title } = useParams<{ title: string }>()
@@ -12,6 +12,12 @@ export default function ProductPage() {
   const { navigateBack } = useNavigation()
   const [imgClic, setImgClic] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const { addToCart } = useCartContext()
+  const [addedToCart, setAddedToCart] = useState(false) // Variável para controlar se o item foi adicionado
+
+  // useEffect(() => {
+  //   console.log("ProductPage rendered")
+  // }, [])
 
   const product = data.find((product) => product.title === title)
 
@@ -19,8 +25,17 @@ export default function ProductPage() {
     return <div>Product not found</div>
   }
 
+  const handleAddToCart = () => {
+    if (!addedToCart) {
+      // Adicione o item ao carrinho apenas se ainda não foi adicionado
+      addToCart(product)
+      setAddedToCart(true) // Marque como adicionado ao carrinho
+    }
+  }
+
   return (
     <div>
+      PRODUCT PAGE
       <div className={styles.back}>
         <button className={styles.btn_back} onClick={navigateBack}>
           <svg
@@ -35,11 +50,9 @@ export default function ProductPage() {
           <span>Back</span>
         </button>
       </div>
-
       <div>
         <h3 className={styles.title_h3}>{product.title}</h3>
       </div>
-
       <div className={styles.container}>
         <div className={styles.container_images}>
           <div className={styles.product_images}>
@@ -87,6 +100,19 @@ export default function ProductPage() {
 
             <div className={styles.product_description}>
               {product.description}
+            </div>
+            <div className={styles.container_btn_add}>
+              <button
+                className={styles.add_btn_cart}
+                onClick={handleAddToCart}
+                // onClick={() => {
+                //   if (product) {
+                //     addToCart(product)
+                //   }
+                // }}
+              >
+                Add item to cart
+              </button>
             </div>
           </div>
         </div>

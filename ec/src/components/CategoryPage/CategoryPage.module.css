@@ -1,7 +1,7 @@
 .back {
   margin: 3rem 5rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .btn_back {
@@ -53,7 +53,7 @@
   grid-template-columns: repeat(5, 220px);
   gap: 60px 64px;
   justify-content: center;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .product_item {
@@ -79,6 +79,35 @@
   cursor: pointer;
   border-radius: 5px;
   border: none;
+}
+
+.container_btn_add {
+  text-align: center;
+}
+
+.add_btn_cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 2rem;
+  padding: 0px 20px;
+  background-color: var(--btn_bg);
+  border: 1px solid var(--secondary);
+  border-radius: 20px;
+  color: var(--secondary);
+  cursor: pointer;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 18px;
+  opacity: 0.5;
+}
+
+.add_btn_cart:hover {
+  background-color: var(--btn_bg_hover);
+  opacity: 1;
 }
 
 .product_title {

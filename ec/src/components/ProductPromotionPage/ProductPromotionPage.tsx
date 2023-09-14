@@ -63,14 +63,16 @@ export default function ProductPromotionPage() {
 
             <div className={styles.nav_link_container}>
               <div className={styles.nav_link}>
-                See other products like this
                 <NavLink
                   to={`/category/${product.category}`}
                   className={styles.nav_link_category}
                 >
-                  Here!
+                  See other products like this!
                 </NavLink>
               </div>
+            </div>
+            <div className={styles.container_btn_add}>
+              <button className={styles.add_btn_cart}>Add item to cart</button>
             </div>
           </div>
         </div>

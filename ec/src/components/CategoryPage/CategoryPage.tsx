@@ -34,25 +34,34 @@ export default function CategoryPage() {
 
         <div className={styles.product_summary}>
           {categoryProducts.map((product) => (
-            <NavLink
-              key={product.id}
-              to={`/product/${product.title}`}
-              className={styles.product_item}
-            >
-              <img
-                className={styles.thumbnail}
-                src={product.thumbnail}
-                alt={product.title}
-                width={220}
-                height={150}
-              />
-              <button className={styles.heart_icon}>{heartIcon}</button>
+            <div key={product.id} className={styles.product_item}>
+              <div className={styles.product_item_content}>
+                <NavLink
+                  key={product.id}
+                  to={`/product/${product.title}`}
+                  className={styles.product_item}
+                >
+                  <img
+                    className={styles.thumbnail}
+                    src={product.thumbnail}
+                    alt={product.title}
+                    width={220}
+                    height={150}
+                  />
 
-              <div className={styles.product_title}>{product.title}</div>
-              <div className={styles.product_price}>
-                Price: ${product.price}
+                  <div className={styles.product_title}>{product.title}</div>
+                  <div className={styles.product_price}>
+                    Price: ${product.price}
+                  </div>
+                </NavLink>
+                <button className={styles.heart_icon}>{heartIcon}</button>
               </div>
-            </NavLink>
+              <div className={styles.container_btn_add}>
+                <button className={styles.add_btn_cart}>
+                  Add item to cart
+                </button>
+              </div>
+            </div>
           ))}
         </div>
       </div>
