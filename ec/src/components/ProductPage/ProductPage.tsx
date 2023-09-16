@@ -1,25 +1,40 @@
 import { useParams } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
+import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
 import { useNavigation } from "../../hook/useNavigation"
 import ColorStarRating from "../../utilities/ColorStarRating"
-import { heartIcon } from "../../icons/icons"
 import { useState } from "react"
 
 export default function ProductPage() {
   const { title } = useParams<{ title: string }>()
+
   const { data, addToCart } = useCartContext()
+  const { addToFav } = useFavContext()
+
   const { navigateBack } = useNavigation()
 
   const [imgClic, setImgClic] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [addedToCart, setAddedToCart] = useState(false) // Variável para controlar se o item foi adicionado
+  const [addedToCart, setAddedToCart] = useState(false)
 
   const product = data.find((product) => product.title === title)
 
   if (!product) {
     return <div>Product not found</div>
   }
+
+  const heartIcon = (
+    <svg
+      height="2rem"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      stroke="orangered"
+      fill="orangered"
+    >
+      <path d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" />
+    </svg>
+  )
 
   return (
     <div>
@@ -71,7 +86,12 @@ export default function ProductPage() {
               alt={product.title}
               width={500}
             />
-            <button className={styles.heart_icon}>{heartIcon}</button>
+            <button
+              className={styles.heart_icon}
+              onClick={() => addToFav(product)}
+            >
+              {heartIcon}
+            </button>
           </div>
         </div>
 

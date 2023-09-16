@@ -76,10 +76,8 @@ export default function CartProvider({ children }: CartProviderProps) {
   const addToCart = (product: Product) => {
     const existingCartItem = cartItems.find((item) => item.id === product.id)
     if (existingCartItem) {
-      // O produto já está no carrinho, não faz nada
       return
     }
-    // Se o produto não existe no carrinho, adicione-o com quantidade 1
     setCartItems((prevCartItems) => [
       ...prevCartItems,
       {

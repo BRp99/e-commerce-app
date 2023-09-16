@@ -100,7 +100,7 @@
   top: 0;
   right: 0;
   margin: 5px;
-  color: var(--btn_bg);
+  background-color: transparent;
   cursor: pointer;
   border-radius: 5px;
   border: none;
@@ -114,14 +114,12 @@
 
 .container_details > div {
   min-height: 75px;
-  /* border: 1px solid green; */
 }
 
 .product_details > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
 }
 
 .product_price {

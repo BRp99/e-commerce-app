@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react"
+import { useLocalStorage } from "../hook/useLocalStorage"
 
 type FavProviderProps = {
   children: ReactNode
@@ -41,15 +42,13 @@ export function useFavContext() {
 }
 
 export function FavProvider({ children }: FavProviderProps) {
-  const [favorites, setFavorites] = useState<FavItem[]>([])
+  const [favorites, setFavorites] = useLocalStorage<FavItem[]>("favorites", [])
 
   const addToFav = (product: Product) => {
     const existingFavItem = favorites.find((item) => item.id === product.id)
     if (existingFavItem) {
-      // O produto já está na pagina Fav, não faz nada
       return
     }
-    // Se o produto não existe no carrinho, adicione-o com quantidade 1
     setFavorites((prevFavItems) => [
       ...prevFavItems,
       {

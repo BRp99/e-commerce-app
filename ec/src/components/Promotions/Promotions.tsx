@@ -30,7 +30,6 @@ export default function Promotions({
 
   return (
     <div className={styles.container}>
-      PROMOTIONS
       <div key={id}>
         <div className={styles.percentage_off_container}>
           <div className={styles.seventeen}>17</div>

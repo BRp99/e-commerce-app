@@ -9,13 +9,10 @@
   border-radius: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  /* border: 1px solid red; */
-  /* background-color: red; */
 }
 
 .container_promotions,
 .container_categories {
-  /* border: 1px solid black; */
   margin: 0 5rem;
   background-color: white;
   border-radius: 10px;
@@ -24,7 +21,6 @@
 }
 
 .container_promotions {
-  /* border: 1px solid blue; */
   display: grid;
   grid-template-columns: repeat(4, 290px);
   justify-content: center;
@@ -41,7 +37,6 @@
   grid-template-columns: repeat(5, 220px);
   gap: 30px 55px;
   padding: 10px 10px;
-  /* border: 1px solid blue; */
 }
 
 .nav_link_categories {
