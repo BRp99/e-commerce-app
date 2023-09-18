@@ -54,7 +54,7 @@ export default function CategoryPage() {
               <div className={styles.product_item_content}>
                 <NavLink
                   key={product.id}
-                  to={`/product/${product.title}`}
+                  to={`/product/${product.id}`}
                   className={styles.product_item}
                 >
                   <img

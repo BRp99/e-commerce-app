@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useCartContext } from "../../context/CartContext"
+import { useCartContext, Product } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
 import { useNavigation } from "../../hook/useNavigation"
@@ -7,7 +7,7 @@ import ColorStarRating from "../../utilities/ColorStarRating"
 import { useState } from "react"
 
 export default function ProductPage() {
-  const { title } = useParams<{ title: string }>()
+  const { id } = useParams<{ id?: string }>()
 
   const { data, addToCart } = useCartContext()
   const { addToFav } = useFavContext()
@@ -16,11 +16,16 @@ export default function ProductPage() {
 
   const [imgClic, setImgClic] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [addedToCart, setAddedToCart] = useState(false)
 
-  const product = data.find((product) => product.title === title)
+  let product: Product | undefined
 
-  if (!product) {
+  if (id !== undefined) {
+    product = data.find((product) => product.id === parseInt(id)) as
+      | Product
+      | undefined
+  }
+
+  if (product === undefined) {
     return <div>Product not found</div>
   }
 
@@ -88,7 +93,11 @@ export default function ProductPage() {
             />
             <button
               className={styles.heart_icon}
-              onClick={() => addToFav(product)}
+              onClick={() => {
+                if (product) {
+                  addToFav(product)
+                }
+              }}
             >
               {heartIcon}
             </button>

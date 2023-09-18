@@ -44,8 +44,13 @@
   outline: none;
 }
 
-.results_container {
-  position: relative;
+.search_results_container {
+  position: absolute;
+  top: 100%;
+  width: 405px;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 2;
 }
 
 .search_btn {

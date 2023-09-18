@@ -29,20 +29,22 @@ export default function HomePage() {
       <h2 className={styles.h2_promotions}>Promotions</h2>
 
       <div className={styles.container_promotions}>
-        {productsWithDiscountBetween17And20Percent.map((product) => (
-          <NavLink
-            key={product.id}
-            to={`/product-promotion/${product.id}`}
-            className={styles.nav_link_promotions}
-          >
-            <Promotions
-              id={product.id}
-              thumbnail={product.thumbnail}
-              title={product.title}
-              product={product}
-            />
-          </NavLink>
-        ))}
+        {productsWithDiscountBetween17And20Percent
+          .slice(0, 4)
+          .map((product) => (
+            <NavLink
+              key={product.id}
+              to={`/product-promotion/${product.id}`}
+              className={styles.nav_link_promotions}
+            >
+              <Promotions
+                id={product.id}
+                thumbnail={product.thumbnail}
+                title={product.title}
+                product={product}
+              />
+            </NavLink>
+          ))}
       </div>
 
       <h2 className={styles.h2_our_categories}>Our Categories</h2>

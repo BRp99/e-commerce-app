@@ -5,18 +5,22 @@ import { useCartContext, Product } from "../context/CartContext"
 import { useFavContext } from "../context/FavContext"
 import { useState } from "react"
 import SearchResultsList from "./SearchResultsList"
+import { useNavigate } from "react-router-dom"
 
 interface HeaderProps {
   openModal(): void
 }
 
 export default function Header({ openModal }: HeaderProps) {
+  const navigate = useNavigate()
+
   const { totalQuantityCart } = useCartContext()
   const { totalQuantityFav } = useFavContext()
 
   const [input, setInput] = useState("")
   const [results, setResults] = useState([])
   const [showResults, setShowResults] = useState(false)
+  const [selectedResult, setSelectedResult] = useState<Product | null>(null)
 
   const fetchData = (inputValue: string) => {
     fetch("https://dummyjson.com/products?limit=100")
@@ -31,6 +35,7 @@ export default function Header({ openModal }: HeaderProps) {
               product.title.toLowerCase().includes(inputValue.toLowerCase())
             )
           })
+          console.log("Resultados filtrados:", results)
           setResults(results)
         } else {
           console.error(
@@ -51,6 +56,16 @@ export default function Header({ openModal }: HeaderProps) {
     setShowResults(true)
   }
 
+  const handleResultClick = () => {
+    if (selectedResult) {
+      console.log("ID product select:", selectedResult.id)
+      navigate(`/product/${selectedResult.id}`)
+      setSelectedResult(null)
+      setInput("")
+      setShowResults(false)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <NavLink to="/" className={styles.market_fusion}>
@@ -63,13 +78,14 @@ export default function Header({ openModal }: HeaderProps) {
           placeholder="What are you looking for?"
           value={input}
           onFocus={() => setShowResults(true)}
-          onBlur={() => setShowResults(false)}
           onChange={(e) => handleChange(e.target.value)}
         />
-        <div className={styles.results_container}>
-          <SearchResultsList results={results} />
+        <div className={styles.search_results_container}>
+          {showResults && (
+            <SearchResultsList results={results} inputValue={input} />
+          )}
         </div>
-        <button className={styles.search_btn}>
+        <button className={styles.search_btn} onClick={handleResultClick}>
           {searchIcon}
           Search
         </button>

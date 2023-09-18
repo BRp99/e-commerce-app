@@ -1,7 +1,16 @@
+.highlight {
+  color: var(--primary);
+  font-weight: bold;
+}
+
 .search_result {
   padding: 10px 20px;
 }
 
 .search_result:hover {
   background-color: #efefef;
+}
+
+.nav_link {
+  text-decoration: none;
 }
