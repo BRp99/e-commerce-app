@@ -1,4 +1,4 @@
-import styles from "./Promotions.module.css"
+import styles from "./CardPromotion.module.css"
 import { useFavContext, Product } from "../../context/FavContext"
 
 interface PromotionsProps {
@@ -41,8 +41,8 @@ export default function Promotions({
           className={styles.thumbnail}
           src={thumbnail}
           alt={title}
-          width={220}
-          height={150}
+          // width={220}
+          // height={150}
         />
         <button className={styles.heart_icon} onClick={() => addToFav(product)}>
           {heartIcon}

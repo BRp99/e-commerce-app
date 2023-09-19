@@ -3,7 +3,7 @@ import { cartIcon, heartIcon, searchIcon } from "../icons/icons"
 import { NavLink } from "react-router-dom"
 import { useCartContext, Product } from "../context/CartContext"
 import { useFavContext } from "../context/FavContext"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import SearchResultsList from "./SearchResultsList"
 import { useNavigate } from "react-router-dom"
 
@@ -18,9 +18,13 @@ export default function Header({ openModal }: HeaderProps) {
   const { totalQuantityFav } = useFavContext()
 
   const [input, setInput] = useState("")
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState<Product[]>([])
   const [showResults, setShowResults] = useState(false)
   const [selectedResult, setSelectedResult] = useState<Product | null>(null)
+  const [showNoResultsMessage, setShowNoResultsMessage] = useState(false)
+  const [semanticallyRelatedResults, setSemanticallyRelatedResults] = useState<
+    Product[]
+  >([])
 
   const fetchData = (inputValue: string) => {
     fetch("https://dummyjson.com/products?limit=100")
@@ -58,13 +62,45 @@ export default function Header({ openModal }: HeaderProps) {
 
   const handleResultClick = () => {
     if (selectedResult) {
-      console.log("ID product select:", selectedResult.id)
       navigate(`/product/${selectedResult.id}`)
       setSelectedResult(null)
       setInput("")
       setShowResults(false)
+    } else {
+      setShowNoResultsMessage(true)
     }
   }
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault()
+      const currentIndex = results.findIndex(
+        (result) => result.id === selectedResult?.id
+      )
+      const nextIndex =
+        currentIndex === -1 ? 0 : (currentIndex + 1) % results.length
+      setSelectedResult(results[nextIndex])
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault()
+      const currentIndex = results.findIndex(
+        (result) => result.id === selectedResult?.id
+      )
+      const prevIndex =
+        currentIndex === -1
+          ? results.length - 1
+          : (currentIndex - 1 + results.length) % results.length
+      setSelectedResult(results[prevIndex])
+    } else if (e.key === "Enter") {
+      handleResultClick()
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [selectedResult, results])
 
   return (
     <div className={styles.container}>
@@ -81,11 +117,24 @@ export default function Header({ openModal }: HeaderProps) {
           onChange={(e) => handleChange(e.target.value)}
         />
         <div className={styles.search_results_container}>
-          {showResults && (
-            <SearchResultsList results={results} inputValue={input} />
-          )}
+          {showResults ? (
+            <SearchResultsList
+              results={results}
+              inputValue={input}
+              selectedResult={selectedResult}
+            />
+          ) : showNoResultsMessage ? (
+            <div className={styles.no_results_message}>
+              Product not found! Did you mean:
+              {semanticallyRelatedResults.map((result, index) => (
+                <span key={index} className={styles.suggested_text}>
+                  {result.title}
+                </span>
+              ))}
+            </div>
+          ) : null}
         </div>
-        <button className={styles.search_btn} onClick={handleResultClick}>
+        <button className={styles.search_btn}>
           {searchIcon}
           Search
         </button>

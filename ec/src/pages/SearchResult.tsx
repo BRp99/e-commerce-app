@@ -1,18 +1,20 @@
 import { NavLink } from "react-router-dom"
 import { Product } from "../context/CartContext"
 import styles from "./SearchResult.module.css"
-import { useState } from "react"
 
 interface SearchResult {
   result: Product
   inputValue: string
+  isSelected: boolean
 }
 
-export default function SearchResult({ result, inputValue }: SearchResult) {
-  console.log("Dados do resultado:", result)
-  console.log("ID do resultado:", result.id)
-
-  const [selectedResult, setSelectedResult] = useState<Product | null>(null)
+export default function SearchResult({
+  result,
+  inputValue,
+  isSelected,
+}: SearchResult) {
+  console.log("Info about result:", result)
+  console.log("ID result:", result.id)
 
   const highlightTitle = (title: string, inputValue: string) => {
     const regex = new RegExp(inputValue, "gi")
@@ -23,7 +25,10 @@ export default function SearchResult({ result, inputValue }: SearchResult) {
   }
 
   return (
-    <NavLink to={`/product/${result.id}`} className={styles.search_result}>
+    <NavLink
+      to={`/product/${result.id}`}
+      className={`${styles.search_result} ${isSelected ? styles.selected : ""}`}
+    >
       <div
         dangerouslySetInnerHTML={{
           __html: highlightTitle(result.title, inputValue),

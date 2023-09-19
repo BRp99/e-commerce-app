@@ -1,9 +1,9 @@
 import { useCartContext } from "../context/CartContext"
 import { Product } from "../context/CartContext"
-import Categories from "../components/Categories/Categories"
+import CardCategory from "../components/CardCategory/CardCategory"
 import styles from "./HomePage.module.css"
 import { NavLink } from "react-router-dom"
-import Promotions from "../components/Promotions/Promotions"
+import CardPromotion from "../components/CardPromotion/CardPromotion"
 
 export type CategoryThumbnails = Record<string, Product>
 
@@ -37,7 +37,7 @@ export default function HomePage() {
               to={`/product-promotion/${product.id}`}
               className={styles.nav_link_promotions}
             >
-              <Promotions
+              <CardPromotion
                 id={product.id}
                 thumbnail={product.thumbnail}
                 title={product.title}
@@ -47,6 +47,7 @@ export default function HomePage() {
           ))}
       </div>
 
+      {/* CATEGORIES */}
       <h2 className={styles.h2_our_categories}>Our Categories</h2>
       <div className={styles.container_categories}>
         {Object.keys(categoryThumbnails).map((category) => (
@@ -55,7 +56,7 @@ export default function HomePage() {
             to={`/category/${category}`}
             className={styles.nav_link_categories}
           >
-            <Categories
+            <CardCategory
               key={category}
               category={category}
               thumbnail={categoryThumbnails[category].thumbnail}

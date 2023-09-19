@@ -1,5 +1,5 @@
 import { CategoryThumbnails } from "../../pages/HomePage"
-import styles from "./Categories.module.css"
+import styles from "./CardCategory.module.css"
 import { Product } from "../../context/FavContext"
 import { useFavContext } from "../../context/FavContext"
 
@@ -30,7 +30,6 @@ export default function Categories({
 
   return (
     <div className={styles.container}>
-      CATEGORIES
       <div key={category}>
         <img className={styles.thumbnail} src={thumbnail} alt={category} />
       </div>
