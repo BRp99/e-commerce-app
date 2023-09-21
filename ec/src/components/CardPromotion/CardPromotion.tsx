@@ -4,7 +4,7 @@ import { useFavContext, Product } from "../../context/FavContext"
 interface PromotionsProps {
   id: number
   thumbnail: string
-  title: string
+  brand: string
   product: Product
 }
 
@@ -20,30 +20,33 @@ const heartIcon = (
   </svg>
 )
 
-export default function Promotions({
+export default function CardPromotion({
   id,
   thumbnail,
-  title,
+  brand,
   product,
 }: PromotionsProps) {
   const { addToFav } = useFavContext()
 
+  const discountedPrice =
+    product.price - (product.price * product.discountPercentage) / 100
+
   return (
     <div className={styles.container}>
-      <div key={id}>
+      <div key={id} className={styles.container_percentage_title_thumb}>
         <div className={styles.percentage_off_container}>
           <div className={styles.seventeen}>17</div>
           <div className={styles.percentage_off}>%</div>
         </div>
 
-        <div className={styles.product_title}>{title} </div>
-        <img
-          className={styles.thumbnail}
-          src={thumbnail}
-          alt={title}
-          // width={220}
-          // height={150}
-        />
+        <div className={styles.product_brand}>{brand} </div>
+        <img className={styles.thumbnail} src={thumbnail} alt={brand} />
+
+        <div className={styles.price_container}>
+          <div className={styles.discount}>${discountedPrice.toFixed(2)}</div>
+          <div className={styles.price}>${product.price}</div>
+        </div>
+
         <button className={styles.heart_icon} onClick={() => addToFav(product)}>
           {heartIcon}
         </button>

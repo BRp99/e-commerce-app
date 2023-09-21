@@ -30,7 +30,6 @@ export default function CategoryPage() {
 
   return (
     <div>
-      CATEGORY PAGE
       <div className={styles.back}>
         <button className={styles.btn_back} onClick={navigateBack}>
           <svg
@@ -61,13 +60,13 @@ export default function CategoryPage() {
                     className={styles.thumbnail}
                     src={product.thumbnail}
                     alt={product.title}
-                    width={220}
-                    height={150}
                   />
 
                   <div className={styles.product_title}>{product.title}</div>
-                  <div className={styles.product_price}>
-                    Price: ${product.price}
+                  <div className={styles.container_price_container}>
+                    <div className={styles.price_container}>
+                      <div className={styles.price}>${product.price}</div>
+                    </div>
                   </div>
                 </NavLink>
                 <button
@@ -76,18 +75,18 @@ export default function CategoryPage() {
                 >
                   {heartIcon}
                 </button>
-              </div>
-              <div className={styles.container_btn_add}>
-                <button
-                  className={styles.add_btn_cart}
-                  onClick={() => {
-                    if (product) {
-                      addToCart(product)
-                    }
-                  }}
-                >
-                  Add item to cart
-                </button>
+                <div className={styles.container_btn_add}>
+                  <button
+                    className={styles.add_btn_cart}
+                    onClick={() => {
+                      if (product) {
+                        addToCart(product)
+                      }
+                    }}
+                  >
+                    Add item to cart
+                  </button>
+                </div>
               </div>
             </div>
           ))}

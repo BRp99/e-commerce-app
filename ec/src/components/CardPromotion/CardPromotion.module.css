@@ -4,11 +4,20 @@
   border-radius: 10px;
   background-color: rgb(238, 238, 238);
   position: relative;
-  /* padding: 10px 10px; */
+  width: 260px;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container:hover {
   box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+}
+
+.container_percentage_title_thumb {
+  padding: 20px 10px;
 }
 
 .percentage_off_container {
@@ -16,18 +25,20 @@
   grid-template-columns: repeat(2, 1fr);
   height: 100px;
   width: 130px;
+  margin-left: -13px;
 }
 
 .seventeen {
   color: orangered;
   font-size: 3.5rem;
   font-weight: 700;
-  padding: 10px 10px;
+  padding: 0px 10px;
+  margin-top: -25px;
 }
 
 .percentage_off {
   margin-left: -40px;
-  padding-top: 20px;
+  margin-top: -15px;
   position: relative;
   height: 90px;
   color: orangered;
@@ -48,21 +59,45 @@
   margin-left: -2px;
 }
 
-.product_title {
+.product_brand {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 40px;
+  min-height: 20px;
   font-weight: 600;
   text-transform: capitalize;
+  margin-top: -50px;
+  margin-bottom: 20px;
 }
 
 .thumbnail {
-  width: 220px;
-  height: 150px;
+  width: 200px;
+  height: 140px;
   object-fit: cover;
   border-radius: 10px;
-  margin: 30px;
+  margin-bottom: 20px;
+}
+
+.price_container {
+  border: 1px solid #757575;
+  background-color: #ffffff;
+  color: black;
+  padding: 5px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  height: 25px;
+}
+
+.discount {
+  font-weight: bold;
+}
+
+.price {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
 }
 
 .heart_icon {

@@ -18,7 +18,7 @@ export default function HomePage() {
     }
   })
 
-  //PROMOTIONS
+  //CARDPROMOTION
   const productsWithDiscountBetween17And20Percent = data.filter(
     (product) =>
       product.discountPercentage >= 17 && product.discountPercentage <= 20
@@ -40,14 +40,14 @@ export default function HomePage() {
               <CardPromotion
                 id={product.id}
                 thumbnail={product.thumbnail}
-                title={product.title}
+                brand={product.brand}
                 product={product}
               />
             </NavLink>
           ))}
       </div>
 
-      {/* CATEGORIES */}
+      {/* CARDCATEGORY */}
       <h2 className={styles.h2_our_categories}>Our Categories</h2>
       <div className={styles.container_categories}>
         {Object.keys(categoryThumbnails).map((category) => (

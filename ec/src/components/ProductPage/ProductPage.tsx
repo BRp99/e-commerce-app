@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, NavLink } from "react-router-dom"
 import { useCartContext, Product } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
@@ -43,7 +43,6 @@ export default function ProductPage() {
 
   return (
     <div>
-      PRODUCT PAGE
       <div className={styles.back}>
         <button className={styles.btn_back} onClick={navigateBack}>
           <svg
@@ -72,8 +71,6 @@ export default function ProductPage() {
                 }`}
                 src={image}
                 alt={`Product Image ${index}`}
-                width={220}
-                height={150}
                 onClick={() => {
                   setImgClic(true)
                   setSelectedImage(image)
@@ -89,7 +86,6 @@ export default function ProductPage() {
               className={styles.thumbnail}
               src={selectedImage || product.thumbnail}
               alt={product.title}
-              width={500}
             />
             <button
               className={styles.heart_icon}
@@ -118,6 +114,7 @@ export default function ProductPage() {
             <div className={styles.product_description}>
               {product.description}
             </div>
+            <div className={styles.brand}>{product.brand} </div>
             <div className={styles.container_btn_add}>
               <button
                 className={styles.add_btn_cart}
@@ -129,6 +126,16 @@ export default function ProductPage() {
               >
                 Add item to cart
               </button>
+            </div>
+            <div className={styles.nav_link_container}>
+              <div className={styles.nav_link}>
+                <NavLink
+                  to={`/category/${product.category}`}
+                  className={styles.nav_link_category}
+                >
+                  See other products like this!
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>

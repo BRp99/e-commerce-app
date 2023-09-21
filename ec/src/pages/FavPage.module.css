@@ -1,5 +1,7 @@
 .back {
-  margin: 3rem 5rem;
+  margin: 0 5rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
   display: flex;
   justify-content: flex-start;
 }
@@ -37,7 +39,26 @@
 
 .container {
   margin: 0rem 5rem;
-  padding: 40px 40px;
+  /* padding: 40px 40px; */
   background-color: white;
   border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  justify-content: space-between;
+}
+
+.wrapper {
+  /* border: 3px solid black; */
+}
+
+.container_thumb {
+  border: 1px solid red;
+  width: 350px;
+  height: 180px;
+}
+
+.thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

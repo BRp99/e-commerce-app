@@ -6,6 +6,8 @@ import { useFavContext } from "../context/FavContext"
 import { useState, useEffect } from "react"
 import SearchResultsList from "./SearchResultsList"
 import { useNavigate } from "react-router-dom"
+import LoginButton from "../components/LoginButton/LoginButton"
+import LogOutButton from "../components/LogOutButton/LogOutButton"
 
 interface HeaderProps {
   openModal(): void
@@ -140,6 +142,9 @@ export default function Header({ openModal }: HeaderProps) {
         </button>
       </div>
       <div className={styles.action_container}>
+        <LoginButton />
+        <LogOutButton />
+
         <button onClick={openModal} className={styles.log_btn}>
           Log in
         </button>

@@ -25,24 +25,25 @@ export default function FavPage() {
       </div>
       <div className={styles.container}>
         {favorites.map((item) => (
-          <div key={item.id} className={styles.flex_container}>
-            <div className={styles.thumb_container}>
+          <div key={item.id} className={styles.wrapper}>
+            <div className={styles.container_thumb}>
               <img
                 src={item.thumbnail}
                 alt={item.title}
-                className={styles.img_thumb}
+                className={styles.thumb}
               />
-              <div className={styles.btn}>
-                <button onClick={() => removeFavorites(item.id)}>
-                  Remove Item
-                </button>
-              </div>
             </div>
-
-            <div className={styles.info_product}>
+            <div className={styles.container_info_product}>
+              <div> {item.title} </div>
               <div> {item.description} </div>
               <div> {item.brand} </div>
-              <p>Price: ${item.price}</p>
+              <div> ${item.price}</div>
+            </div>
+            <div className={styles.container_btn}>
+              <button onClick={() => removeFavorites(item.id)}>
+                Remove from Favorites
+              </button>
+              <button>Add item to cart</button>
             </div>
           </div>
         ))}

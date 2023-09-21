@@ -37,10 +37,12 @@ export default function ProductPromotionPage() {
     </svg>
   )
 
+  const discountedPrice =
+    product.price - (product.price * product.discountPercentage) / 100
+
   return (
     <div>
       <div className={styles.back}>
-        PRODUCT PROMO
         <button className={styles.btn_back} onClick={navigateBack}>
           <svg
             height="16"
@@ -66,14 +68,17 @@ export default function ProductPromotionPage() {
             className={styles.heart_icon}
             onClick={() => addToFav(product)}
           >
-            {heartIcon}{" "}
+            {heartIcon}
           </button>
         </div>
 
         <div className={styles.info_product_container}>
           <div className={styles.info_product}>
             <div className={styles.product_discount}>
-              {product.discountPercentage}
+              ${discountedPrice.toFixed(2)}
+            </div>
+            <div className={styles.product_discount_info}>
+              Promotion with 17% off!
             </div>
             <div className={styles.title}> {product.title}</div>
             <div className={styles.rating}>
