@@ -1,5 +1,5 @@
 .container {
-  width: 220px;
+  width: 100%;
   position: relative;
   border-radius: 10px;
   transition: box-shadow 0.1s ease-out;
@@ -40,7 +40,7 @@
 .category_name {
   font-weight: 600;
   text-transform: capitalize;
-  width: 220px;
+  width: 100%;
   text-align: center;
   margin-top: 10px;
   padding-bottom: 10px;

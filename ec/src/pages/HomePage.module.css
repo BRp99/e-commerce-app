@@ -4,39 +4,43 @@
   text-align: center;
   background-color: white;
   margin: 0 5rem;
-  padding: 10px 10px;
-  margin-top: 60px;
+  padding: 20px 10px;
+  margin-top: 40px;
   border-radius: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  /* background-color: red; */
 }
 
 .container_promotions,
 .container_categories {
   margin: 0 5rem;
-  padding: 0 20px;
+  padding: 0 50px;
   background-color: white;
   border-radius: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   padding-bottom: 50px;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .container_promotions {
   display: grid;
-  grid-template-columns: repeat(4, 290px);
+  grid-template-columns: repeat(5, 1fr);
+  gap: 50px;
+  /* outline: 1px solid lime; */
 }
 
 .nav_link_promotions,
 .nav_link_categories {
   text-decoration: none;
+  /* outline: 1px solid red; */
 }
 
 .container_categories {
   display: grid;
-  grid-template-columns: repeat(5, 220px);
-  padding: 0px 25px;
+  grid-template-columns: repeat(5, 1fr);
+  /* padding: 0px 50px; */
   padding-bottom: 50px;
-  gap: 50px 0px;
+  gap: 50px 50px;
 }

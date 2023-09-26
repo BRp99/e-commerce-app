@@ -6,16 +6,14 @@ interface ColorStarRatingProps {
 }
 
 export default function ColorStarRating({ rating }: ColorStarRatingProps) {
-  const shouldAnimate = rating >= 3.5 && rating <= 5
+  const shouldAnimate = rating >= 3.5
 
   return (
     <div>
       {Array.from({ length: 5 }).map((_, i) => (
         <span
           key={i}
-          className={`${styles.star_icon} ${
-            shouldAnimate ? styles.bounce : ""
-          }`}
+          className={`${styles.star_icon} ${true ? styles.bounce : ""}`}
         >
           {starIcon}
         </span>

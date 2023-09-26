@@ -35,7 +35,9 @@ export default function CardPromotion({
     <div className={styles.container}>
       <div key={id} className={styles.container_percentage_title_thumb}>
         <div className={styles.percentage_off_container}>
-          <div className={styles.seventeen}>17</div>
+          <div className={styles.seventeen}>
+            {Math.floor(product.discountPercentage)}
+          </div>
           <div className={styles.percentage_off}>%</div>
         </div>
 

@@ -1,9 +1,12 @@
 import { useFavContext } from "../context/FavContext"
+import { useCartContext } from "../context/CartContext"
 import { useNavigation } from "../hook/useNavigation"
 import styles from "./FavPage.module.css"
+import { NavLink } from "react-router-dom"
 
 export default function FavPage() {
-  const { favorites, addToFav, removeFavorites } = useFavContext()
+  const { favorites, removeFavorites } = useFavContext()
+  const { addToCart } = useCartContext()
 
   const { navigateBack } = useNavigation()
 
@@ -26,24 +29,31 @@ export default function FavPage() {
       <div className={styles.container}>
         {favorites.map((item) => (
           <div key={item.id} className={styles.wrapper}>
-            <div className={styles.container_thumb}>
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-                className={styles.thumb}
-              />
-            </div>
+            <NavLink to={`/product/${item.id}`} className={styles.nav_link}>
+              <div className={styles.container_thumb}>
+                <img
+                  src={item.thumbnail}
+                  alt={item.title}
+                  className={styles.thumb}
+                />
+              </div>
+            </NavLink>
+
             <div className={styles.container_info_product}>
-              <div> {item.title} </div>
-              <div> {item.description} </div>
-              <div> {item.brand} </div>
-              <div> ${item.price}</div>
+              <div className={styles.title}> {item.title} </div>
+              <div className={styles.description}> {item.description} </div>
+              <div className={styles.brand}> {item.brand} </div>
+              <div className={styles.price}> ${item.price}</div>
             </div>
+
             <div className={styles.container_btn}>
-              <button onClick={() => removeFavorites(item.id)}>
+              <button
+                className={styles.btn_remove}
+                onClick={() => removeFavorites(item.id)}
+              >
                 Remove from Favorites
               </button>
-              <button>Add item to cart</button>
+              <button className={styles.btn_add}>Add item to cart</button>
             </div>
           </div>
         ))}

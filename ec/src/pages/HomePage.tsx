@@ -30,7 +30,7 @@ export default function HomePage() {
 
       <div className={styles.container_promotions}>
         {productsWithDiscountBetween17And20Percent
-          .slice(0, 4)
+          .slice(0, 5)
           .map((product) => (
             <NavLink
               key={product.id}
