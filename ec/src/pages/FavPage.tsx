@@ -40,20 +40,14 @@ export default function FavPage() {
             </NavLink>
 
             <div className={styles.container_info_product}>
-              <div className={styles.title}> {item.title} </div>
-              <div className={styles.description}> {item.description} </div>
-              <div className={styles.brand}> {item.brand} </div>
-              <div className={styles.price}> ${item.price}</div>
-            </div>
+              <div className={styles.title_price}>
+                <div className={styles.title}> {item.title} </div>
 
-            <div className={styles.container_btn}>
-              <button
-                className={styles.btn_remove}
-                onClick={() => removeFavorites(item.id)}
-              >
-                Remove from Favorites
-              </button>
-              <button className={styles.btn_add}>Add item to cart</button>
+                <div className={styles.price}> ${item.price}</div>
+              </div>
+              <div className={styles.brand}> {item.brand} </div>
+
+              <div className={styles.description}> {item.description} </div>
             </div>
           </div>
         ))}

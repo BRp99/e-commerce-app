@@ -44,19 +44,15 @@
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px 80px;
+  gap: 10px 40px;
 }
 
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 1fr;
-}
-
-.container_thumb,
-.container_info_product,
-.container_btn {
-  outline: 1px solid black;
+  border: 1px solid #dadada;
+  border-radius: 10px;
+  margin-bottom: 30px;
 }
 
 .container_thumb {
@@ -70,19 +66,25 @@
   object-fit: cover;
   display: flex;
   align-items: center;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .container_info_product {
   grid-column: 2;
   grid-row: 1;
-  text-align: center;
 }
 
 .container_info_product > div {
-  min-height: 35px;
+  padding: 0px 60px;
+  margin: 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.title_price {
+  display: flex;
+  justify-content: space-between;
 }
 
 .title {
@@ -90,6 +92,12 @@
   font-size: 1.2rem;
   font-weight: 700;
   color: orangered;
+}
+
+.price {
+  font-size: 1.2rem;
+  color: orangered;
+  font-weight: 600;
 }
 
 .description {
@@ -101,44 +109,13 @@
   font-size: 1rem;
 }
 
-.price {
-  text-align: center;
-  font-size: 1rem;
-  color: orangered;
-  font-weight: 600;
-}
-
-.container_btn {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+/* .container_btn {
   grid-column: 1/3;
   grid-row: 2;
-  height: 60px;
-}
-
-.btn_remove,
-.btn_add {
+  height: 80px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  /* width: 270px; */
-  height: 2rem;
-  padding: 0px 20px;
-  background-color: var(--btn_bg);
-  border: 1px solid var(--secondary);
-  border-radius: 20px;
-  color: var(--secondary);
-  cursor: pointer;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  /* margin: 30px 30px; */
-  opacity: 0.5;
-}
-
-.btn_remove:hover,
-.btn_add:hover {
-  background-color: var(--btn_bg_hover);
-  opacity: 1;
-}
+  padding-top: 10px;
+  gap: 10px;
+} */
