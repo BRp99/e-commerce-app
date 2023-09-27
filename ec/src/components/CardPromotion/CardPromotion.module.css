@@ -5,12 +5,10 @@
   background-color: rgb(238, 238, 238);
   position: relative;
   width: 100%;
-  position: relative;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 10px;
 }
 
 .container:hover {
@@ -99,21 +97,4 @@
 .price {
   text-decoration: line-through;
   text-decoration-thickness: 1px;
-}
-
-.heart_icon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 5px;
-  color: orangered;
-  background-color: transparent;
-  cursor: pointer;
-  border-radius: 5px;
-  opacity: 0;
-  border: none;
-}
-
-.container:hover .heart_icon {
-  opacity: 1;
 }

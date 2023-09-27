@@ -41,7 +41,7 @@ export default function Header({ openModal }: HeaderProps) {
               product.title.toLowerCase().includes(inputValue.toLowerCase())
             )
           })
-          console.log("Resultados filtrados:", results)
+          console.log("Results filter:", results)
           setResults(results)
         } else {
           console.error(
@@ -107,7 +107,7 @@ export default function Header({ openModal }: HeaderProps) {
   return (
     <div className={styles.container}>
       <NavLink to="/" className={styles.market_fusion}>
-        MarketFusion
+        <h1> MarketFusion</h1>
       </NavLink>
       <div className={styles.search_container}>
         <input

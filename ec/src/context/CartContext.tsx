@@ -63,7 +63,13 @@ export default function CartProvider({ children }: CartProviderProps) {
     try {
       const response = await fetch("https://dummyjson.com/products?limit=100")
       const jsonData = await response.json()
-      setData(jsonData.products)
+      let data = jsonData.products as Product[]
+      data = data.map((p) => ({
+        ...p,
+        description: p.description.toLowerCase(),
+      }))
+      console.log(data)
+      setData(data)
     } catch (error) {
       console.log("Error:", error)
     }
