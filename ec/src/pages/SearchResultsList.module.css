@@ -4,7 +4,18 @@
   flex-direction: column;
   box-shadow: 0 0 8px #ddd;
   border-radius: 10px;
-  max-height: 200px;
+  max-height: 500px;
   width: 405px;
   overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  /* z-index: 1; */
+}
+
+.results_list.has_results {
+  /* min-height: 40px; */
+}
+
+.results_list.less_results {
+  overflow-y: hidden;
 }

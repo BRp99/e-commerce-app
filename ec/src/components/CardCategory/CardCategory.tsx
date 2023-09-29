@@ -1,11 +1,11 @@
 import { CategoryThumbnails } from "../../pages/HomePage"
 import styles from "./CardCategory.module.css"
-import { Product } from "../../context/FavContext"
+import { ProductFav } from "../../context/FavContext"
 
 interface CategoriesProps {
   category: string
   thumbnail: CategoryThumbnails[string]["thumbnail"]
-  product: Product
+  product: ProductFav
 }
 
 export default function Categories({

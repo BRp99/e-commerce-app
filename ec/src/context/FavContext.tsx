@@ -15,7 +15,7 @@ export type FavItem = {
   thumbnail: string
 }
 
-export type Product = {
+export type ProductFav = {
   id: number
   title: string
   description: string
@@ -27,11 +27,12 @@ export type Product = {
   category: string
   thumbnail: string
   images: string[]
+  isFavorite: boolean
 }
 
 type FavContext = {
   favorites: FavItem[]
-  addToFav: (product: Product) => void
+  addToFav: (product: ProductFav) => void
   removeFavorites: (id: number) => void
   totalQuantityFav: number
 }
@@ -44,7 +45,7 @@ export function useFavContext() {
 export function FavProvider({ children }: FavProviderProps) {
   const [favorites, setFavorites] = useLocalStorage<FavItem[]>("favorites", [])
 
-  const addToFav = (product: Product) => {
+  const addToFav = (product: ProductFav) => {
     const existingFavItem = favorites.find((item) => item.id === product.id)
     if (existingFavItem) {
       return
@@ -59,13 +60,28 @@ export function FavProvider({ children }: FavProviderProps) {
         quantity: 1,
         brand: product.brand,
         thumbnail: product.thumbnail,
+        isFavorite: true,
       },
     ])
   }
 
+  // const removeFavorites = (id: number) => {
+  //   setFavorites((currItems) => {
+  //     return currItems.filter((item) => item.id !== id)
+  //   })
+  // }
+
   const removeFavorites = (id: number) => {
     setFavorites((currItems) => {
-      return currItems.filter((item) => item.id !== id)
+      return currItems.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            isFavorite: false,
+          }
+        }
+        return item
+      })
     })
   }
 

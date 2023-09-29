@@ -1,6 +1,7 @@
 .highlight {
   color: var(--primary);
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 .search_result {
@@ -15,4 +16,5 @@
 
 .selected {
   background-color: #f0f0f0;
+  background-color: red;
 }

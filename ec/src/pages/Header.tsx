@@ -1,8 +1,9 @@
 import styles from "./Header.module.css"
 import { cartIcon, heartIcon, searchIcon } from "../icons/icons"
 import { NavLink } from "react-router-dom"
-import { useCartContext, Product } from "../context/CartContext"
+import { useCartContext } from "../context/CartContext"
 import { useFavContext } from "../context/FavContext"
+import { Product } from "../context/StoreContext"
 import { useState, useEffect } from "react"
 import SearchResultsList from "./SearchResultsList"
 import { useNavigate } from "react-router-dom"
@@ -23,10 +24,9 @@ export default function Header({ openModal }: HeaderProps) {
   const [results, setResults] = useState<Product[]>([])
   const [showResults, setShowResults] = useState(false)
   const [selectedResult, setSelectedResult] = useState<Product | null>(null)
+  const [selectedResultIndex, setSelectedResultIndex] = useState<number | null>(null)
   const [showNoResultsMessage, setShowNoResultsMessage] = useState(false)
-  const [semanticallyRelatedResults, setSemanticallyRelatedResults] = useState<
-    Product[]
-  >([])
+  const [semanticallyRelatedResults, setSemanticallyRelatedResults] = useState<Product[]>([])
 
   const fetchData = (inputValue: string) => {
     fetch("https://dummyjson.com/products?limit=100")
@@ -34,20 +34,12 @@ export default function Header({ openModal }: HeaderProps) {
       .then((data) => {
         if (Array.isArray(data.products)) {
           const results = data.products.filter((product: Product) => {
-            return (
-              inputValue &&
-              product &&
-              product.title &&
-              product.title.toLowerCase().includes(inputValue.toLowerCase())
-            )
+            return inputValue && product && product.title && product.title.toLowerCase().includes(inputValue.toLowerCase())
           })
           console.log("Results filter:", results)
           setResults(results)
         } else {
-          console.error(
-            'The "products" property is not an array in the response:',
-            data
-          )
+          console.error('The "products" property is not an array in the response:', data)
         }
       })
       .catch((error) => {
@@ -57,43 +49,56 @@ export default function Header({ openModal }: HeaderProps) {
 
   const handleChange = (inputValue: string) => {
     setInput(inputValue)
-    fetchData(inputValue)
-
-    setShowResults(true)
+    if (inputValue.trim() === "") {
+      setShowResults(false)
+    } else {
+      fetchData(inputValue)
+      setShowResults(true)
+    }
   }
 
   const handleResultClick = () => {
-    if (selectedResult) {
-      navigate(`/product/${selectedResult.id}`)
+    if (input === "") {
+      setShowNoResultsMessage(true)
+    } else if (selectedResultIndex !== null) {
+      const selectedProduct = results[selectedResultIndex]
+      if (selectedProduct) {
+        navigate(`/product/${selectedProduct.id}`)
+      }
       setSelectedResult(null)
       setInput("")
       setShowResults(false)
-    } else {
-      setShowNoResultsMessage(true)
     }
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault()
-      const currentIndex = results.findIndex(
-        (result) => result.id === selectedResult?.id
-      )
-      const nextIndex =
-        currentIndex === -1 ? 0 : (currentIndex + 1) % results.length
-      setSelectedResult(results[nextIndex])
+      setSelectedResultIndex((prevIndex) => {
+        if (prevIndex === null || prevIndex === results.length - 1) {
+          return 0
+        } else {
+          return prevIndex + 1
+        }
+      })
     } else if (e.key === "ArrowUp") {
       e.preventDefault()
-      const currentIndex = results.findIndex(
-        (result) => result.id === selectedResult?.id
-      )
-      const prevIndex =
-        currentIndex === -1
-          ? results.length - 1
-          : (currentIndex - 1 + results.length) % results.length
-      setSelectedResult(results[prevIndex])
+      setSelectedResultIndex((prevIndex) => {
+        if (prevIndex === null || prevIndex === 0) {
+          return results.length - 1
+        } else {
+          return prevIndex - 1
+        }
+      })
     } else if (e.key === "Enter") {
-      handleResultClick()
+      if (selectedResultIndex !== null) {
+        const selectedProduct = results[selectedResultIndex]
+        if (selectedProduct) {
+          navigate(`/product/${selectedProduct.id}`)
+        }
+      } else {
+        handleResultClick()
+      }
     }
   }
 
@@ -102,7 +107,7 @@ export default function Header({ openModal }: HeaderProps) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [selectedResult, results])
+  }, [results])
 
   return (
     <div className={styles.container}>
@@ -120,11 +125,7 @@ export default function Header({ openModal }: HeaderProps) {
         />
         <div className={styles.search_results_container}>
           {showResults ? (
-            <SearchResultsList
-              results={results}
-              inputValue={input}
-              selectedResult={selectedResult}
-            />
+            <SearchResultsList results={results} inputValue={input} selectedResult={selectedResult} selectedResultIndex={selectedResultIndex} />
           ) : showNoResultsMessage ? (
             <div className={styles.no_results_message}>
               Product not found! Did you mean:
@@ -136,7 +137,8 @@ export default function Header({ openModal }: HeaderProps) {
             </div>
           ) : null}
         </div>
-        <button className={styles.search_btn}>
+
+        <button className={styles.search_btn} onClick={handleResultClick}>
           {searchIcon}
           Search
         </button>

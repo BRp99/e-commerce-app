@@ -1,10 +1,4 @@
-import {
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-  createContext,
-} from "react"
+import { ReactNode, useContext, useEffect, useState, createContext } from "react"
 
 import { useLocalStorage } from "../hook/useLocalStorage"
 
@@ -12,38 +6,18 @@ type CartProviderProps = {
   children: ReactNode
 }
 
-export type CartItem = {
-  id: number
-  title: string
-  description: string
-  price: number
+type CartItem = {
+  productId: number
   quantity: number
-  thumbnail: string
-}
-
-export type Product = {
-  id: number
-  title: string
-  description: string
-  price: number
-  discountPercentage: number
-  rating: number
-  stock: number
-  brand: string
-  category: string
-  thumbnail: string
-  images: string[]
 }
 
 type CartContext = {
-  data: Product[]
   cartItems: CartItem[]
-  addToCart: (product: Product) => void
-  increaseCartQuantity(id: number): void
-  decreaseCartQuantity(id: number): void
-  removeFromCart(id: number): void
+  addToCart: (productId: number) => void
+  increaseQuantityInCart(productId: number): void
+  decreaseQuantityInCart(productId: number): void
+  removeFromCart(productId: number): void
   totalQuantityCart: number
-  totalPriceCart: number
 }
 
 const CartContext = createContext({} as CartContext)
@@ -53,104 +27,69 @@ export function useCartContext() {
 }
 
 export default function CartProvider({ children }: CartProviderProps) {
-  const [data, setData] = useState<Product[]>([])
-  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
-    "shopping-cart",
-    []
-  )
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart", [])
 
-  async function fetchData() {
-    try {
-      const response = await fetch("https://dummyjson.com/products?limit=100")
-      const jsonData = await response.json()
-      let data = jsonData.products as Product[]
-      data = data.map((p) => ({
-        ...p,
-        description: p.description.toLowerCase(),
-      }))
-      console.log(data)
-      setData(data)
-    } catch (error) {
-      console.log("Error:", error)
-    }
+  const addToCart = (productId: number) => {
+    const alreadyExists = cartItems.find((item) => item.productId === productId)
+    if (alreadyExists) return
+    setCartItems((cartItems) => [...cartItems, { productId, quantity: 1 }])
   }
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  const addToCart = (product: Product) => {
-    const existingCartItem = cartItems.find((item) => item.id === product.id)
-    if (existingCartItem) {
-      return
-    }
-    setCartItems((prevCartItems) => [
-      ...prevCartItems,
-      {
-        id: product.id,
-        title: product.title,
-        description: product.description,
-        price: product.price,
-        quantity: 1,
-        thumbnail: product.thumbnail,
-      },
-    ])
-  }
-
-  function increaseCartQuantity(id: number) {
-    setCartItems((currItems) => {
-      return currItems.map((item) => {
-        if (item.id === id) {
-          return { ...item, quantity: item.quantity + 1 }
-        } else {
-          return item
-        }
+  function increaseQuantityInCart(productId: number) {
+    setCartItems((cartItems) =>
+      cartItems.map((item) => {
+        return item.productId === productId ? { ...item, quantity: item.quantity + 1 } : item
       })
-    })
+    )
   }
 
-  function decreaseCartQuantity(id: number) {
-    setCartItems((currItems) => {
-      if (currItems.find((item) => item.id === id)?.quantity === 1) {
-        return currItems.filter((item) => item.id !== id)
-      } else {
-        return currItems.map((item) => {
-          if (item.id === id) {
-            return { ...item, quantity: item.quantity - 1 }
-          } else {
-            return item
-          }
-        })
+  function decreaseQuantityInCart(productId: number) {
+    setCartItems((cartItems) => {
+      const productIndex = cartItems.findIndex((item) => item.productId === productId)
+      if (productIndex === -1) return cartItems // item does not exist
+      const product = cartItems[productIndex]
+
+      // if quantity is 1, remove the item from the array
+      if (product.quantity === 1) {
+        const newCartItems = [...cartItems]
+        delete newCartItems[productIndex]
+        return newCartItems
       }
+
+      // if quantity is >1, decrease the item quantity by 1
+      const newCartItems = [...cartItems]
+      newCartItems[productIndex].quantity--
+      return newCartItems
+
+      // if () {
+      //   return cartItems.filter((item) => item.productId !== productId)
+      // } else {
+      //   return cartItems.map((item) => {
+      //     if (item.productId === productId) {
+      //       return { ...item, quantity: item.quantity - 1 }
+      //     } else {
+      //       return item
+      //     }
+      //   })
+      // }
     })
   }
 
-  function removeFromCart(id: number) {
-    setCartItems((currItems) => {
-      return currItems.filter((item) => item.id !== id)
-    })
+  function removeFromCart(productId: number) {
+    setCartItems((currItems) => currItems.filter((item) => item.productId !== productId))
   }
 
-  const totalQuantityCart = cartItems.reduce(
-    (quantity, item) => item.quantity + quantity,
-    0
-  )
-  const totalPriceCart = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  )
+  const totalQuantityCart = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
 
   return (
     <CartContext.Provider
       value={{
-        data,
         cartItems,
         addToCart,
-        increaseCartQuantity,
-        decreaseCartQuantity,
+        increaseQuantityInCart,
+        decreaseQuantityInCart,
         removeFromCart,
         totalQuantityCart,
-        totalPriceCart,
       }}
     >
       {children}

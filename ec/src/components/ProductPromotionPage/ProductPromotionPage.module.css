@@ -9,7 +9,7 @@
 }
 
 .container:hover {
-  box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+  /* box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff; */
 }
 
 .thumbnail_container {
@@ -39,6 +39,10 @@
   background-color: transparent;
 }
 
+.heart_icon_remove {
+  stroke-width: 2px;
+}
+
 .info_product_container {
   width: 550px;
   height: 340px;
@@ -55,7 +59,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid pink; */
 }
 
 .product_discount {

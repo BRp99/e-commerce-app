@@ -1,11 +1,11 @@
 import styles from "./CardPromotion.module.css"
-import { Product } from "../../context/FavContext"
+import { ProductFav } from "../../context/FavContext"
 
 interface PromotionsProps {
   id: number
   thumbnail: string
   brand: string
-  product: Product
+  product: ProductFav
 }
 
 export default function CardPromotion({

@@ -1,15 +1,17 @@
 import { useParams, NavLink } from "react-router-dom"
-import { useCartContext, Product } from "../../context/CartContext"
-import { useFavContext } from "../../context/FavContext"
+import { useCartContext } from "../../context/CartContext"
+import { useFavContext, ProductFav } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
 import ColorStarRating from "../../utilities/ColorStarRating"
 import ButtonBack from "../../utilities/ButtonBack"
 import { useState } from "react"
+import { Product, useStoreContext } from "../../context/StoreContext"
 
 export default function ProductPage() {
   const { id } = useParams<{ id?: string }>()
 
-  const { data, addToCart } = useCartContext()
+  const { addToCart } = useCartContext()
+  const { products } = useStoreContext()
   const { addToFav } = useFavContext()
 
   const [imgClic, setImgClic] = useState(false)
@@ -17,10 +19,10 @@ export default function ProductPage() {
 
   let product: Product | undefined
 
+  if (!products) return <>Loading...</>
+
   if (id !== undefined) {
-    product = data.find((product) => product.id === parseInt(id)) as
-      | Product
-      | undefined
+    product = products.find((product) => product.id === parseInt(id)) as Product | undefined
   }
 
   if (product === undefined) {
@@ -28,13 +30,7 @@ export default function ProductPage() {
   }
 
   const heartIcon = (
-    <svg
-      height="2rem"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      stroke="orangered"
-      fill="orangered"
-    >
+    <svg height="2rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="orangered" fill="orangered">
       <path d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" />
     </svg>
   )
@@ -51,9 +47,7 @@ export default function ProductPage() {
             {product.images.map((image, index) => (
               <img
                 key={`image-${index}`}
-                className={`${styles.images} ${
-                  selectedImage === image ? styles.selected : ""
-                }`}
+                className={`${styles.images} ${selectedImage === image ? styles.selected : ""}`}
                 src={image}
                 alt={`Product Image ${index}`}
                 onClick={() => {
@@ -67,16 +61,12 @@ export default function ProductPage() {
 
         <div className={styles.container_thumbnail}>
           <div key={product.id} className={styles.product_thumbnail}>
-            <img
-              className={styles.thumbnail}
-              src={selectedImage || product.thumbnail}
-              alt={product.title}
-            />
+            <img className={styles.thumbnail} src={selectedImage || product.thumbnail} alt={product.title} />
             <button
               className={styles.heart_icon}
               onClick={() => {
                 if (product) {
-                  addToFav(product)
+                  addToFav(product as ProductFav)
                 }
               }}
             >
@@ -96,18 +86,14 @@ export default function ProductPage() {
               <ColorStarRating rating={product.rating} />
             </div>
 
-            <div className={styles.product_description}>
-              {product.description.replaceAll(/[_\-\.]/g, "")}
-            </div>
-            <div className={styles.brand}>
-              {product.brand.replaceAll(/[_\-\.]/g, "")}
-            </div>
+            <div className={styles.product_description}>{product.description.replaceAll(/[_\-\.]/g, "")}</div>
+            <div className={styles.brand}>{product.brand.replaceAll(/[_\-\.]/g, "")}</div>
             <div className={styles.container_btn_add}>
               <button
                 className={styles.add_btn_cart}
                 onClick={() => {
                   if (product) {
-                    addToCart(product)
+                    addToCart(product.id)
                   }
                 }}
               >
@@ -116,10 +102,7 @@ export default function ProductPage() {
             </div>
             <div className={styles.nav_link_container}>
               <div className={styles.nav_link}>
-                <NavLink
-                  to={`/category/${product.category}`}
-                  className={styles.nav_link_category}
-                >
+                <NavLink to={`/category/${product.category}`} className={styles.nav_link_category}>
                   See other products like this!
                 </NavLink>
               </div>

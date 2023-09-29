@@ -1,48 +1,44 @@
 import { useCartContext } from "../context/CartContext"
+import { useStoreContext } from "../context/StoreContext"
 import ButtonBack from "../utilities/ButtonBack"
 import styles from "./ShoppingCartPage.module.css"
 
 export default function ShoppingCartPage() {
-  const {
-    cartItems,
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    removeFromCart,
-    totalQuantityCart,
-    totalPriceCart,
-  } = useCartContext()
+  const { cartItems, increaseQuantityInCart, decreaseQuantityInCart, removeFromCart, totalQuantityCart } = useCartContext()
+
+  const { products } = useStoreContext()
+
+  const totalPrice = products ? cartItems.reduce((p, c) => p + products[c.productId].price * c.quantity, 0) : "-"
 
   return (
     <div>
       <ButtonBack />
 
       <div className={styles.container}>
-        {cartItems.map((item) => (
-          <div key={item.id} className={styles.flex_container}>
-            <div className={styles.thumb_container}>
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-                className={styles.img_thumb}
-              />
-              <div className={styles.btn}>
-                <button onClick={() => increaseCartQuantity(item.id)}>+</button>
-                <p>Quantity: {item.quantity}</p>
-                <button onClick={() => decreaseCartQuantity(item.id)}>-</button>
-                <button onClick={() => removeFromCart(item.id)}>
-                  Remove Item
-                </button>
-              </div>
-            </div>
+        {products &&
+          cartItems.map((cartItem) => {
+            const product = products[cartItem.productId]
+            return (
+              <div key={product.id} className={styles.flex_container}>
+                <div className={styles.thumb_container}>
+                  <img src={product.thumbnail} alt={product.title} className={styles.img_thumb} />
+                  <div className={styles.btn}>
+                    <button onClick={() => increaseQuantityInCart(product.id)}>+</button>
+                    <p>Quantity: {cartItem.quantity}</p>
+                    <button onClick={() => decreaseQuantityInCart(product.id)}>-</button>
+                    <button onClick={() => removeFromCart(product.id)}>Remove Item</button>
+                  </div>
+                </div>
 
-            <div className={styles.info_product}>
-              <h3>{item.title.replaceAll(/[_\-\.]/g, "")}</h3>
-              <p>Price: ${item.price}</p>
-            </div>
-          </div>
-        ))}
+                <div className={styles.info_product}>
+                  <h3>{product.title.replaceAll(/[_\-\.]/g, "")}</h3>
+                  <p>Price: ${product.price}</p>
+                </div>
+              </div>
+            )
+          })}
         <div>
-          TOTAL = ${totalPriceCart} for {totalQuantityCart} item
+          TOTAL = ${totalPrice} for {totalQuantityCart} item
         </div>
       </div>
     </div>
