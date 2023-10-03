@@ -1,5 +1,4 @@
-import { ReactNode, useContext, useEffect, useState, createContext } from "react"
-
+import { ReactNode, useContext, createContext } from "react"
 import { useLocalStorage } from "../hook/useLocalStorage"
 
 type CartProviderProps = {
@@ -46,32 +45,18 @@ export default function CartProvider({ children }: CartProviderProps) {
   function decreaseQuantityInCart(productId: number) {
     setCartItems((cartItems) => {
       const productIndex = cartItems.findIndex((item) => item.productId === productId)
-      if (productIndex === -1) return cartItems // item does not exist
+      if (productIndex === -1) return cartItems
       const product = cartItems[productIndex]
 
-      // if quantity is 1, remove the item from the array
       if (product.quantity === 1) {
         const newCartItems = [...cartItems]
         delete newCartItems[productIndex]
-        return newCartItems
+        return newCartItems.filter(Boolean)
       }
 
-      // if quantity is >1, decrease the item quantity by 1
       const newCartItems = [...cartItems]
-      newCartItems[productIndex].quantity--
+      newCartItems[productIndex].quantity -= 1
       return newCartItems
-
-      // if () {
-      //   return cartItems.filter((item) => item.productId !== productId)
-      // } else {
-      //   return cartItems.map((item) => {
-      //     if (item.productId === productId) {
-      //       return { ...item, quantity: item.quantity - 1 }
-      //     } else {
-      //       return item
-      //     }
-      //   })
-      // }
     })
   }
 

@@ -8,10 +8,6 @@
   border-radius: 10px;
 }
 
-.container:hover {
-  /* box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff; */
-}
-
 .thumbnail_container {
   position: relative;
   background-color: #f0f0f0;
@@ -30,7 +26,7 @@
   border-radius: 10px;
 }
 
-.heart_icon {
+.container_heart_icon {
   position: absolute;
   top: 70px;
   right: 45px;

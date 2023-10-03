@@ -1,6 +1,6 @@
 import { useParams, NavLink } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
-import { useFavContext, ProductFav } from "../../context/FavContext"
+import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
 import ColorStarRating from "../../utilities/ColorStarRating"
 import ButtonBack from "../../utilities/ButtonBack"
@@ -8,14 +8,17 @@ import { useState } from "react"
 import { Product, useStoreContext } from "../../context/StoreContext"
 
 export default function ProductPage() {
-  const { id } = useParams<{ id?: string }>()
-
-  const { addToCart } = useCartContext()
-  const { products } = useStoreContext()
-  const { addToFav } = useFavContext()
-
   const [imgClic, setImgClic] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+
+  const { products } = useStoreContext()
+  const { addToCart } = useCartContext()
+  const { addToFav, favorites, removeFavorites } = useFavContext()
+  const { id } = useParams<{ id?: string }>()
+
+  if (!favorites) return <>Loading...</>
+
+  const isProductInFavorites = (productId: number) => favorites.some((favItem) => favItem.productId === productId)
 
   let product: Product | undefined
 
@@ -25,12 +28,18 @@ export default function ProductPage() {
     product = products.find((product) => product.id === parseInt(id)) as Product | undefined
   }
 
-  if (product === undefined) {
-    return <div>Product not found</div>
+  if (!product) {
+    return <>Loading...</>
   }
 
-  const heartIcon = (
-    <svg height="2rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="orangered" fill="orangered">
+  const heartIconAdd = (
+    <svg className={styles.heart_icon_add} height="2rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="orangered" fill="orangered">
+      <path d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" />
+    </svg>
+  )
+
+  const heartIconRemove = (
+    <svg className={styles.heart_icon_remove} height="2rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="orangered" fill="white">
       <path d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" />
     </svg>
   )
@@ -63,14 +72,18 @@ export default function ProductPage() {
           <div key={product.id} className={styles.product_thumbnail}>
             <img className={styles.thumbnail} src={selectedImage || product.thumbnail} alt={product.title} />
             <button
-              className={styles.heart_icon}
+              className={styles.container_heart_icon}
               onClick={() => {
                 if (product) {
-                  addToFav(product as ProductFav)
+                  if (isProductInFavorites(product.id)) {
+                    removeFavorites(product.id)
+                  } else {
+                    addToFav(product.id)
+                  }
                 }
               }}
             >
-              {heartIcon}
+              {isProductInFavorites(product.id) ? heartIconAdd : heartIconRemove}
             </button>
           </div>
         </div>

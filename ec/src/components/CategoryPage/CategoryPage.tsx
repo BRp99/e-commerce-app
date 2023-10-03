@@ -1,7 +1,7 @@
 import { NavLink, useParams } from "react-router-dom"
 import styles from "./CategoryPage.module.css"
 import { useCartContext } from "../../context/CartContext"
-import { ProductFav } from "../../context/FavContext"
+// import { ProductFav } from "../../context/FavContext"
 import { useFavContext } from "../../context/FavContext"
 import ButtonBack from "../../utilities/ButtonBack"
 import { Product, useStoreContext } from "../../context/StoreContext"
@@ -13,7 +13,9 @@ export default function CategoryPage() {
   const { products } = useStoreContext()
   const { addToFav, removeFavorites, favorites } = useFavContext()
 
-  const isProductInFavorites = (productId: number) => favorites.some((favItem) => favItem.id === productId)
+  if (!favorites) return <>Loading...</>
+
+  const isProductInFavorites = (productId: number) => favorites.some((favItem) => favItem.productId === productId)
 
   if (!products) return <>Loading...</>
 
@@ -52,16 +54,16 @@ export default function CategoryPage() {
                 </div>
 
                 <button
-                  className={styles.heart_icon}
+                  className={styles.container_heart_icon}
                   onClick={() => {
                     if (isProductInFavorites(product.id)) {
                       removeFavorites(product.id)
                     } else {
-                      addToFav(product as ProductFav)
+                      addToFav(product.id)
                     }
                   }}
                 >
-                  {isProductInFavorites(product.id) ? heartIconRemove : heartIconAdd}
+                  {isProductInFavorites(product.id) ? heartIconAdd : heartIconRemove}
                 </button>
 
                 <div className={styles.container_btn_add}>

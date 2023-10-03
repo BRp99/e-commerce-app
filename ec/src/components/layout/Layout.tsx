@@ -1,7 +1,7 @@
 import styles from "./Layout.module.css"
 import { ReactNode, useState } from "react"
 import Header from "../../pages/Header"
-import Footer from "../../pages/Footer"
+import Footer from "./Footer"
 import Modal from "../../pages/Modal"
 
 type LayoutProps = {

@@ -7,7 +7,7 @@ import ProductPage from "../ProductPage/ProductPage"
 import ProductPromotionPage from "../ProductPromotionPage/ProductPromotionPage"
 import ShoppingCartPage from "../../pages/ShoppingCartPage"
 import FavPage from "../../pages/FavPage"
-import { FavProvider } from "../../context/FavContext"
+import FavProvider from "../../context/FavContext"
 import StoreProvider from "../../context/StoreContext"
 
 export default function App() {

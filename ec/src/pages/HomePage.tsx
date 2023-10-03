@@ -3,8 +3,7 @@ import CardCategory from "../components/CardCategory/CardCategory"
 import styles from "./HomePage.module.css"
 import { NavLink } from "react-router-dom"
 import CardPromotion from "../components/CardPromotion/CardPromotion"
-import { ProductFav } from "../context/FavContext"
-
+import { FavItem } from "../context/FavContext"
 export type CategoryThumbnails = Record<string, Product>
 
 export default function HomePage() {
@@ -30,7 +29,7 @@ export default function HomePage() {
       <div className={styles.container_promotions}>
         {productsWithDiscountBetween17And20Percent.slice(0, 5).map((product) => (
           <NavLink key={product.id} to={`/product-promotion/${product.id}`} className={styles.nav_link_promotions}>
-            <CardPromotion id={product.id} thumbnail={product.thumbnail} brand={product.brand} product={product as ProductFav} />
+            <CardPromotion id={product.id} thumbnail={product.thumbnail} brand={product.brand} product={product as Product} />
           </NavLink>
         ))}
       </div>
@@ -44,7 +43,7 @@ export default function HomePage() {
               key={category}
               category={category}
               thumbnail={categoryThumbnails[category].thumbnail}
-              product={categoryThumbnails[category] as ProductFav}
+              product={categoryThumbnails[category] as Product}
             />
           </NavLink>
         ))}

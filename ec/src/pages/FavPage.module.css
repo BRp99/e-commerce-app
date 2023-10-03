@@ -34,6 +34,19 @@
   animation: moveText 3s linear infinite alternate;
 }
 
+.heart_icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.container:hover .heart_icon {
+  opacity: 1;
+}
+
 @keyframes moveText {
   0% {
     transform: translateX(0);
@@ -124,16 +137,3 @@
   padding-top: 10px;
   gap: 10px;
 } */
-
-.heart_icon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-}
-
-.container:hover .heart_icon {
-  opacity: 1;
-}

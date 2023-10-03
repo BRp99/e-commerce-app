@@ -151,7 +151,7 @@ export default function Header({ openModal }: HeaderProps) {
           Log in
         </button>
 
-        <NavLink to={"/favorites"} className={styles.fav_link}>
+        <NavLink to="/favorites" className={styles.fav_link}>
           {heartIcon}
           <div className={styles.quantity_fav}> {totalQuantityFav} </div>
         </NavLink>
