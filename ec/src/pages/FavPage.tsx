@@ -5,8 +5,8 @@ import ButtonBack from "../utilities/ButtonBack"
 import styles from "./FavPage.module.css"
 
 export default function FavPage() {
-  const { favorites, removeFavorites } = useFavContext()
   const { products } = useStoreContext()
+  const { favorites, removeFavorite } = useFavContext()
 
   if (!favorites) return <>Loading...</>
 
@@ -17,7 +17,7 @@ export default function FavPage() {
   )
 
   const heartIconNoFav = (
-    <svg height="12rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="orangered" fill="orangered">
+    <svg height="12rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="orangered" fill="white">
       <path d="M12 6.00019C10.2006 3.90317 7.19377 3.25510 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.27530 13.7994 3.90317 12 6.00019Z" />
     </svg>
   )
@@ -25,6 +25,7 @@ export default function FavPage() {
   return (
     <div>
       <ButtonBack />
+
       <div className={favorites.length === 0 ? styles.container_without_fav : styles.container_with_fav}>
         {products && favorites.length === 0 ? (
           <div className={styles.no_favorites_container}>
@@ -34,7 +35,7 @@ export default function FavPage() {
         ) : (
           products &&
           favorites.map((favorite) => {
-            const product = products[favorite.productId]
+            const product = products.find((v) => v.id === favorite.productId)
             if (!product) return null
             return (
               <div key={product.id} className={styles.wrapper}>
@@ -45,7 +46,9 @@ export default function FavPage() {
                       className={styles.heart_icon}
                       onClick={(e) => {
                         e.preventDefault()
-                        removeFavorites(product.id)
+                        console.log("Product:", product)
+                        console.log("Removing product with ID:", product.id)
+                        removeFavorite(product.id)
                       }}
                     >
                       {heartIcon}

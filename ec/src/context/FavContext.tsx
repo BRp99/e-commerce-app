@@ -1,10 +1,7 @@
-import { ReactNode, createContext, useContext } from "react"
+import { ReactNode, createContext, useContext, useState } from "react"
 import { useLocalStorage } from "../hook/useLocalStorage"
 
-type FavProviderProps = {
-  children: ReactNode
-}
-
+// FavItem is a type item that representing an item taht can be added to the favorites list. The item includes this properties:
 export type FavItem = {
   productId: number
   quantity: number
@@ -20,32 +17,47 @@ export type FavItem = {
   images?: string[]
 }
 
+// TS type representing the props expected by the FavProvider
+type FavProviderProps = {
+  children: ReactNode
+}
+
+// TS type representing the shape of the context data. It includes properties for favorites, adding to favorites, removing from favorites and the quantity of items in favorites
 type FavContextType = {
   favorites: FavItem[] | undefined
   addToFav: (productId: number) => void
-  removeFavorites: (productId: number) => void
+  removeFavorite: (productId: number) => void
   totalQuantityFav: number
 }
 
+// This object defines the inicial state for the context. It includes default values for each property in FavContextType type
 const initialState = {
   favorites: undefined,
   addToFav: () => {},
-  removeFavorites: () => {},
+  removeFavorite: () => {},
   totalQuantityFav: 0,
 } as FavContextType
 
+// create a context called FavContext with the inicial state
 const FavContext = createContext(initialState)
 
+// hook that allows other components  access context data and functions
 export function useFavContext() {
   return useContext(FavContext)
 }
 
+// React component that serves as the provider for the context. It receives a children components as props and manages the state of favorites
 export default function FavProvider({ children }: FavProviderProps) {
-  const [favorites, setFavorites] = useLocalStorage<FavItem[]>("favorites", [])
+  const [favorites, setFavorites] = useState<FavItem[]>([])
+  // const [favorites, setFavorites] = useLocalStorage<FavItem[]>("favorites", [])
 
   const addToFav = (productId: number) => {
+    console.log(`Before add productId=${productId}`)
     const alreadyExists = favorites.find((item) => item.productId === productId)
-    if (alreadyExists) return
+    if (alreadyExists) {
+      console.log(`already exists`)
+      return
+    }
 
     const newItem: FavItem = {
       productId,
@@ -62,15 +74,24 @@ export default function FavProvider({ children }: FavProviderProps) {
       images: [],
     }
 
-    const newFavorites = [...favorites, newItem]
-    setFavorites(newFavorites)
+    setFavorites((items) => {
+      console.log(`Adding ${productId} to favorites. Before:`, items)
+      const newFavorites = [...items, newItem]
+      console.log(`Added ${productId} to favorites. After:`, newFavorites)
+      return newFavorites
+    })
   }
 
-  function removeFavorites(productId: number) {
-    setFavorites((currItems) => currItems.filter((item) => item.productId !== productId))
+  function removeFavorite(productId: number) {
+    setFavorites((items) => {
+      console.log(`Removing ${productId}. Before:`, items)
+      const newItems = items.filter((item) => item.productId !== productId)
+      console.log("After:", newItems)
+      return newItems
+    })
   }
 
   const totalQuantityFav = favorites.reduce((quantity, item) => item.quantity + quantity, 0)
 
-  return <FavContext.Provider value={{ favorites, addToFav, removeFavorites, totalQuantityFav }}>{children}</FavContext.Provider>
+  return <FavContext.Provider value={{ favorites, addToFav, removeFavorite, totalQuantityFav }}>{children}</FavContext.Provider>
 }

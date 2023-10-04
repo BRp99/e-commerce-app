@@ -33,7 +33,7 @@ export default function ShoppingCartPage() {
 
       <div className={styles.container}>
         {cartItems.map((cartItem) => {
-          const product = products[cartItem.productId]
+          const product = products.find((v) => v.id === cartItem.productId)
           if (!product) return null
           return (
             <div key={product.id} className={styles.flex_container}>

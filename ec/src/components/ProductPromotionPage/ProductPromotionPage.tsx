@@ -4,7 +4,6 @@ import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPromotionPage.module.css"
 import ColorStarRating from "../../utilities/ColorStarRating"
 import ButtonBack from "../../utilities/ButtonBack"
-import { useState } from "react"
 import { useStoreContext } from "../../context/StoreContext"
 
 export default function ProductPromotionPage() {
@@ -12,11 +11,12 @@ export default function ProductPromotionPage() {
 
   const { addToCart } = useCartContext()
   const { products } = useStoreContext()
-  const { addToFav, removeFavorites, favorites } = useFavContext()
+  const { addToFav, removeFavorite, favorites } = useFavContext()
 
   if (!favorites) return <>Loading...</>
 
   const isProductInFavorites = (productId: number) => favorites.some((favItem) => favItem.productId === productId)
+  const isProductInCart = (productId: number) => favorites.some((cartItem) => cartItem.productId === productId)
 
   if (productId === undefined) {
     return <div>Product not found</div>
@@ -58,7 +58,7 @@ export default function ProductPromotionPage() {
             className={styles.container_heart_icon}
             onClick={() => {
               if (isProductInFavorites(product.id)) {
-                removeFavorites(product.id)
+                removeFavorite(product.id)
               } else {
                 addToFav(product.id)
               }

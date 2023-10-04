@@ -11,7 +11,7 @@ export default function CategoryPage() {
 
   const { addToCart } = useCartContext()
   const { products } = useStoreContext()
-  const { addToFav, removeFavorites, favorites } = useFavContext()
+  const { addToFav, removeFavorite, favorites } = useFavContext()
 
   if (!favorites) return <>Loading...</>
 
@@ -57,7 +57,7 @@ export default function CategoryPage() {
                   className={styles.container_heart_icon}
                   onClick={() => {
                     if (isProductInFavorites(product.id)) {
-                      removeFavorites(product.id)
+                      removeFavorite(product.id)
                     } else {
                       addToFav(product.id)
                     }

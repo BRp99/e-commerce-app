@@ -13,7 +13,7 @@ export default function ProductPage() {
 
   const { products } = useStoreContext()
   const { addToCart } = useCartContext()
-  const { addToFav, favorites, removeFavorites } = useFavContext()
+  const { addToFav, favorites, removeFavorite } = useFavContext()
   const { id } = useParams<{ id?: string }>()
 
   if (!favorites) return <>Loading...</>
@@ -76,7 +76,7 @@ export default function ProductPage() {
               onClick={() => {
                 if (product) {
                   if (isProductInFavorites(product.id)) {
-                    removeFavorites(product.id)
+                    removeFavorite(product.id)
                   } else {
                     addToFav(product.id)
                   }

@@ -1,4 +1,4 @@
-import { ReactNode, useContext, createContext } from "react"
+import { ReactNode, useContext, createContext, useState } from "react"
 import { useLocalStorage } from "../hook/useLocalStorage"
 
 type CartProviderProps = {
@@ -26,7 +26,8 @@ export function useCartContext() {
 }
 
 export default function CartProvider({ children }: CartProviderProps) {
-  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart", [])
+  // const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart", [])
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
 
   const addToCart = (productId: number) => {
     const alreadyExists = cartItems.find((item) => item.productId === productId)
