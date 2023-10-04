@@ -174,6 +174,25 @@
   opacity: 1;
 }
 
+.add_btn_cart_are_in_cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
+  height: 3rem;
+  padding: 0px 20px;
+  background-color: var(--btn_bg_hover);
+  border: 1px solid var(--secondary);
+  border-radius: 20px;
+  color: var(--secondary);
+  cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 30px 30px;
+  opacity: 1;
+}
+
 .nav_link {
   width: 320px;
   font-size: 1rem;

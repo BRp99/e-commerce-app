@@ -28,7 +28,7 @@ export default function FavPage() {
 
       <div className={favorites.length === 0 ? styles.container_without_fav : styles.container_with_fav}>
         {products && favorites.length === 0 ? (
-          <div className={styles.no_favorites_container}>
+          <div>
             <div className={styles.no_fav_heart}> {heartIconNoFav} </div>
             <div className={styles.no_fav_text}>There are no items saved yet</div>
           </div>

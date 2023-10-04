@@ -1,7 +1,6 @@
 import { NavLink, useParams } from "react-router-dom"
 import styles from "./CategoryPage.module.css"
 import { useCartContext } from "../../context/CartContext"
-// import { ProductFav } from "../../context/FavContext"
 import { useFavContext } from "../../context/FavContext"
 import ButtonBack from "../../utilities/ButtonBack"
 import { Product, useStoreContext } from "../../context/StoreContext"
@@ -9,13 +8,14 @@ import { Product, useStoreContext } from "../../context/StoreContext"
 export default function CategoryPage() {
   const { category } = useParams<string>()
 
-  const { addToCart } = useCartContext()
+  const { addToCart, cartItems, removeFromCart } = useCartContext()
   const { products } = useStoreContext()
   const { addToFav, removeFavorite, favorites } = useFavContext()
 
   if (!favorites) return <>Loading...</>
 
   const isProductInFavorites = (productId: number) => favorites.some((favItem) => favItem.productId === productId)
+  const isProductInCart = (productId: number) => cartItems.some((cartItem) => cartItem.productId === productId)
 
   if (!products) return <>Loading...</>
 
@@ -68,14 +68,16 @@ export default function CategoryPage() {
 
                 <div className={styles.container_btn_add}>
                   <button
-                    className={styles.add_btn_cart}
+                    className={`${styles.add_btn_cart} ${isProductInCart(product.id) ? styles.add_btn_cart_are_in_cart : ""} `}
                     onClick={() => {
-                      if (product) {
+                      if (isProductInCart(product.id)) {
+                        removeFromCart(product.id)
+                      } else {
                         addToCart(product.id)
                       }
                     }}
                   >
-                    Add item to cart
+                    {isProductInCart(product.id) ? " Add item to cart" : " Add item to cart"}
                   </button>
                 </div>
               </div>

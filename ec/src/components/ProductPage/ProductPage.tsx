@@ -8,17 +8,20 @@ import { useState } from "react"
 import { Product, useStoreContext } from "../../context/StoreContext"
 
 export default function ProductPage() {
-  const [imgClic, setImgClic] = useState(false)
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const { id } = useParams<{ id?: string }>()
 
   const { products } = useStoreContext()
-  const { addToCart } = useCartContext()
+
+  const { addToCart, cartItems, removeFromCart } = useCartContext()
   const { addToFav, favorites, removeFavorite } = useFavContext()
-  const { id } = useParams<{ id?: string }>()
+
+  const [imgClic, setImgClic] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   if (!favorites) return <>Loading...</>
 
   const isProductInFavorites = (productId: number) => favorites.some((favItem) => favItem.productId === productId)
+  const isProductInCart = (productId: number) => cartItems.some((cartItem) => cartItem.productId === productId)
 
   let product: Product | undefined
 
@@ -103,14 +106,17 @@ export default function ProductPage() {
             <div className={styles.brand}>{product.brand.replaceAll(/[_\-\.]/g, "")}</div>
             <div className={styles.container_btn_add}>
               <button
-                className={styles.add_btn_cart}
+                className={`${styles.add_btn_cart} ${isProductInCart(product.id) ? styles.add_btn_cart_are_in_cart : ""} `}
                 onClick={() => {
-                  if (product) {
-                    addToCart(product.id)
-                  }
+                  if (product)
+                    if (isProductInCart(product.id)) {
+                      removeFromCart(product.id)
+                    } else {
+                      addToCart(product.id)
+                    }
                 }}
               >
-                Add item to cart
+                {product && isProductInCart(product.id) ? " Add item to cart" : " Add item to cart"}
               </button>
             </div>
             <div className={styles.nav_link_container}>
