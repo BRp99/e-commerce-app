@@ -18,7 +18,7 @@ export default function SearchResult({ result, inputValue, isSelected }: SearchR
   }
 
   return (
-    <NavLink to={`/product/${result.id}`} className={`${styles.search_result} ${isSelected ? styles.selected : ""}`}>
+    <NavLink to={`/product-promotion/${result.id}`} className={`${styles.search_result} ${isSelected ? styles.selected : ""}`}>
       <div
         dangerouslySetInnerHTML={{
           __html: highlightTitle(result.title, inputValue),

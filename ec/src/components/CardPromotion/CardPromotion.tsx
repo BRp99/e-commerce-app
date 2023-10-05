@@ -1,20 +1,19 @@
 import styles from "./CardPromotion.module.css"
-// import { ProductFav } from "../../context/FavContext"
 import { Product } from "../../context/StoreContext"
 
-interface PromotionsProps {
+interface CardPromotionsProps {
   id: number
   thumbnail: string
   brand: string
   product: Product
 }
 
-export default function CardPromotion({ id, thumbnail, brand, product }: PromotionsProps) {
+export default function CardPromotion({ id, thumbnail, brand, product }: CardPromotionsProps) {
   const discountedPrice = product.price - (product.price * product.discountPercentage) / 100
 
   return (
     <div className={styles.container}>
-      <div key={id} className={styles.container_percentage_title_thumb}>
+      <div key={id} className={styles.container_info}>
         <div className={styles.percentage_off_container}>
           <div className={styles.seventeen}>{Math.floor(product.discountPercentage)}</div>
           <div className={styles.percentage_off}>%</div>

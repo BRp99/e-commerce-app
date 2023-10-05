@@ -2,13 +2,13 @@ import { CategoryThumbnails } from "../../pages/HomePage"
 import styles from "./CardCategory.module.css"
 import { Product } from "../../context/StoreContext"
 
-interface CategoriesProps {
+interface CardCategoriesProps {
   category: string
   thumbnail: CategoryThumbnails[string]["thumbnail"]
   product: Product
 }
 
-export default function Categories({ category, thumbnail, product }: CategoriesProps) {
+export default function Categories({ category, thumbnail, product }: CardCategoriesProps) {
   return (
     <div className={styles.container}>
       <div key={category}>

@@ -66,7 +66,9 @@ export default function ShoppingCartPage() {
                   <h3>{product.title.replaceAll(/[_\-\.]/g, "")}</h3>
                   <p>Price: ${product.price}</p>
                 </div>
-                <div>TOTAL = ${totalPrice}</div>
+                <div className={styles.total_price}>
+                  <div>TOTAL = ${totalPrice}</div>
+                </div>
               </div>
             )
           })

@@ -3,6 +3,7 @@ import CardCategory from "../components/CardCategory/CardCategory"
 import styles from "./HomePage.module.css"
 import { NavLink } from "react-router-dom"
 import CardPromotion from "../components/CardPromotion/CardPromotion"
+
 export type CategoryThumbnails = Record<string, Product>
 
 export default function HomePage() {

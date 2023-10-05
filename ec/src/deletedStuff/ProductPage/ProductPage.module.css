@@ -1,19 +1,30 @@
+.title_h3 {
+  color: var(--secondary);
+  text-transform: capitalize;
+  text-align: center;
+  margin: 0 5rem;
+  background-color: white;
+  padding: 20px 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 0;
+}
+
 .container {
-  position: relative;
+  margin: 0 5rem;
+  padding: 0 30px;
+  padding-bottom: 70px;
   display: flex;
-  margin: 0rem 5rem;
-  padding: 40px 40px;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .container_images {
-  width: 200px;
-  min-height: 300px;
-  display: flex;
-  justify-content: center;
+  width: 220px;
+  min-height: 500px;
 }
 
 .product_images {
@@ -24,12 +35,17 @@
 }
 
 .images {
-  width: 150px;
+  width: 180px;
   height: 130px;
   border: 1px solid #757575;
 }
 
-.images {
+.thumbnail {
+  width: 500px;
+}
+
+.images,
+.thumbnail {
   border-radius: 10px;
   object-fit: cover;
 }
@@ -39,85 +55,106 @@
   cursor: pointer;
 }
 
-.thumbnail_container {
-  position: relative;
-  background-color: #f0f0f0;
-  border-radius: 10px;
+.container_thumbnail {
+  width: 100%;
+  min-height: 490px;
+  padding: 0px 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 340px;
-  padding: 20px 40px;
+  border-radius: 10px;
 }
 
-.img_thumbnail {
-  width: 380px;
-  height: 250px;
-  object-fit: contain;
-  border-radius: 10px;
+.product_thumbnail {
+  position: relative;
 }
 
 .container_heart_icon {
   position: absolute;
-  top: 70px;
-  right: 45px;
+  top: 0;
+  right: 0;
   cursor: pointer;
   border: none;
   background-color: transparent;
+}
+
+.heart_icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* margin: 5px; */
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
 }
 
 .heart_icon_remove {
   stroke-width: 2px;
 }
 
-.info_product_container {
-  width: 550px;
-  height: 340px;
-  display: flex;
-  justify-content: center;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  padding: 20px 40px;
+.container_details {
+  width: 360px;
+  height: 100px;
+  background-color: white;
 }
 
-.info_product > div {
-  width: 530px;
-  min-height: 35px;
+.product_details {
+  height: 550px;
+}
+
+.product_details > div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.product_discount {
-  font-size: 2.5rem;
+.product_price {
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  word-spacing: 10px;
+  min-height: 90px;
+  text-align: center;
+  align-items: center;
+}
+
+.product_price > div {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 20px 20px;
+  font-size: 1.4rem;
   font-weight: 700;
-  color: orangered;
 }
 
-.product_discount_info {
-  font-weight: 600;
-  color: orangered;
-  font-size: 1.5rem;
+.product_rating {
+  min-height: 50px;
+  word-spacing: 3px;
+  padding: 30px 30px;
 }
 
-.title {
-  font-weight: 600;
+.product_rating > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product_description {
+  min-height: 100px;
+  text-align: center;
+  padding: 10px 10px;
   text-transform: capitalize;
 }
 
-.rating {
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.description {
-  text-align: center;
-  font-size: 1rem;
+.brand {
+  padding: 30px 30px;
   text-transform: capitalize;
 }
 
 .add_btn_cart {
-  width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
   height: 3rem;
   padding: 0px 20px;
   background-color: var(--btn_bg);
@@ -128,8 +165,8 @@
   color: white;
   font-size: 1.2rem;
   font-weight: bold;
+  margin: 30px 30px;
   opacity: 0.5;
-  margin: 15px 15px;
 }
 
 .add_btn_cart:hover {
@@ -138,7 +175,10 @@
 }
 
 .add_btn_cart_are_in_cart {
-  width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
   height: 3rem;
   padding: 0px 20px;
   background-color: var(--btn_bg_hover);
@@ -149,8 +189,8 @@
   color: white;
   font-size: 1.2rem;
   font-weight: bold;
+  margin: 30px 30px;
   opacity: 1;
-  margin: 15px 15px;
 }
 
 .nav_link {

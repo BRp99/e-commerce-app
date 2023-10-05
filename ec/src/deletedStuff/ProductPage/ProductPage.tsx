@@ -1,18 +1,19 @@
-import { NavLink, useParams } from "react-router-dom"
+import { useParams, NavLink } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
 import ColorStarRating from "../../utilities/ColorStarRating"
 import ButtonBack from "../../utilities/ButtonBack"
-import { useStoreContext } from "../../context/StoreContext"
 import { useState } from "react"
+import { Product, useStoreContext } from "../../context/StoreContext"
 
 export default function ProductPage() {
-  const { productId } = useParams<{ productId: string | undefined }>()
+  const { id } = useParams<{ id?: string }>()
+
+  const { products } = useStoreContext()
 
   const { addToCart, cartItems, removeFromCart } = useCartContext()
-  const { products } = useStoreContext()
-  const { addToFav, removeFavorite, favorites } = useFavContext()
+  const { addToFav, favorites, removeFavorite } = useFavContext()
 
   const [imgClic, setImgClic] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -22,18 +23,16 @@ export default function ProductPage() {
   const isProductInFavorites = (productId: number) => favorites.some((favItem) => favItem.productId === productId)
   const isProductInCart = (productId: number) => cartItems.some((cartItem) => cartItem.productId === productId)
 
-  if (productId === undefined) {
-    return <div>Product not found</div>
-  }
-
-  const productIdAsInt = parseInt(productId, 10)
+  let product: Product | undefined
 
   if (!products) return <>Loading...</>
 
-  const product = products.find((p) => p.id === productIdAsInt)
+  if (id !== undefined) {
+    product = products.find((product) => product.id === parseInt(id)) as Product | undefined
+  }
 
   if (!product) {
-    return <div>Product not found.</div>
+    return <>Loading...</>
   }
 
   const heartIconAdd = (
@@ -48,12 +47,12 @@ export default function ProductPage() {
     </svg>
   )
 
-  const discountedPrice = product.price - (product.price * product.discountPercentage) / 100
-
   return (
     <div>
       <ButtonBack />
-
+      <div>
+        <h3 className={styles.title_h3}>{product.title}</h3>
+      </div>
       <div className={styles.container}>
         <div className={styles.container_images}>
           <div className={styles.product_images}>
@@ -71,49 +70,55 @@ export default function ProductPage() {
             ))}
           </div>
         </div>
-        <div className={styles.thumbnail_container}>
-          <img className={styles.img_thumbnail} src={selectedImage || product.thumbnail} alt={product.title} />
 
-          <button
-            className={styles.container_heart_icon}
-            onClick={() => {
-              if (isProductInFavorites(product.id)) {
-                removeFavorite(product.id)
-              } else {
-                addToFav(product.id)
-              }
-            }}
-          >
-            {isProductInFavorites(product.id) ? heartIconAdd : heartIconRemove}
-          </button>
+        <div className={styles.container_thumbnail}>
+          <div key={product.id} className={styles.product_thumbnail}>
+            <img className={styles.thumbnail} src={selectedImage || product.thumbnail} alt={product.title} />
+            <button
+              className={styles.container_heart_icon}
+              onClick={() => {
+                if (product) {
+                  if (isProductInFavorites(product.id)) {
+                    removeFavorite(product.id)
+                  } else {
+                    addToFav(product.id)
+                  }
+                }
+              }}
+            >
+              {isProductInFavorites(product.id) ? heartIconAdd : heartIconRemove}
+            </button>
+          </div>
         </div>
-        .
-        <div className={styles.info_product_container}>
-          <div className={styles.info_product}>
-            <div className={styles.product_discount}>${discountedPrice.toFixed(2)}</div>
-            <div className={styles.product_discount_info}>Promotion with 17% off!</div>
-            <div className={styles.title}>{product.title.replaceAll(/[_\-\.]/g, "")}</div>
-            <div className={styles.rating}>
+
+        <div className={styles.container_details}>
+          <div className={styles.product_details}>
+            <div className={styles.product_price}>
+              <div> Price: ${product.price}</div>
+            </div>
+
+            <div className={styles.product_rating}>
               Rating of {product.rating}
               <ColorStarRating rating={product.rating} />
             </div>
-            <div className={styles.description}> {product.description.replaceAll(/[_\-\.]/g, "")}</div>
 
+            <div className={styles.product_description}>{product.description.replaceAll(/[_\-\.]/g, "")}</div>
+            <div className={styles.brand}>{product.brand.replaceAll(/[_\-\.]/g, "")}</div>
             <div className={styles.container_btn_add}>
               <button
                 className={`${styles.add_btn_cart} ${isProductInCart(product.id) ? styles.add_btn_cart_are_in_cart : ""} `}
                 onClick={() => {
-                  if (isProductInCart(product.id)) {
-                    removeFromCart(product.id)
-                  } else {
-                    addToCart(product.id)
-                  }
+                  if (product)
+                    if (isProductInCart(product.id)) {
+                      removeFromCart(product.id)
+                    } else {
+                      addToCart(product.id)
+                    }
                 }}
               >
-                {isProductInCart(product.id) ? " Add item to cart" : " Add item to cart"}
+                {product && isProductInCart(product.id) ? " Add item to cart" : " Add item to cart"}
               </button>
             </div>
-
             <div className={styles.nav_link_container}>
               <div className={styles.nav_link}>
                 <NavLink to={`/category/${product.category}`} className={styles.nav_link_category}>

@@ -43,7 +43,7 @@ export default function CategoryPage() {
           {categoryProducts.map((product, index) => (
             <div key={product.id} className={styles.product_item}>
               <div className={styles.product_item_content}>
-                <NavLink key={product.id} to={`/product/${product.id}`} className={styles.product_item}>
+                <NavLink key={product.id} to={`/product-promotion/${product.id}`} className={styles.product_item}>
                   <img className={styles.thumbnail} src={product.thumbnail} alt={product.title} />
                 </NavLink>
                 <div className={styles.product_title}>{product.title}</div>
