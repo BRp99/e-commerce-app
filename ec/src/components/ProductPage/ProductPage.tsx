@@ -45,8 +45,8 @@ export default function ProductPage() {
 
       <div className={styles.container}>
         <div className={styles.container_of_others_containers}>
-          <div className={styles.container_images}>
-            <div className={styles.product_images}>
+          <div className={styles.container_images_three}>
+            <div className={styles.product_images_three}>
               {product.images.map((image, index) => (
                 <img
                   key={`image-${index}`}
@@ -61,8 +61,8 @@ export default function ProductPage() {
               ))}
             </div>
           </div>
-          <div className={styles.container_thumbnail}>
-            <img className={styles.img_thumbnail} src={selectedImage || product.thumbnail} alt={product.title} />
+          <div className={styles.container_thumbnail_three}>
+            <img className={styles.img_thumbnail_three} src={selectedImage || product.thumbnail} alt={product.title} />
 
             <button
               className={styles.container_heart_icon}
@@ -78,7 +78,7 @@ export default function ProductPage() {
             </button>
           </div>
           .
-          <div className={styles.container_info_product}>
+          <div className={styles.container_info_product_three}>
             <div className={styles.info_product}>
               <div className={styles.product_discount}>${discountedPrice.toFixed(2)}</div>
               <div className={styles.product_discount_info}>Promotion with 17% off!</div>
