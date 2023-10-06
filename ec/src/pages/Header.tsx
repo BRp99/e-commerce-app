@@ -1,5 +1,5 @@
 import styles from "./Header.module.css"
-import { cartIcon, heartIcon, searchIcon } from "../icons/icons"
+import { cartIconHeader, heartIconHeader, searchIcon } from "../icons/icons"
 import { NavLink } from "react-router-dom"
 import { useCartContext } from "../context/CartContext"
 import { useFavContext } from "../context/FavContext"
@@ -152,12 +152,12 @@ export default function Header({ openModal }: HeaderProps) {
         </button>
 
         <NavLink to="/favorites" className={styles.fav_link}>
-          {heartIcon}
+          {heartIconHeader}
           <div className={styles.quantity_fav}> {totalQuantityFav} </div>
         </NavLink>
 
         <NavLink to="/shopping-cart" className={styles.cart_link}>
-          {cartIcon}
+          {cartIconHeader}
           <div className={styles.quantity_cart}> {totalQuantityCart} </div>
         </NavLink>
       </div>

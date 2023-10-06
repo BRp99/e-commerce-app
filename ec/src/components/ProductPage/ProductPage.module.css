@@ -3,10 +3,16 @@
   display: flex;
   margin: 0rem 5rem;
   padding: 40px 40px;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   background-color: white;
   border-radius: 10px;
   box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
+}
+
+.container_of_others_containers {
+  /* outline: 1px solid green; */
+  display: flex;
+  background-color: #f0f0f0;
 }
 
 .container_images {
@@ -14,6 +20,9 @@
   min-height: 300px;
   display: flex;
   justify-content: center;
+  padding: 0px 40px;
+
+  outline: 1px solid red;
 }
 
 .product_images {
@@ -26,7 +35,7 @@
 .images {
   width: 150px;
   height: 130px;
-  border: 1px solid #757575;
+  outline: 1px solid #757575;
 }
 
 .images {
@@ -39,20 +48,20 @@
   cursor: pointer;
 }
 
-.thumbnail_container {
+.container_thumbnail {
   position: relative;
-  background-color: #f0f0f0;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 340px;
+  height: 430px;
   padding: 20px 40px;
+  outline: 1px solid blue;
 }
 
 .img_thumbnail {
   width: 380px;
-  height: 250px;
+  height: 430px;
   object-fit: contain;
   border-radius: 10px;
 }
@@ -66,18 +75,14 @@
   background-color: transparent;
 }
 
-.heart_icon_remove {
-  stroke-width: 2px;
-}
-
-.info_product_container {
+.container_info_product {
   width: 550px;
   height: 340px;
   display: flex;
   justify-content: center;
-  background-color: #f0f0f0;
   border-radius: 10px;
   padding: 20px 40px;
+  outline: 1px solid red;
 }
 
 .info_product > div {

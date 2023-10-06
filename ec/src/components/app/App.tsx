@@ -8,6 +8,7 @@ import FavPage from "../../pages/FavPage"
 import StoreProvider from "../../context/StoreContext"
 import FavProvider from "../../context/FavContext"
 import CartProvider from "../../context/CartContext"
+// import ListCategoryPage from "../ListCategoryPage"
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="category/:category" element={<CategoryPage />} />
+                {/* <Route path="/category-list" element={<ListCategoryPage />} /> */}
                 <Route path="product-promotion/:productId" element={<ProductPage />} />
                 <Route path="/shopping-cart" element={<ShoppingCartPage />} />
                 <Route path="/favorites" element={<FavPage />} />

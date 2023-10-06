@@ -51,6 +51,10 @@
   background-color: transparent;
 }
 
+.heart_icon_remove {
+  stroke-width: 2px;
+}
+
 .product_title {
   text-transform: capitalize;
   display: flex;

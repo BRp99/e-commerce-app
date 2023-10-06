@@ -1,5 +1,5 @@
 .container {
-  border: 1px solid rgb(195, 188, 188);
+  outline: 1px solid rgb(195, 188, 188);
   height: 100%;
   border-radius: 10px;
   background-color: rgb(238, 238, 238);
@@ -78,7 +78,7 @@
 }
 
 .price_container {
-  border: 1px solid #757575;
+  outline: 1px solid #757575;
   background-color: #ffffff;
   color: black;
   padding: 5px;

@@ -3,7 +3,7 @@ import { useCartContext } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
 import ColorStarRating from "../../utilities/ColorStarRating"
-import ButtonBack from "../../utilities/ButtonBack"
+// import ButtonBack from "../../utilities/BackButtonToHomePage"
 import { useState } from "react"
 import { Product, useStoreContext } from "../../context/StoreContext"
 
@@ -49,7 +49,7 @@ export default function ProductPage() {
 
   return (
     <div>
-      <ButtonBack />
+      {/* <ButtonBack /> */}
       <div>
         <h3 className={styles.title_h3}>{product.title}</h3>
       </div>
