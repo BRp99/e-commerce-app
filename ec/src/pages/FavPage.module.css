@@ -86,7 +86,8 @@
   padding: 0px 50px;
 }
 
-.title_price {
+.title_price:first-child,
+.title_price:nth-child(2) {
   display: flex;
   justify-content: space-between;
   height: 50px;
@@ -102,7 +103,20 @@
 .price {
   font-size: 1.2rem;
   color: orangered;
-  font-weight: 600;
+  font-weight: bold;
+}
+
+.title_without_discount {
+  text-transform: capitalize;
+  font-size: 1.2rem;
+  font-weight: bold;
+  /* color: orangered; */
+}
+
+.price_without_discount {
+  font-size: 1.2rem;
+  /* color: orangered; */
+  font-weight: bold;
 }
 
 .description {
@@ -112,7 +126,7 @@
 }
 
 .brand {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1rem;
   height: 30px;
 }

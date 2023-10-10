@@ -36,7 +36,6 @@ export default function StoreProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState<Product[]>()
 
   async function fetchProducts() {
-    console.log("fetching")
     try {
       const response = await fetch("https://dummyjson.com/products?limit=100")
       const jsonData = await response.json()

@@ -4,9 +4,10 @@ import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
 import ColorStarRating from "../../utilities/ColorStarRating"
 import { heartIconAddProductAndCategoryPage, heartIconRemoveProductAndCategoryPage } from "../../icons/icons"
-import { useStoreContext } from "../../context/StoreContext"
+import { useStoreContext, Product } from "../../context/StoreContext"
 import { useState } from "react"
 import BackButtonToCategoryPage from "../../utilities/BackButtonToCategoryPage"
+import { calculateDiscountedPrice, getFirsts5ProductsWith17Discount, getProductsWithMoreThan17Discount } from "../../utilities/shareFunctions"
 
 export default function ProductPage() {
   const { productId } = useParams<{ productId: string | undefined }>()
@@ -37,7 +38,9 @@ export default function ProductPage() {
     return <div>Product not found.</div>
   }
 
-  const discountedPrice = product.price - (product.price * product.discountPercentage) / 100
+  const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
+
+  const fiveProductsWithDiscount: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
 
   return (
     <div>
@@ -45,8 +48,8 @@ export default function ProductPage() {
 
       <div className={styles.container}>
         <div className={styles.container_of_others_containers}>
-          <div className={styles.container_images_three}>
-            <div className={styles.product_images_three}>
+          <div>
+            <div className={`${styles.product_images} ${product.images.length > 3 ? `${styles.overscroll_container}` : ""}`}>
               {product.images.map((image, index) => (
                 <img
                   key={`image-${index}`}
@@ -61,8 +64,8 @@ export default function ProductPage() {
               ))}
             </div>
           </div>
-          <div className={styles.container_thumbnail_three}>
-            <img className={styles.img_thumbnail_three} src={selectedImage || product.thumbnail} alt={product.title} />
+          <div className={styles.container_thumbnail}>
+            <img className={styles.img_thumbnail} src={selectedImage || product.thumbnail} alt={product.title} />
 
             <button
               className={styles.container_heart_icon}
@@ -77,11 +80,19 @@ export default function ProductPage() {
               {isProductInFavorites(product.id) ? heartIconAddProductAndCategoryPage : heartIconRemoveProductAndCategoryPage}
             </button>
           </div>
-          .
-          <div className={styles.container_info_product_three}>
+          <div className={styles.container_info_product}>
             <div className={styles.info_product}>
-              <div className={styles.product_discount}>${discountedPrice.toFixed(2)}</div>
-              <div className={styles.product_discount_info}>Promotion with 17% off!</div>
+              {fiveProductsWithDiscount.includes(product) ? (
+                <>
+                  <div className={styles.product_discount}>${calculateDiscountedPrice(product)}</div>
+                  <div className={styles.product_discount_info}>Promotion with 17% off!</div>
+                </>
+              ) : (
+                <div className={styles.container_price_without_discount}>
+                  <div> ${product.price} </div>
+                </div>
+              )}
+
               <div className={styles.title}>{product.title.replaceAll(/[_\-\.]/g, "")}</div>
               <div className={styles.rating}>
                 Rating of {product.rating}
@@ -89,7 +100,7 @@ export default function ProductPage() {
               </div>
               <div className={styles.description}> {product.description.replaceAll(/[_\-\.]/g, "")}</div>
 
-              <div className={styles.container_btn_add}>
+              <div>
                 <button
                   className={`${styles.add_btn_cart} ${isProductInCart(product.id) ? styles.add_btn_cart_are_in_cart : ""} `}
                   onClick={() => {

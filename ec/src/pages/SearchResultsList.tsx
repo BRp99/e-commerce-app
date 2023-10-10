@@ -45,16 +45,9 @@ export default function SearchResultsList({ results, inputValue, selectedResultI
 
   return (
     <div className={listClassName} ref={listRef}>
-      {/* <div tabIndex={0} className={styles.focusable_element}></div> */}
       {filteredResults.length > 0
         ? filteredResults.map((result, id) => (
-            <SearchResult
-              key={id}
-              result={result}
-              inputValue={inputValue}
-              // isSelected={result.id === selectedResult?.id}
-              isSelected={id === selectedResultIndex}
-            />
+            <SearchResult key={id} result={result} inputValue={inputValue} isSelected={id === selectedResultIndex} />
           ))
         : null}
       {showNoResultsMessage && (

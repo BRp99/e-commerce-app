@@ -14,6 +14,8 @@ export default function CardPromotion({ id, thumbnail, brand, product }: CardPro
   return (
     <div className={styles.container}>
       <div key={id} className={styles.container_info}>
+        <div className={styles.more_then}>More than</div>
+
         <div className={styles.percentage_off_container}>
           <div className={styles.seventeen}>{Math.floor(product.discountPercentage)}</div>
           <div className={styles.percentage_off}>%</div>

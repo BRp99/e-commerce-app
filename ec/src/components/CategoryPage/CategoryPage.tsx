@@ -5,6 +5,7 @@ import { useFavContext } from "../../context/FavContext"
 import BackButtonToHomePage from "../../utilities/BackButtonToHomePage"
 import { Product, useStoreContext } from "../../context/StoreContext"
 import { heartIconAddProductAndCategoryPage, heartIconRemoveProductAndCategoryPage } from "../../icons/icons"
+import { calculateDiscountedPrice } from "../../utilities/shareFunctions"
 
 export default function CategoryPage() {
   const { category } = useParams<string>()
@@ -39,6 +40,7 @@ export default function CategoryPage() {
                 <div className={styles.product_title}>{product.title}</div>
                 <div className={styles.container_price_container}>
                   <div className={styles.price_container}>
+                    <div className={styles.discount}>${calculateDiscountedPrice(product)}</div>
                     <div className={styles.price}>${product.price}</div>
                   </div>
                 </div>

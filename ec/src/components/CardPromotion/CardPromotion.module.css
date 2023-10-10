@@ -17,13 +17,19 @@
 }
 
 .container_info {
-  padding: 20px 10px;
+  padding: 10px 10px;
+}
+
+.more_then {
+  color: orangered;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .percentage_off_container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  height: 100px;
+  height: 105px;
   width: 130px;
   margin-left: -10px;
 }
@@ -32,7 +38,7 @@
   color: orangered;
   font-size: 3.5rem;
   font-weight: 700;
-  padding: 0px 10px;
+  padding: 5px 30px;
   margin-top: -20px;
 }
 
@@ -43,6 +49,7 @@
   color: orangered;
   font-size: 1.7rem;
   font-weight: 700;
+  padding: 5px 0px;
   display: flex;
   justify-content: center;
 }
@@ -50,11 +57,11 @@
 .percentage_off::after {
   content: "off";
   position: absolute;
-  left: 50%;
+  left: 55%;
   transform: translateX(-50%);
   font-weight: 700;
   font-size: 1.4rem;
-  padding: 23px 0px;
+  padding: 25px 0px;
   margin-left: -4px;
 }
 

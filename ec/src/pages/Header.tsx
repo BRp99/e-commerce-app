@@ -94,7 +94,7 @@ export default function Header({ openModal }: HeaderProps) {
       if (selectedResultIndex !== null) {
         const selectedProduct = results[selectedResultIndex]
         if (selectedProduct) {
-          navigate(`/product/${selectedProduct.id}`)
+          navigate(`/product-promotion/${selectedProduct.id}`)
         }
       } else {
         handleResultClick()

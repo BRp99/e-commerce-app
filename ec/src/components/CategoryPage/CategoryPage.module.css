@@ -70,17 +70,25 @@
 .price_container {
   outline: 1px solid #757575;
   background-color: #ffffff;
+  color: black;
+  padding: 5px;
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px 10px;
-  width: 80px;
-  border-radius: 20px;
+  gap: 0.8rem;
   height: 25px;
+  padding: 8px 20px;
+}
+
+.discount {
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .price {
-  font-weight: bold;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
 }
 
 .container_btn_add {
