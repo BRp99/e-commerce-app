@@ -71,14 +71,14 @@
   outline: 1px solid #757575;
   background-color: #ffffff;
   color: black;
-  padding: 5px;
+  /* padding: 5px; */
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
   height: 25px;
-  padding: 8px 20px;
+  padding: 8px 30px;
 }
 
 .discount {

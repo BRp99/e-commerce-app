@@ -52,10 +52,11 @@
   width: 430px;
   height: 430px;
   object-fit: cover;
-  padding: 90px 90px;
+  padding: 0px 0px;
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  border-radius: 10px;
 }
 
 .container_heart_icon {
@@ -76,8 +77,6 @@
   outline: 1px solid #757575;
   background-color: #f0f0f0;
 }
-
-/* ------------------------------------------------------------ */
 
 .info_product > div {
   display: flex;

@@ -7,26 +7,30 @@ interface SearchResultsListProps {
   results: Product[]
   inputValue: string
   selectedResult: Product | null
-  selectedResultIndex: number | null
+  onResultClick: () => void
+  onResultSelection: (productId: number) => void
 }
 
-export default function SearchResultsList({ results, inputValue, selectedResultIndex }: SearchResultsListProps) {
+export default function SearchResultsList({ results, inputValue, selectedResult, onResultClick, onResultSelection }: SearchResultsListProps) {
   const listRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (selectedResultIndex !== null && listRef.current) {
-      const selectedResultElement = listRef.current.children[selectedResultIndex] as HTMLElement
-      if (selectedResultElement) {
-        const listHeight = listRef.current.clientHeight
-        const elementHeight = selectedResultElement.clientHeight
-        const elementOffsetTop = selectedResultElement.offsetTop
+    if (selectedResult && listRef.current) {
+      const selectedResultIndex = results.findIndex((result) => result.id === selectedResult.id)
+      if (selectedResultIndex !== -1) {
+        const selectedResultElement = listRef.current.children[selectedResultIndex] as HTMLElement
+        if (selectedResultElement) {
+          const listHeight = listRef.current.clientHeight
+          const elementHeight = selectedResultElement.clientHeight
+          const elementOffsetTop = selectedResultElement.offsetTop
 
-        const scrollPosition = elementOffsetTop - (listHeight - elementHeight) / 2
+          const scrollPosition = elementOffsetTop - (listHeight - elementHeight) / 2
 
-        listRef.current.scrollTop = scrollPosition
+          listRef.current.scrollTop = scrollPosition
+        }
       }
     }
-  }, [selectedResultIndex])
+  }, [selectedResult, results])
 
   const filteredResults = results
     .filter((result) => result.title.toLowerCase().includes(inputValue.toLowerCase()))
@@ -43,11 +47,42 @@ export default function SearchResultsList({ results, inputValue, selectedResultI
     filteredResults.length < 5 ? styles.less_results : ""
   }`
 
+  const onResultKeyDown = (e: React.KeyboardEvent, productId: number) => {
+    // Alterar o argumento para o ID do produto
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault()
+
+      if (e.key === "ArrowDown") {
+        const selectedResultIndex = results.findIndex((result) => result.id === selectedResult?.id)
+        if (selectedResultIndex < results.length - 1) {
+          onResultSelection(results[selectedResultIndex + 1].id) // Alterar o argumento para o ID do próximo produto
+        }
+      } else if (e.key === "ArrowUp") {
+        const selectedResultIndex = results.findIndex((result) => result.id === selectedResult?.id)
+        if (selectedResultIndex > 0) {
+          onResultSelection(results[selectedResultIndex - 1].id) // Alterar o argumento para o ID do produto anterior
+        }
+      }
+    } else if (e.key === "Enter") {
+      if (selectedResult) {
+        onResultClick()
+      }
+    }
+  }
+
   return (
     <div className={listClassName} ref={listRef}>
       {filteredResults.length > 0
-        ? filteredResults.map((result, id) => (
-            <SearchResult key={id} result={result} inputValue={inputValue} isSelected={id === selectedResultIndex} />
+        ? filteredResults.map((results, id) => (
+            <SearchResult
+              key={results.id}
+              results={results}
+              inputValue={inputValue}
+              isSelected={selectedResult?.id === results.id}
+              onClick={onResultClick}
+              onKeyDown={(e) => onResultKeyDown(e, results.id)}
+              onSelection={() => onResultSelection(results.id)}
+            />
           ))
         : null}
       {showNoResultsMessage && (

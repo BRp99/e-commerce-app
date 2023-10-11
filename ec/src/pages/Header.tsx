@@ -1,14 +1,14 @@
-import styles from "./Header.module.css"
-import { cartIconHeader, heartIconHeader, searchIcon } from "../icons/icons"
+import { useState, useEffect, useRef } from "react"
 import { NavLink } from "react-router-dom"
-import { useCartContext } from "../context/CartContext"
-import { useFavContext } from "../context/FavContext"
-import { Product } from "../context/StoreContext"
-import { useState, useEffect } from "react"
-import SearchResultsList from "./SearchResultsList"
 import { useNavigate } from "react-router-dom"
 import LoginButton from "../components/LoginButton/LoginButton"
 import LogOutButton from "../components/LogOutButton/LogOutButton"
+import SearchResultsList from "./SearchResultsList"
+import styles from "./Header.module.css"
+import { cartIconHeader, heartIconHeader, searchIcon } from "../icons/icons"
+import { useCartContext } from "../context/CartContext"
+import { useFavContext } from "../context/FavContext"
+import { Product } from "../context/StoreContext"
 
 interface HeaderProps {
   openModal(): void
@@ -22,24 +22,30 @@ export default function Header({ openModal }: HeaderProps) {
 
   const [input, setInput] = useState("")
   const [results, setResults] = useState<Product[]>([])
-  const [showResults, setShowResults] = useState(false)
-  const [selectedResult, setSelectedResult] = useState<Product | null>(null)
-  const [selectedResultIndex, setSelectedResultIndex] = useState<number | null>(null)
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(null)
   const [showNoResultsMessage, setShowNoResultsMessage] = useState(false)
+
+  const [selectedResult, setSelectedResult] = useState<Product | null>(null)
+  const [showResults, setShowResults] = useState(false)
   const [semanticallyRelatedResults, setSemanticallyRelatedResults] = useState<Product[]>([])
 
   const fetchData = (inputValue: string) => {
     fetch("https://dummyjson.com/products?limit=100")
       .then((response) => response.json())
       .then((data) => {
+        console.log("API Data:", data)
+
         if (Array.isArray(data.products)) {
-          const results = data.products.filter((product: Product) => {
-            return inputValue && product && product.title && product.title.toLowerCase().includes(inputValue.toLowerCase())
+          const filteredResults = data.products.filter((product: Product) => {
+            return product.title && product.title.toLowerCase().includes(inputValue.toLowerCase())
           })
-          console.log("Results filter:", results)
-          setResults(results)
+          console.log("Filtered Results:", filteredResults)
+
+          setResults(filteredResults)
         } else {
           console.error('The "products" property is not an array in the response:', data)
+          setResults([])
+          setShowNoResultsMessage(true)
         }
       })
       .catch((error) => {
@@ -47,65 +53,86 @@ export default function Header({ openModal }: HeaderProps) {
       })
   }
 
-  const handleChange = (inputValue: string) => {
-    setInput(inputValue)
-    if (inputValue.trim() === "") {
-      setShowResults(false)
-    } else {
-      fetchData(inputValue)
-      setShowResults(true)
-    }
-  }
-
   const handleResultClick = () => {
-    if (input === "") {
-      setShowNoResultsMessage(true)
-    } else if (selectedResultIndex !== null) {
-      const selectedProduct = results[selectedResultIndex]
-      if (selectedProduct) {
-        navigate(`/product/${selectedProduct.id}`)
-      }
-      setSelectedResult(null)
+    console.log("Result clicked")
+    if (selectedResult) {
+      console.log("Selected Product:", selectedResult)
+      console.log("Selected Product ID:", selectedProductId)
+
+      navigate(`/product-promotion/${selectedProductId}`)
       setInput("")
       setShowResults(false)
     }
   }
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "ArrowDown") {
+  const handleChange = (inputValue: string) => {
+    setInput(inputValue)
+    if (inputValue.trim() === "") {
+      setShowResults(false)
+      setShowNoResultsMessage(false)
+    } else {
+      fetchData(inputValue)
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log("Key pressed:", e.key)
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       e.preventDefault()
-      setSelectedResultIndex((prevIndex) => {
-        if (prevIndex === null || prevIndex === results.length - 1) {
-          return 0
+
+      if (results.length > 0) {
+        if (selectedProductId === null) {
+          setSelectedProductId(results[0].id)
         } else {
-          return prevIndex + 1
+          const currentIndex = results.findIndex((product) => product.id === selectedProductId)
+
+          if (e.key === "ArrowDown") {
+            const nextIndex = (currentIndex + 1) % results.length
+            setSelectedProductId(results[nextIndex].id)
+          } else if (e.key === "ArrowUp") {
+            const prevIndex = (currentIndex - 1 + results.length) % results.length
+            setSelectedProductId(results[prevIndex].id)
+          }
         }
-      })
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault()
-      setSelectedResultIndex((prevIndex) => {
-        if (prevIndex === null || prevIndex === 0) {
-          return results.length - 1
-        } else {
-          return prevIndex - 1
-        }
-      })
+      }
     } else if (e.key === "Enter") {
-      if (selectedResultIndex !== null) {
-        const selectedProduct = results[selectedResultIndex]
-        if (selectedProduct) {
-          navigate(`/product-promotion/${selectedProduct.id}`)
-        }
-      } else {
+      if (selectedResult) {
         handleResultClick()
       }
     }
   }
 
+  const handleSearchBtnClick = () => {
+    let productToNavigate = selectedResult || results[0]
+    if (productToNavigate) {
+      navigate(`/product-promotion/${productToNavigate.id}`)
+      setInput("")
+      setShowResults(false)
+    }
+  }
+
+  const handleResultSelection = (productId: number) => {
+    setSelectedProductId(productId)
+    setSelectedResult(results.find((product) => product.id === productId) || null)
+  }
+
+  const performBtnSearch = (currentResults: Product[]) => {
+    if (selectedProductId !== null && currentResults.length > 0) {
+      const selectedProduct = currentResults.find((product) => product.id === selectedProductId)
+      navigate(`/product-promotion/${selectedProductId}`)
+      setInput("")
+      setShowResults(false)
+    }
+  }
+
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown)
+    const handleKeyDownEvent = (e: KeyboardEvent) => {
+      handleKeyDown(e as any)
+    }
+
+    window.addEventListener("keydown", handleKeyDownEvent)
     return () => {
-      window.removeEventListener("keydown", handleKeyDown)
+      window.removeEventListener("keydown", handleKeyDownEvent)
     }
   }, [results])
 
@@ -122,10 +149,21 @@ export default function Header({ openModal }: HeaderProps) {
           value={input}
           onFocus={() => setShowResults(true)}
           onChange={(e) => handleChange(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearchBtnClick()
+            }
+          }}
         />
         <div className={styles.search_results_container}>
           {showResults ? (
-            <SearchResultsList results={results} inputValue={input} selectedResult={selectedResult} selectedResultIndex={selectedResultIndex} />
+            <SearchResultsList
+              results={results}
+              inputValue={input}
+              selectedResult={selectedResult}
+              onResultClick={handleResultClick}
+              onResultSelection={handleResultSelection}
+            />
           ) : showNoResultsMessage ? (
             <div className={styles.no_results_message}>
               Product not found! Did you mean:
@@ -138,7 +176,7 @@ export default function Header({ openModal }: HeaderProps) {
           ) : null}
         </div>
 
-        <button className={styles.search_btn} onClick={handleResultClick}>
+        <button className={styles.search_btn} onClick={handleSearchBtnClick}>
           {searchIcon}
           Search
         </button>
