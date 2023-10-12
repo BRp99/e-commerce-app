@@ -3,7 +3,7 @@
   position: relative;
   border-radius: 10px;
   transition: box-shadow 0.1s ease-out;
-  outline: 1px solid #757575;
+  outline: 1px solid rgb(195, 188, 188);
 }
 
 .thumbnail {
@@ -13,7 +13,7 @@
   border-radius: 10px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border-bottom: 1px solid #757575;
+  border-bottom: 1px solid rgb(195, 188, 188);
 }
 
 .container:hover {

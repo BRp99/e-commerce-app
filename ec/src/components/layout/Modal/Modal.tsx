@@ -1,4 +1,4 @@
-import styles from "../pages/Modal.module.css"
+import styles from "./Modal.module.css"
 import { useEffect, useState } from "react"
 
 interface ModalProps {
@@ -18,11 +18,7 @@ export default function Modal({ closeModal }: ModalProps) {
 
   useEffect(() => {
     function handleClickOutsideModal(event: MouseEvent) {
-      if (
-        (event.target as HTMLElement).classList.contains(
-          styles.container_overlay
-        )
-      ) {
+      if ((event.target as HTMLElement).classList.contains(styles.container_overlay)) {
         closeModal()
       }
     }
@@ -30,8 +26,7 @@ export default function Modal({ closeModal }: ModalProps) {
     function handleEscKeyPressModal(event: KeyboardEvent) {
       if (event.key === "Escape") {
         closeModal()
-        if (document.activeElement instanceof HTMLElement)
-          document.activeElement.blur()
+        if (document.activeElement instanceof HTMLElement) document.activeElement.blur()
       }
     }
 
@@ -82,15 +77,9 @@ export default function Modal({ closeModal }: ModalProps) {
               <div className={styles.divider_line_log} />
 
               <div className={styles.big_tech_companies_registration_log}>
-                <button className={styles.google_btn_log}>
-                  Login with Google
-                </button>
-                <button className={styles.fb_btn_log}>
-                  Login with Facebook
-                </button>
-                <button className={styles.apple_btn_log}>
-                  Login with Apple
-                </button>
+                <button className={styles.google_btn_log}>Login with Google</button>
+                <button className={styles.fb_btn_log}>Login with Facebook</button>
+                <button className={styles.apple_btn_log}>Login with Apple</button>
               </div>
             </>
           ) : (
@@ -114,15 +103,9 @@ export default function Modal({ closeModal }: ModalProps) {
               <div className={styles.divider_line_sign} />
 
               <div className={styles.big_tech_companies_registration_sign}>
-                <button className={styles.google_btn_sign}>
-                  Continue with Google
-                </button>
-                <button className={styles.fb_btn_sign}>
-                  Continue with Facebook
-                </button>
-                <button className={styles.apple_btn_sign}>
-                  Continue with Apple
-                </button>
+                <button className={styles.google_btn_sign}>Continue with Google</button>
+                <button className={styles.fb_btn_sign}>Continue with Facebook</button>
+                <button className={styles.apple_btn_sign}>Continue with Apple</button>
               </div>
             </>
           )}

@@ -44,7 +44,6 @@ export default function StoreProvider({ children }: { children: ReactNode }) {
         ...p,
         description: p.description.toLowerCase(),
       }))
-      console.log(products)
       setProducts(products)
     } catch (error) {
       console.error("Error fetching products:", error)

@@ -1,0 +1,7 @@
+.container {
+  overflow: hidden;
+  display: flex;
+  border-radius: 20px;
+  padding-left: 10px;
+  background-color: hsl(0, 0%, 95%);
+}

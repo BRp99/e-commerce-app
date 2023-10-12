@@ -1,8 +1,8 @@
 import styles from "./Layout.module.css"
 import { ReactNode, useState } from "react"
-import Header from "../../pages/Header"
-import Footer from "./Footer"
-import Modal from "../../pages/Modal"
+import Header from "./Header/Header"
+import Footer from "./Footer/Footer"
+import Modal from "./Modal/Modal"
 
 type LayoutProps = {
   children?: ReactNode
@@ -22,9 +22,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className={styles.container}>
       <Header openModal={openModal} />
-
       <main>{children}</main>
-
       <Footer />
       {modalOpen && <Modal closeModal={closeModal} />}
     </div>

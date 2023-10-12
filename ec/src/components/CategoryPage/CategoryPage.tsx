@@ -5,7 +5,7 @@ import { useFavContext } from "../../context/FavContext"
 import BackButtonToHomePage from "../../utilities/BackButtonToHomePage"
 import { Product, useStoreContext } from "../../context/StoreContext"
 import { heartIconAddProductAndCategoryPage, heartIconRemoveProductAndCategoryPage } from "../../icons/icons"
-import { calculateDiscountedPrice } from "../../utilities/shareFunctions"
+import { calculateDiscountedPrice, getFirsts5ProductsWith17Discount, getProductsWithMoreThan17Discount } from "../../utilities/shareFunctions"
 
 export default function CategoryPage() {
   const { category } = useParams<string>()
@@ -23,6 +23,10 @@ export default function CategoryPage() {
 
   const categoryProducts: Product[] = products.filter((product) => product.category === category)
 
+  const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
+
+  const fiveProductsWithDiscount: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
+
   return (
     <div>
       <BackButtonToHomePage />
@@ -31,18 +35,27 @@ export default function CategoryPage() {
         <h3 className={styles.category_title}>{category?.replaceAll(/[_\-\.]/g, "")}</h3>
 
         <div className={styles.product_summary}>
-          {categoryProducts.map((product, index) => (
+          {categoryProducts.map((product) => (
             <div key={product.id} className={styles.product_item}>
               <div className={styles.product_item_content}>
-                <NavLink key={product.id} to={`/product-promotion/${product.id}`} className={styles.product_item}>
+                <NavLink key={product.id} to={`/product/${product.id}`} className={styles.product_item}>
                   <img className={styles.thumbnail} src={product.thumbnail} alt={product.title} />
                 </NavLink>
                 <div className={styles.product_title}>{product.title}</div>
+
                 <div className={styles.container_price_container}>
-                  <div className={styles.price_container}>
-                    <div className={styles.discount}>${calculateDiscountedPrice(product)}</div>
-                    <div className={styles.price}>${product.price}</div>
-                  </div>
+                  {fiveProductsWithDiscount.includes(product) ? (
+                    <>
+                      <div className={styles.price_container}>
+                        <div className={styles.discount}>${calculateDiscountedPrice(product)}</div>
+                        <div className={styles.price}>${product.price}</div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className={styles.price_container_no_promo}>
+                      <div className={styles.price_no_promo}>${product.price}</div>
+                    </div>
+                  )}
                 </div>
 
                 <button

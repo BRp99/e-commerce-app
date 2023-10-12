@@ -34,7 +34,7 @@ export default function FavPage() {
             if (!product) return null
             return (
               <div key={product.id} className={styles.wrapper}>
-                <NavLink to={`/product-promotion/${product.id}`} className={styles.nav_link}>
+                <NavLink to={`/product/${product.id}`} className={styles.nav_link}>
                   <div className={styles.container_thumb}>
                     <img src={product.thumbnail} alt={product.title} className={styles.thumb} />
                     <button

@@ -1,0 +1,20 @@
+.container {
+  position: absolute;
+  top: 100%;
+  width: 36ch;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 8px #ddd;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  max-height: 200px;
+  padding-left: 13px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  margin: 0;
+}

@@ -19,7 +19,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="category/:category" element={<CategoryPage />} />
-                <Route path="product-promotion/:productId" element={<ProductPage />} />
+                <Route path="product/:productId" element={<ProductPage />} />
                 <Route path="/shopping-cart" element={<ShoppingCartPage />} />
                 <Route path="/favorites" element={<FavPage />} />
               </Routes>

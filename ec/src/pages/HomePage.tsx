@@ -30,7 +30,7 @@ export default function HomePage() {
 
       <div className={styles.container_promotions}>
         {fiveProducts.map((product) => (
-          <NavLink key={product.id} to={`/product-promotion/${product.id}`} className={styles.nav_link_promotions}>
+          <NavLink key={product.id} to={`/product/${product.id}`} className={styles.nav_link_promotions}>
             <CardPromotion id={product.id} thumbnail={product.thumbnail} brand={product.brand} product={product as Product} />
           </NavLink>
         ))}
