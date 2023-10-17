@@ -1,0 +1,16 @@
+.quantity_btn {
+  cursor: pointer;
+}
+
+.selected_quantity {
+  display: inline;
+  font-weight: bold;
+}
+
+.dropdown {
+  margin-top: 5px;
+  max-height: 100px;
+  overflow-y: auto;
+  outline: 1px solid #757575;
+  width: 68px;
+}

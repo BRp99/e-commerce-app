@@ -22,8 +22,8 @@ export default function Header({ openModal }: HeaderProps) {
       </NavLink>
       <Search />
       <div className={styles.action_container}>
-        <LoginButton />
-        <LogOutButton />
+        {/* <LoginButton />
+        <LogOutButton /> */}
 
         <button onClick={openModal} className={styles.log_btn}>
           Log in

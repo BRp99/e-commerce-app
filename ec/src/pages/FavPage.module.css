@@ -1,18 +1,18 @@
-.container_with_fav {
+.container_with_fav,
+.container_without_fav {
   margin: 0rem 5rem;
   padding: 40px 40px;
   background-color: white;
   border-radius: 10px;
+}
+
+.container_with_fav {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px 40px;
 }
 
 .container_without_fav {
-  margin: 0rem 5rem;
-  padding: 40px 40px;
-  background-color: white;
-  border-radius: 10px;
   display: grid;
   justify-content: center;
   align-items: center;
@@ -95,28 +95,23 @@
 
 .title {
   text-transform: capitalize;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: orangered;
 }
 
+.title,
 .price {
   font-size: 1.2rem;
-  color: orangered;
   font-weight: bold;
+  color: orangered;
 }
 
 .title_without_discount {
   text-transform: capitalize;
-  font-size: 1.2rem;
-  font-weight: bold;
-  /* color: orangered; */
 }
 
+.title_without_discount,
 .price_without_discount {
   font-size: 1.2rem;
-  /* color: orangered; */
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .description {

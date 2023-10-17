@@ -15,6 +15,10 @@
   padding-left: 13px;
 }
 
+/* .container::-webkit-scrollbar-sbutton {
+  display:none;
+} */
+
 .container::-webkit-scrollbar-thumb {
   margin: 0;
 }

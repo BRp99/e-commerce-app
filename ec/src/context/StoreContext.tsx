@@ -12,6 +12,7 @@ export type Product = {
   category: string
   thumbnail: string
   images: string[]
+  quantity: number
 }
 
 type StoreContextType = {

@@ -1,0 +1,10 @@
+.result {
+  padding-left: 10px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.result:hover {
+  background-color: #efefef;
+  cursor: pointer;
+}
