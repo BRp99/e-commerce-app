@@ -6,14 +6,13 @@ export type QuantityButtonType = Product[]
 
 interface Props {
   product: Product
-  selectedQuantity: number
-  setSelectedQuantity: (quantity: number) => void
+  updateQuantity: (productId: number, quantity: number) => void
 }
 
-export default function QuantityButton({ product, selectedQuantity, setSelectedQuantity }: Props) {
+export default function QuantityButton({ product, updateQuantity }: Props) {
   return (
     <div className={styles.container}>
-      <QuantityButtonResults product={product} selectedQuantity={selectedQuantity} setSelectedQuantity={setSelectedQuantity} />
+      <QuantityButtonResults product={product} updateQuantity={updateQuantity} />
     </div>
   )
 }

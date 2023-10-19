@@ -16,7 +16,8 @@ type CartContext = {
   increaseQuantityInCart(productId: number): void
   decreaseQuantityInCart(productId: number): void
   removeFromCart(productId: number): void
-  totalQuantityCart: number
+  updateTotalQuantityCart: () => number
+  // totalQuantityCart: number
 }
 
 const CartContext = createContext({} as CartContext)
@@ -28,6 +29,7 @@ export function useCartContext() {
 export default function CartProvider({ children }: CartProviderProps) {
   // const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart", [])
   const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [totalQuantityCart, setTotalQuantityCart] = useState(0)
 
   const addToCart = (productId: number) => {
     const alreadyExists = cartItems.find((item) => item.productId === productId)
@@ -65,7 +67,15 @@ export default function CartProvider({ children }: CartProviderProps) {
     setCartItems((currItems) => currItems.filter((item) => item.productId !== productId))
   }
 
-  const totalQuantityCart = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
+  function updateTotalQuantityCart(): number {
+    const newTotalQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
+    setTotalQuantityCart(newTotalQuantity)
+    return newTotalQuantity
+  }
+  // const totalQuantityCart = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
+
+  // criar ActionContainer -> depois melhoro esta função:
+  // const totalQuantityCart = cartItems.reduce((total, item) => total + item.quantity, 0)
 
   return (
     <CartContext.Provider
@@ -75,7 +85,8 @@ export default function CartProvider({ children }: CartProviderProps) {
         increaseQuantityInCart,
         decreaseQuantityInCart,
         removeFromCart,
-        totalQuantityCart,
+        updateTotalQuantityCart,
+        // totalQuantityCart,
       }}
     >
       {children}

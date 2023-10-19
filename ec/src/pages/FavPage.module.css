@@ -1,3 +1,23 @@
+.loading_container {
+  margin: 0rem 5rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
+  font-weight: 600;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 40px;
+}
+
+.loading_svg,
+.loading_string,
+.error_loading {
+  margin-bottom: 15px;
+}
+
 .container_with_fav,
 .container_without_fav {
   margin: 0rem 5rem;

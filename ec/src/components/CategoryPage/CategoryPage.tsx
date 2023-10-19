@@ -4,22 +4,44 @@ import { useCartContext } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import BackButtonToHomePage from "../../utilities/BackButtonToHomePage"
 import { Product, useStoreContext } from "../../context/StoreContext"
-import { heartIconAddProductAndCategoryPage, heartIconRemoveProductAndCategoryPage } from "../../icons/icons"
+import { useState, useEffect } from "react"
+import { heartIconAddProductAndCategoryPage, heartIconRemoveProductAndCategoryPage, loadingIcon } from "../../icons/icons"
 import { calculateDiscountedPrice, getFirsts5ProductsWith17Discount, getProductsWithMoreThan17Discount } from "../../utilities/shareFunctions"
 
 export default function CategoryPage() {
+  const [loading, setLoading] = useState(true)
   const { category } = useParams<string>()
 
   const { addToCart, cartItems, removeFromCart } = useCartContext()
   const { products } = useStoreContext()
   const { addToFav, removeFavorite, favorites } = useFavContext()
 
-  if (!favorites) return <>Loading...</>
+  useEffect(() => {
+    setLoading(false)
+  }, [])
 
-  const isProductInFavorites = (productId: number) => favorites.some((favItem) => favItem.productId === productId)
+  if (loading) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.loading_svg}>
+          {loadingIcon}
+
+          <div className={styles.loading_string}>Loading...</div>
+        </div>
+      </div>
+    )
+  }
+
+  const isProductInFavorites = (productId: number) => (favorites || []).some((favItem) => favItem.productId === productId)
   const isProductInCart = (productId: number) => cartItems.some((cartItem) => cartItem.productId === productId)
 
-  if (!products) return <>Loading...</>
+  if (!products) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.error_loading}> Error loading products. Try again later</div>
+      </div>
+    )
+  }
 
   const categoryProducts: Product[] = products.filter((product) => product.category === category)
 

@@ -8,7 +8,7 @@ export function getFirsts5ProductsWith17Discount(products: Product[]) {
   return products.slice(0, 5)
 }
 
-export function calculateDiscountedPrice(product: Product): string {
+export function calculateDiscountedPrice(product: Product): number {
   const discountedPrice = (product.price - (product.price * product.discountPercentage) / 100).toFixed(2)
-  return discountedPrice
+  return parseFloat(discountedPrice)
 }

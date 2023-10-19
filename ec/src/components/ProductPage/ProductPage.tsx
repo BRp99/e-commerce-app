@@ -1,17 +1,16 @@
-import { NavLink, useNavigate, useParams } from "react-router-dom"
+import { NavLink, useParams } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
 import ColorStarRating from "../../utilities/ColorStarRating"
-import { heartIconAddProductAndCategoryPage, heartIconRemoveProductAndCategoryPage } from "../../icons/icons"
+import { heartIconAddProductAndCategoryPage, heartIconRemoveProductAndCategoryPage, loadingIcon } from "../../icons/icons"
 import { useStoreContext, Product } from "../../context/StoreContext"
 import { useEffect, useState } from "react"
 import BackButtonToCategoryPage from "../../utilities/BackButtonToCategoryPage"
-import { calculateDiscountedPrice, getFirsts5ProductsWith17Discount, getProductsWithMoreThan17Discount } from "../../utilities/shareFunctions"
+import { calculateDiscountedPrice } from "../../utilities/shareFunctions"
 
 export default function ProductPage() {
   const { productId } = useParams<{ productId: string | undefined }>()
-  const navigate = useNavigate()
 
   const { addToCart, cartItems, removeFromCart } = useCartContext()
   const { products } = useStoreContext()
@@ -20,44 +19,48 @@ export default function ProductPage() {
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null)
   const [imgClic, setImgClic] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (productId === undefined || !products) {
       setCurrentProduct(null)
+      setLoading(false)
     } else {
       const productIdAsInt = parseInt(productId, 10)
       const selectedProduct = products.find((p) => p.id === productIdAsInt)
 
       if (selectedProduct) {
         setCurrentProduct(selectedProduct)
+        setLoading(false)
       } else {
         setCurrentProduct(null)
+        setLoading(false)
       }
     }
   }, [productId, products])
 
-  if (!favorites) return <>Loading...</>
-
-  const isProductInFavorites = (productId: number) => favorites.some((favItem) => favItem.productId === productId)
+  const isProductInFavorites = (productId: number) => (favorites || []).some((favItem) => favItem.productId === productId)
   const isProductInCart = (productId: number) => cartItems.some((cartItem) => cartItem.productId === productId)
 
-  if (productId === undefined) {
-    return <div>Product not found</div>
+  if (loading) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.loading_svg}>
+          {loadingIcon}
+
+          <div className={styles.loading_string}>Loading...</div>
+        </div>
+      </div>
+    )
   }
 
-  const productIdAsInt = parseInt(productId, 10)
-
-  if (!products) return <>Loading...</>
-
-  const product = products.find((p) => p.id === productIdAsInt)
-
-  if (!product) {
-    return <div>Product not found.</div>
+  if (!products) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.error_loading}>Error loading products. Try again later</div>
+      </div>
+    )
   }
-
-  const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
-
-  const fiveProductsWithDiscount: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
 
   return (
     <div>

@@ -1,17 +1,48 @@
 import { useFavContext } from "../context/FavContext"
 import { useStoreContext, Product } from "../context/StoreContext"
 import { NavLink } from "react-router-dom"
-import { heartIconFavPage, heartIconNoFavPage } from "../icons/icons"
+import { useEffect, useState } from "react"
+import { heartIconFavPage, heartIconNoFavPage, loadingIcon } from "../icons/icons"
 import BackButtonToHomePage from "../utilities/BackButtonToHomePage"
 import styles from "./FavPage.module.css"
 import { calculateDiscountedPrice, getFirsts5ProductsWith17Discount, getProductsWithMoreThan17Discount } from "../utilities/shareFunctions"
 
 export default function FavPage() {
+  const [loading, setLoading] = useState(true)
   const { products } = useStoreContext()
   const { favorites, removeFavorite } = useFavContext()
 
-  if (!favorites) return <>Loading...</>
-  if (!products) return <>Loading...</>
+  useEffect(() => {
+    setLoading(false)
+  }, [])
+
+  if (loading) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.loading_svg}>
+          {loadingIcon}
+
+          <div className={styles.loading_string}>Loading...</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!favorites) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.error_loading}>Error loading favorites</div>
+      </div>
+    )
+  }
+
+  if (!products) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.error_loading}>Error loading products. Try again later</div>
+      </div>
+    )
+  }
 
   const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
 

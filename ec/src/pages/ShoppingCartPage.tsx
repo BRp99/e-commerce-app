@@ -1,65 +1,102 @@
+import { useEffect, useState } from "react"
 import QuantityButton from "../components/QuantityButton/QuantityButton"
 import { useCartContext } from "../context/CartContext"
 import { Product, useStoreContext } from "../context/StoreContext"
-import { cartIconShoppingCartPage } from "../icons/icons"
+import { cartIconShoppingCartPage, loadingIcon } from "../icons/icons"
 import BackButtonToHomePage from "../utilities/BackButtonToHomePage"
-import { useState, useEffect } from "react"
 import { calculateDiscountedPrice, getFirsts5ProductsWith17Discount, getProductsWithMoreThan17Discount } from "../utilities/shareFunctions"
 import styles from "./ShoppingCartPage.module.css"
 
 export default function ShoppingCartPage() {
-  const [selectedQuantities, setSelectedQuantities] = useState<{ [productId: number]: number }>({})
+  const [loading, setLoading] = useState(true)
+  const [selectedQuantities, setSelectedQuantities] = useState<Record<number, number>>({})
+  const [totalPrice, setTotalPrice] = useState<number>(0)
+
   const { cartItems, removeFromCart } = useCartContext()
   const { products } = useStoreContext()
-  const [totalItems, setTotalItems] = useState(0)
-
-  // Função para calcular a soma total das quantidades
-  const calculateTotalItems = (quantities: { [productId: number]: number }) => {
-    const total = Object.values(quantities).reduce((acc, quantity) => acc + quantity, 0)
-    setTotalItems(total)
-  }
 
   useEffect(() => {
-    // Redefina as quantidades selecionadas quando o carrinho for atualizado
-    const initialQuantities: { [productId: number]: number } = {}
-    cartItems.forEach((cartItem) => {
-      initialQuantities[cartItem.productId] = cartItem.quantity
-    })
-    setSelectedQuantities(initialQuantities)
-    // Calcula a soma total das quantidades
-    calculateTotalItems(initialQuantities)
-  }, [cartItems])
+    setLoading(false)
+  }, [])
 
-  // Use um efeito separado para calcular a soma das quantidades sempre que houver uma alteração
   useEffect(() => {
-    const total = Object.values(selectedQuantities).reduce((acc, quantity) => acc + quantity, 0)
-    setTotalItems(total)
-  }, [selectedQuantities])
+    // Ccalcula o preço total com base nas quantidades selecionadas
+    if (products) {
+      const newTotalPrice = calculateTotalPrice(selectedQuantities, products)
+      setTotalPrice(newTotalPrice)
+    }
+  }, [selectedQuantities, products])
 
-  // Função para remover um item do carrinho
-  const handleRemoveFromCart = (productId: number) => {
-    removeFromCart(productId)
-
-    // Atualiza as quantidades selecionadas após a remoção
-    const updatedQuantities = { ...selectedQuantities }
-    delete updatedQuantities[productId]
-    setSelectedQuantities(updatedQuantities)
-
-    // Calcula a soma total atualizada
-    calculateTotalItems(updatedQuantities)
-  }
-
-  if (!products) {
+  if (loading) {
     return (
-      <div>
-        <BackButtonToHomePage />
-        <p>Loading...</p>
+      <div className={styles.loading_container}>
+        <div className={styles.loading_svg}>
+          {loadingIcon}
+
+          <div className={styles.loading_string}>Loading...</div>
+        </div>
       </div>
     )
   }
 
+  if (!products) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.error_loading}> Error loading products. Try again later </div>
+      </div>
+    )
+  }
+
+  function calculateTotalPrice(selectedQuantities: Record<number, number>, products: Product[]): number {
+    let totalPrice = 0
+
+    for (const productId in selectedQuantities) {
+      if (selectedQuantities.hasOwnProperty(productId)) {
+        const quantity = selectedQuantities[productId]
+        const product = products.find((p) => p.id === parseInt(productId, 10))
+
+        if (product) {
+          if (fiveProductsWithDiscount.includes(product)) {
+            totalPrice += calculateDiscountedPrice(product) * quantity
+          } else {
+            totalPrice += product.price * quantity
+          }
+        }
+      }
+    }
+
+    return totalPrice
+  }
+
+  // Atualiz a quant.
+  const updateQuantity = (productId: number, quantity: number) => {
+    setSelectedQuantities((prevSelectedQuantities) => ({
+      ...prevSelectedQuantities,
+      [productId]: quantity,
+    }))
+  }
+
   const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
   const fiveProductsWithDiscount: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
+
+  const totalItems = Object.values(selectedQuantities).reduce((acc: number, quantity) => acc + quantity, 0)
+
+  function calculateSavings(products: Product[], selectedQuantities: Record<number, number>) {
+    return products.reduce((totalSavings, product) => {
+      const quantity = selectedQuantities[product.id] || 0
+      return totalSavings + (product.price - calculateDiscountedPrice(product)) * quantity
+    }, 0)
+  }
+
+  const handleRemoveFromCart = (productId: number) => {
+    setSelectedQuantities((prevSelectedQuantities) => {
+      const updatedQuantities = { ...prevSelectedQuantities }
+      delete updatedQuantities[productId]
+      return updatedQuantities
+    })
+
+    removeFromCart(productId)
+  }
 
   return (
     <div>
@@ -78,7 +115,6 @@ export default function ShoppingCartPage() {
               const product = products.find((v) => v.id === cartItem.productId)
               if (!product) return null
 
-              const selectedQuantity = selectedQuantities[product.id] || 1
               return (
                 <div key={product.id}>
                   <div key={product.id} className={styles.container_of_others_containers}>
@@ -87,7 +123,7 @@ export default function ShoppingCartPage() {
                     </div>
                     <div className={styles.container_info_product}>
                       <div className={styles.container_description}>
-                        <div className={styles.description}> {product.description.replaceAll(/[_\.]/g, "")}</div>
+                        <div className={styles.description}> {product.description.replaceAll(/[_]/g, "")}</div>
                       </div>
                       {fiveProductsWithDiscount.includes(product) ? (
                         <>
@@ -96,16 +132,7 @@ export default function ShoppingCartPage() {
                             <div className={styles.price}>${product.price}</div>
                             <div className={styles.container_btn}>
                               <div>
-                                <QuantityButton
-                                  product={product}
-                                  selectedQuantity={selectedQuantity}
-                                  setSelectedQuantity={(quantity: number) =>
-                                    setSelectedQuantities({
-                                      ...selectedQuantities,
-                                      [product.id]: quantity,
-                                    })
-                                  }
-                                />
+                                <QuantityButton product={product} updateQuantity={updateQuantity} />
                               </div>
                               <div>
                                 <button className={styles.remove_btn} onClick={() => handleRemoveFromCart(product.id)}>
@@ -120,16 +147,7 @@ export default function ShoppingCartPage() {
                           <div className={styles.price_without_promo}> ${product.price}</div>
                           <div className={styles.container_btn}>
                             <div>
-                              <QuantityButton
-                                product={product}
-                                selectedQuantity={selectedQuantity}
-                                setSelectedQuantity={(quantity: number) =>
-                                  setSelectedQuantities({
-                                    ...selectedQuantities,
-                                    [product.id]: quantity,
-                                  })
-                                }
-                              />
+                              <QuantityButton product={product} updateQuantity={updateQuantity} />
                             </div>
                             <div>
                               <button className={styles.remove_btn} onClick={() => handleRemoveFromCart(product.id)}>
@@ -151,13 +169,19 @@ export default function ShoppingCartPage() {
             <div className={styles.info}>
               <div className={styles.order_summary}>Order Summary:</div>
               <div className={styles.saved_with}>
-                Saved with Promotions: <div>$number</div>{" "}
+                <div className={styles.saved}>Saved</div> <div className={styles.with_promotions}> with Promotions:</div>
+                <div className={styles.money_save}> ${calculateSavings(fiveProductsWithDiscount, selectedQuantities).toFixed(2)} </div>
               </div>
               <div className={styles.total_items}>
-                TOTAL items: <div>{totalItems}</div>{" "}
+                Total items: <div>{totalItems}</div>
               </div>
-              <div className={styles.all_taxes}>all taxes includes</div>
-              <button>Buy</button>
+              <div className={styles.total_price}>
+                Total price: <div className={styles.total}> ${totalPrice.toFixed(2)} </div>
+              </div>
+              <div className={styles.all_taxes}>(all taxes includes)</div>
+              <div className={styles.container_buy_btn}>
+                <button className={styles.buy_btn}>Buy</button>
+              </div>
             </div>
           </div>
         )}

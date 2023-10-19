@@ -3,16 +3,42 @@ import CardCategory from "../components/CardCategory/CardCategory"
 import styles from "./HomePage.module.css"
 import { NavLink } from "react-router-dom"
 import CardPromotion from "../components/CardPromotion/CardPromotion"
+import { useEffect, useState } from "react"
 import { getFirsts5ProductsWith17Discount, getProductsWithMoreThan17Discount } from "../utilities/shareFunctions"
+import { loadingIcon } from "../icons/icons"
 
 export type CategoryThumbnails = Record<string, Product>
 
 export default function HomePage() {
+  const [loading, setLoading] = useState(true)
+
   const { products } = useStoreContext()
 
   const categoryThumbnails: CategoryThumbnails = {}
 
-  if (!products) return <>Loading...</>
+  useEffect(() => {
+    setLoading(false)
+  }, [])
+
+  if (loading) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.loading_svg}>
+          {loadingIcon}
+
+          <div className={styles.loading_string}>Loading...</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!products) {
+    return (
+      <div className={styles.loading_container}>
+        <div className={styles.error_loading}> Error loading products. Try again later </div>
+      </div>
+    )
+  }
 
   products.forEach((product) => {
     if (!categoryThumbnails[product.category]) {
