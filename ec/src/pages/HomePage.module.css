@@ -1,6 +1,9 @@
+.container {
+  padding-top: 1rem;
+}
 .loading_container {
   margin: 0rem 5rem;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 10px;
   box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
   font-weight: 600;
@@ -22,7 +25,7 @@
 .h2_promotions {
   color: var(--secondary);
   text-align: center;
-  background-color: white;
+  /* background-color: white; */
   margin: 0 5rem;
   padding: 15px;
   margin-top: 40px;
@@ -35,7 +38,7 @@
 .container_categories {
   margin: 0 5rem;
   padding: 0 20px;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;

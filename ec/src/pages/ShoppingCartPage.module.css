@@ -10,6 +10,7 @@
   align-items: center;
   text-align: center;
   padding: 40px 40px;
+  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
 }
 
 .loading_svg,
@@ -21,12 +22,13 @@
 .container_without_products {
   margin: 0rem 5rem;
   padding: 40px 40px;
-  background-color: white;
+  background-color: #efefef;
   border-radius: 10px;
   display: grid;
   justify-content: center;
   align-items: center;
   width: 1280px;
+  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
 }
 
 .no_cart_icon {
@@ -54,13 +56,14 @@
 .container_with_products {
   margin-left: 5rem;
   padding: 40px 40px;
-  background-color: white;
+  background-color: #efefef;
   border-radius: 10px;
   width: 830px;
-  outline: 1px solid #757575;
+  /* outline: 1px solid #757575; */
   margin-bottom: 5px;
-  max-height: 710px;
+  max-height: 500px;
   overflow-x: auto;
+  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
 }
 
 .container_of_others_containers {
@@ -153,8 +156,9 @@
   height: 210px;
   margin-right: 5rem;
   padding: 40px 40px;
-  outline: 1px solid #757575;
+  /* outline: 1px solid #757575; */
   background-color: #efefef;
+  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
 }
 
 .info {

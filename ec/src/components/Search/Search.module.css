@@ -3,5 +3,6 @@
   display: flex;
   border-radius: 20px;
   padding-left: 10px;
-  background-color: hsl(0, 0%, 95%);
+  background-color: #efefef;
+  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
 }

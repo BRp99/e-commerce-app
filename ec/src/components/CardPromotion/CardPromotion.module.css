@@ -1,8 +1,10 @@
 .container {
-  outline: 1px solid rgb(195, 188, 188);
+  /* outline: 1px solid rgb(195, 188, 188); */
   height: 100%;
   border-radius: 10px;
-  background-color: rgb(238, 238, 238);
+  background-color: #efefef;
+  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
+  transition: box-shadow 0.5s ease-out, background-color 0.5s ease-out;
   position: relative;
   width: 100%;
   border-radius: 10px;
@@ -13,7 +15,9 @@
 }
 
 .container:hover {
-  box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+  background-color: #f4f4f4;
+
+  box-shadow: 9px 9px 10px #d1d1d1, -9px -9px 10px #fff;
 }
 
 .container_info {

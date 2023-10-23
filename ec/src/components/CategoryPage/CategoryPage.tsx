@@ -45,10 +45,6 @@ export default function CategoryPage() {
 
   const categoryProducts: Product[] = products.filter((product) => product.category === category)
 
-  const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
-
-  const fiveProductsWithDiscount: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
-
   return (
     <div>
       <BackButtonToHomePage />
@@ -66,7 +62,7 @@ export default function CategoryPage() {
                 <div className={styles.product_title}>{product.title}</div>
 
                 <div className={styles.container_price_container}>
-                  {fiveProductsWithDiscount.includes(product) ? (
+                  {product.discountPercentage > 0 ? (
                     <>
                       <div className={styles.price_container}>
                         <div className={styles.discount}>${calculateDiscountedPrice(product)}</div>

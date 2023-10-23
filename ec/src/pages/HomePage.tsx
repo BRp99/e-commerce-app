@@ -51,8 +51,8 @@ export default function HomePage() {
   const fiveProducts: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
 
   return (
-    <div>
-      <h2 className={styles.h2_promotions}>Promotions</h2>
+    <div className={styles.container}>
+      {/* <h2 className={styles.h2_promotions}>Promotions</h2> */}
 
       <div className={styles.container_promotions}>
         {fiveProducts.map((product) => (
@@ -63,7 +63,7 @@ export default function HomePage() {
       </div>
 
       {/* CARDCATEGORY */}
-      <h2 className={styles.h2_our_categories}>Our Categories</h2>
+      {/* <h2 className={styles.h2_our_categories}>Our Categories</h2> */}
       <div className={styles.container_categories}>
         {Object.keys(categoryThumbnails).map((category) => (
           <NavLink key={category} to={`/category/${category}`} className={styles.nav_link_categories}>

@@ -103,10 +103,10 @@ export default function ProductPage() {
             </div>
             <div className={styles.container_info_product}>
               <div className={styles.info_product}>
-                {currentProduct.discountPercentage > 17 ? (
+                {currentProduct.discountPercentage > 0 ? (
                   <>
                     <div className={styles.product_discount}>${calculateDiscountedPrice(currentProduct)}</div>
-                    <div className={styles.product_discount_info}>Promotion with 17% off!</div>
+                    <div className={styles.product_discount_info}> {currentProduct.discountPercentage}% off!</div>
                   </>
                 ) : (
                   <div className={styles.container_price_without_discount}>

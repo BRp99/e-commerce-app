@@ -6,31 +6,29 @@ import { useCartContext } from "../../../context/CartContext"
 
 interface Props {
   product: Product
-  updateQuantity: (productId: number, quantity: number) => void
+  quantity: number
+  setQuantity: (quantity: number) => void
 }
 
-export default function QuantityButtonResults({ product, updateQuantity }: Props) {
-  const { updateTotalQuantityCart } = useCartContext()
+export default function QuantitySelector({ product, quantity, setQuantity }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [selectedQuantity, setSelectedQuantity] = useState(0)
 
   const handleQuantityChange = (value: number) => {
     const newQuantity = Math.max(0, value)
-    setSelectedQuantity(newQuantity)
-    updateQuantity(product.id, newQuantity)
-    updateTotalQuantityCart()
+    setQuantity(newQuantity)
+    // setSelectedQuantity(newQuantity)
   }
 
   return (
     <div>
       <div className={styles.container}>
         <button className={styles.quantity_btn} onClick={() => setDropdownOpen(!dropdownOpen)}>
-          Quantity: <div className={styles.selected_quantity}> {selectedQuantity}</div>
+          Quantity: <div className={styles.selected_quantity}> {quantity}</div>
         </button>
         {dropdownOpen && (
           <div className={styles.dropdown}>
             {Array.from({ length: product.stock }).map((_, id) => (
-              <QuantityButtonResult key={id} value={id + 1} selectedQuantity={selectedQuantity} onSelect={handleQuantityChange} />
+              <QuantityButtonResult key={id} value={id + 1} selectedQuantity={quantity} onSelect={handleQuantityChange} />
             ))}
           </div>
         )}

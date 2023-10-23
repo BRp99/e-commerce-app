@@ -44,9 +44,9 @@ export default function FavPage() {
     )
   }
 
-  const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
+  // const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
 
-  const fiveProductsWithDiscount: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
+  // const fiveProductsWithDiscount: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
 
   return (
     <div>
@@ -82,7 +82,7 @@ export default function FavPage() {
 
                 <div className={styles.container_info_product}>
                   <div className={styles.title_price}>
-                    {fiveProductsWithDiscount.includes(product) ? (
+                    {product.discountPercentage > 0 ? (
                       <>
                         <div className={styles.title}>{product.title.replaceAll(/[_\-\.]/g, "")} </div>
 

@@ -3,7 +3,8 @@
   position: relative;
   border-radius: 10px;
   transition: box-shadow 0.1s ease-out;
-  outline: 1px solid rgb(195, 188, 188);
+  /* outline: 1px solid rgb(195, 188, 188); */
+  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
 }
 
 .thumbnail {

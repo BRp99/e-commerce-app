@@ -5,7 +5,7 @@ type CartProviderProps = {
   children: ReactNode
 }
 
-type CartItem = {
+export type CartItem = {
   productId: number
   quantity: number
 }
@@ -13,11 +13,11 @@ type CartItem = {
 type CartContext = {
   cartItems: CartItem[]
   addToCart: (productId: number) => void
+  setQuantity: (productId: number, quantity: number) => void
   increaseQuantityInCart(productId: number): void
   decreaseQuantityInCart(productId: number): void
   removeFromCart(productId: number): void
-  updateTotalQuantityCart: () => number
-  // totalQuantityCart: number
+  totalQuantityCart: number
 }
 
 const CartContext = createContext({} as CartContext)
@@ -29,7 +29,7 @@ export function useCartContext() {
 export default function CartProvider({ children }: CartProviderProps) {
   // const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart", [])
   const [cartItems, setCartItems] = useState<CartItem[]>([])
-  const [totalQuantityCart, setTotalQuantityCart] = useState(0)
+  // const [totalQuantityCart, setTotalQuantityCart] = useState(0)
 
   const addToCart = (productId: number) => {
     const alreadyExists = cartItems.find((item) => item.productId === productId)
@@ -67,12 +67,15 @@ export default function CartProvider({ children }: CartProviderProps) {
     setCartItems((currItems) => currItems.filter((item) => item.productId !== productId))
   }
 
-  function updateTotalQuantityCart(): number {
-    const newTotalQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
-    setTotalQuantityCart(newTotalQuantity)
-    return newTotalQuantity
+  function setQuantity(productId: number, quantity: number) {
+    setCartItems((cartItems) =>
+      cartItems.map((item) => {
+        return item.productId === productId ? { ...item, quantity } : item
+      })
+    )
   }
-  // const totalQuantityCart = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
+
+  const totalQuantityCart = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
 
   // criar ActionContainer -> depois melhoro esta função:
   // const totalQuantityCart = cartItems.reduce((total, item) => total + item.quantity, 0)
@@ -85,8 +88,8 @@ export default function CartProvider({ children }: CartProviderProps) {
         increaseQuantityInCart,
         decreaseQuantityInCart,
         removeFromCart,
-        updateTotalQuantityCart,
-        // totalQuantityCart,
+        totalQuantityCart,
+        setQuantity,
       }}
     >
       {children}

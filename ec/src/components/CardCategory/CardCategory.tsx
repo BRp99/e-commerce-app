@@ -15,7 +15,7 @@ export default function Categories({ category, thumbnail, product }: CardCategor
         <img className={styles.thumbnail} src={thumbnail} alt={category} />
       </div>
 
-      <div className={styles.category_name}>{category.replaceAll(/[_\.]/g, "")}</div>
+      <div className={styles.category_name}>{category.replaceAll("-", " ")}</div>
     </div>
   )
 }

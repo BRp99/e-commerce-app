@@ -11,8 +11,8 @@ interface Props {
 }
 
 export default function ActionContainer({ openModal }: Props) {
-  const { updateTotalQuantityCart } = useCartContext()
   const { totalQuantityFav } = useFavContext()
+  const { totalQuantityCart } = useCartContext()
 
   return (
     <div>
@@ -31,7 +31,7 @@ export default function ActionContainer({ openModal }: Props) {
 
         <NavLink to="/shopping-cart" className={styles.cart_link}>
           {cartIconHeader}
-          <div className={styles.quantity_cart}>{updateTotalQuantityCart()}</div>
+          <div className={styles.quantity_cart}> {totalQuantityCart} </div>
         </NavLink>
       </div>
     </div>
