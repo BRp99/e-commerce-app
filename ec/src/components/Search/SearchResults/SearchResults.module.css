@@ -1,13 +1,13 @@
 .container {
   position: absolute;
   top: 100%;
-  width: 36ch;
-  background-color: white;
-  border-radius: 10px;
+  width: 37ch;
+  background-color: var(--bg);
+  border-radius: 0.55rem;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 8px #ddd;
+  box-shadow: 2px 2px 5px #b8b9be, -3px -3px 7px #fff;
   overflow-y: auto;
   display: flex;
   justify-content: center;

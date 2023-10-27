@@ -2,22 +2,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0rem 5rem;
-  /* border-bottom: 1px solid rgb(230, 230, 230); */
+  padding: 1rem 5rem;
   position: sticky;
   top: 0;
-  background-color: #efefef;
-  box-shadow: 0 0 50px #efefef;
+  background-color: var(--bg);
   z-index: 2;
-  height: 63px;
 }
 
-.market_fusion {
+.logo {
+  border: var(--nm_border);
   text-decoration: none;
-  color: var(--primary);
-  font-weight: 700;
-}
-
-.market_fusion:hover {
-  color: var(--btn_bg_hover);
+  color: var(--new_primary);
+  box-shadow: 6px 6px 12px #b8b9be, -6px -6px 12px #fff;
+  border-color: #d1d9e6;
+  width: 55px;
+  height: 43px;
+  font-size: 1.95rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.55rem;
+  background-color: transparent;
 }

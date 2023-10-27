@@ -99,7 +99,7 @@ export default function ProductPage() {
 
             <div className={styles.product_rating}>
               Rating of {product.rating}
-              <ColorStarRating rating={product.rating} />
+              <ColorStarRating />
             </div>
 
             <div className={styles.product_description}>{product.description.replaceAll(/[_\-\.]/g, "")}</div>

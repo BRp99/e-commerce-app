@@ -52,8 +52,6 @@ export default function HomePage() {
 
   return (
     <div className={styles.container}>
-      {/* <h2 className={styles.h2_promotions}>Promotions</h2> */}
-
       <div className={styles.container_promotions}>
         {fiveProducts.map((product) => (
           <NavLink key={product.id} to={`/product/${product.id}`} className={styles.nav_link_promotions}>
@@ -63,7 +61,6 @@ export default function HomePage() {
       </div>
 
       {/* CARDCATEGORY */}
-      {/* <h2 className={styles.h2_our_categories}>Our Categories</h2> */}
       <div className={styles.container_categories}>
         {Object.keys(categoryThumbnails).map((category) => (
           <NavLink key={category} to={`/category/${category}`} className={styles.nav_link_categories}>

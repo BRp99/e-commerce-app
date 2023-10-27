@@ -6,6 +6,7 @@ import { heartIconFavPage, heartIconNoFavPage, loadingIcon } from "../icons/icon
 import BackButtonToHomePage from "../utilities/BackButtonToHomePage"
 import styles from "./FavPage.module.css"
 import { calculateDiscountedPrice, getFirsts5ProductsWith17Discount, getProductsWithMoreThan17Discount } from "../utilities/shareFunctions"
+import ColorStarRating from "../utilities/ColorStarRating"
 
 export default function FavPage() {
   const [loading, setLoading] = useState(true)
@@ -43,10 +44,6 @@ export default function FavPage() {
       </div>
     )
   }
-
-  // const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
-
-  // const fiveProductsWithDiscount: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
 
   return (
     <div>
@@ -86,18 +83,21 @@ export default function FavPage() {
                       <>
                         <div className={styles.title}>{product.title.replaceAll(/[_\-\.]/g, "")} </div>
 
-                        <div className={styles.price}> ${calculateDiscountedPrice(product)}</div>
+                        <div className={styles.price_container}>
+                          <div className={styles.price}>${product.price}</div>
+
+                          <div className={styles.discount}> ${calculateDiscountedPrice(product)}</div>
+                        </div>
                       </>
                     ) : (
-                      <>
-                        <div className={styles.title_without_discount}>{product.title.replaceAll(/[_\-\.]/g, "")} </div>
-
-                        <div className={styles.price_without_discount}> ${product.price}</div>
-                      </>
+                      ""
                     )}
                   </div>
 
-                  <div className={styles.brand}> Brand: {product.brand.replaceAll(/[_\-\.]/g, "")} </div>
+                  <div className={styles.rating}>
+                    <ColorStarRating />
+                    <div className={styles.number_rating}> {product.rating}</div>
+                  </div>
 
                   <div className={styles.description}>{product.description.replaceAll(/[_\-\.]/g, "")} </div>
                 </div>

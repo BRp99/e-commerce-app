@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react"
 import { CartItem, useCartContext } from "../context/CartContext"
 import { Product, useStoreContext } from "../context/StoreContext"
-import { cartIconShoppingCartPage, loadingIcon } from "../icons/icons"
+import { cartIconShoppingCartPage, garbageIcon, loadingIcon } from "../icons/icons"
 import BackButtonToHomePage from "../utilities/BackButtonToHomePage"
 import { calculateDiscountedPrice } from "../utilities/shareFunctions"
-import styles from "./ShoppingCartPage.module.css"
+import styles from "./CartPage.module.css"
 import QuantitySelector from "../components/QuantityButton/QuantityButtonResults/QuantityButtonResults"
 
 export default function ShoppingCartPage() {
   const [loading, setLoading] = useState(true)
-  // const [selectedQuantities, setSelectedQuantities] = useState<Record<number, number>>({})
   const [totalPrice, setTotalPrice] = useState<number>(0)
 
   const { cartItems, removeFromCart, setQuantity } = useCartContext()
@@ -20,7 +19,6 @@ export default function ShoppingCartPage() {
   }, [])
 
   useEffect(() => {
-    // Ccalcula o preço total com base nas quantidades selecionadas
     if (products) {
       const newTotalPrice = calculateTotalPrice(cartItems, products)
       setTotalPrice(newTotalPrice)
@@ -53,14 +51,11 @@ export default function ShoppingCartPage() {
     cartItems.forEach((cartItem) => {
       const product = products.find((p) => p.id === cartItem.productId)
       if (!product) return
-      totalPrice += cartItem.quantity * product.price
+      totalPrice += cartItem.quantity * calculateDiscountedPrice(product)
     })
 
     return totalPrice
   }
-
-  // const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
-  // const fiveProductsWithDiscount: Product[] = getFirsts5ProductsWith17Discount(productsWithMoreThan17Discount)
 
   const totalItems = cartItems.reduce((p, c) => p + c.quantity, 0)
 
@@ -97,33 +92,16 @@ export default function ShoppingCartPage() {
                       <img className={styles.img_thumb} src={product.thumbnail} alt={product.title} />
                     </div>
                     <div className={styles.container_info_product}>
-                      <div className={styles.container_description}>
-                        <div className={styles.description}> {product.description.replaceAll(/[_]/g, "")}</div>
-                      </div>
                       {product.discountPercentage > 0 ? (
                         <>
                           <div className={styles.price_with_promo}>
-                            <div className={styles.discount}>${calculateDiscountedPrice(product)}</div>
+                            <div className={styles.title}>{product.title}</div>
+
                             <div className={styles.price}>${product.price}</div>
-                            <div className={styles.container_btn}>
-                              <div>
-                                <QuantitySelector
-                                  product={product}
-                                  quantity={cartItem.quantity}
-                                  setQuantity={(quantity: number) => setQuantity(product.id, quantity)}
-                                />
-                              </div>
-                              <div>
-                                <button className={styles.remove_btn} onClick={() => removeFromCart(product.id)}>
-                                  Remove Item
-                                </button>
-                              </div>
-                            </div>
+                            <div className={styles.discount}>${calculateDiscountedPrice(product)}</div>
                           </div>
-                        </>
-                      ) : (
-                        <div className={styles.price_no_promo}>
-                          <div className={styles.price_without_promo}> ${product.price}</div>
+                          <div className={styles.description}> {product.description.replaceAll(/[_]/g, "")}</div>
+
                           <div className={styles.container_btn}>
                             <div>
                               <QuantitySelector
@@ -134,11 +112,13 @@ export default function ShoppingCartPage() {
                             </div>
                             <div>
                               <button className={styles.remove_btn} onClick={() => removeFromCart(product.id)}>
-                                Remove Item
+                                {garbageIcon} Remove
                               </button>
                             </div>
                           </div>
-                        </div>
+                        </>
+                      ) : (
+                        ""
                       )}
                     </div>
                   </div>

@@ -3,7 +3,7 @@ import Layout from "../layout/Layout"
 import CategoryPage from "../CategoryPage/CategoryPage"
 import HomePage from "../../pages/HomePage"
 import ProductPage from "../ProductPage/ProductPage"
-import ShoppingCartPage from "../../pages/ShoppingCartPage"
+import CartPage from "../../pages/CartPage"
 import FavPage from "../../pages/FavPage"
 import StoreProvider from "../../context/StoreContext"
 import FavProvider from "../../context/FavContext"
@@ -20,7 +20,7 @@ export default function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="category/:category" element={<CategoryPage />} />
                 <Route path="product/:productId" element={<ProductPage />} />
-                <Route path="/shopping-cart" element={<ShoppingCartPage />} />
+                <Route path="/shopping-cart" element={<CartPage />} />
                 <Route path="/favorites" element={<FavPage />} />
               </Routes>
             </Layout>

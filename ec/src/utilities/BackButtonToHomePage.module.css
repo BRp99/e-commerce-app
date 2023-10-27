@@ -1,23 +1,31 @@
 .back {
   margin: 0 5rem;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
   display: flex;
   justify-content: flex-start;
 }
 
 .btn_back {
+  width: 82px;
+  height: 43px;
+  color: var(--new_primary);
+  background-color: var(--bg);
+  border-radius: 0.55rem;
+  font-size: 1rem;
+  border: var(--nm_border);
+  box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
   display: flex;
-  height: 3em;
-  width: 100px;
-  align-items: center;
   justify-content: center;
-  background-color: #eeeeee4b;
-  border-radius: 3px;
-  transition: all 0.2s linear;
+  align-items: center;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.btn_back:hover {
   cursor: pointer;
-  border: none;
-  background: #f0f0f0;
+  box-shadow: inset -3px -3px 6px #fff, inset 3px 3px 6px #b8b9be;
+  transform: translateY(-2px);
 }
 
 .btn_back > svg {
@@ -28,11 +36,5 @@
 }
 
 .btn_back:hover > svg {
-  font-size: 1.2em;
   transform: translateX(-5px);
-}
-
-.btn_back:hover {
-  box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
-  transform: translateY(-2px);
 }

@@ -6,7 +6,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: var(--primary);
+  color: var(--new_primary);
   padding-right: 5px;
 }
 
@@ -17,11 +17,10 @@
   font-size: 1.1rem;
   padding: 10px 20px;
   padding-left: 3px;
-  /* outline: 4px solid red; */
 }
 
 .search_input::placeholder {
-  color: gray;
+  color: var(--new_secondary);
 }
 
 .search_input:focus {

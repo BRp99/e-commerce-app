@@ -117,7 +117,7 @@ export default function ProductPage() {
                 <div className={styles.title}>{currentProduct.title.replaceAll(/[_\-\.]/g, "")}</div>
                 <div className={styles.rating}>
                   Rating of {currentProduct.rating}
-                  <ColorStarRating rating={currentProduct.rating} />
+                  <ColorStarRating />
                 </div>
                 <div className={styles.description}> {currentProduct.description.replaceAll(/[_\-\.]/g, "")}</div>
 
@@ -134,14 +134,6 @@ export default function ProductPage() {
                   >
                     {isProductInCart(currentProduct.id) ? " Add item to cart" : " Add item to cart"}
                   </button>
-                </div>
-
-                <div className={styles.nav_link_container}>
-                  <div className={styles.nav_link}>
-                    <NavLink to={`/category/${currentProduct.category}`} className={styles.nav_link_category}>
-                      See other products like this!
-                    </NavLink>
-                  </div>
                 </div>
               </div>
             </div>

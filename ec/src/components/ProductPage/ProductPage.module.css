@@ -21,7 +21,7 @@
 .container {
   margin: 0rem 5rem;
   padding: 40px 40px;
-  background-color: white;
+  background-color: var(--bg);
   border-radius: 10px;
   box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
 }

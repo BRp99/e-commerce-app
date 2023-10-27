@@ -2,7 +2,6 @@ import { Product } from "../../../context/StoreContext"
 import QuantityButtonResult from "./QuantityButtonResult/QuantityButtonResult"
 import styles from "./QuantityButtonResults.module.css"
 import { useState } from "react"
-import { useCartContext } from "../../../context/CartContext"
 
 interface Props {
   product: Product
@@ -16,14 +15,14 @@ export default function QuantitySelector({ product, quantity, setQuantity }: Pro
   const handleQuantityChange = (value: number) => {
     const newQuantity = Math.max(0, value)
     setQuantity(newQuantity)
-    // setSelectedQuantity(newQuantity)
   }
 
   return (
     <div>
       <div className={styles.container}>
+        <div className={styles.text_quantity}>Quantity</div>
         <button className={styles.quantity_btn} onClick={() => setDropdownOpen(!dropdownOpen)}>
-          Quantity: <div className={styles.selected_quantity}> {quantity}</div>
+          <div className={styles.selected_quantity}> {quantity}</div>
         </button>
         {dropdownOpen && (
           <div className={styles.dropdown}>

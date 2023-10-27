@@ -1,22 +1,11 @@
 import { starIcon } from "../icons/icons"
 import styles from "./ColorStarRating.module.css"
 
-interface ColorStarRatingProps {
-  rating: number
-}
-
-export default function ColorStarRating({ rating }: ColorStarRatingProps) {
-  const shouldAnimate = rating >= 3.5
-
+export default function ColorStarRating() {
   return (
     <div>
       {Array.from({ length: 5 }).map((_, i) => (
-        <span
-          key={i}
-          className={`${styles.star_icon} ${true ? styles.bounce : ""}`}
-        >
-          {starIcon}
-        </span>
+        <span key={i}>{starIcon}</span>
       ))}
     </div>
   )

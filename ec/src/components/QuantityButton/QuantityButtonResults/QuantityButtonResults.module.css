@@ -1,16 +1,41 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  height: 50px;
+}
+
+.text_quantity {
+  font-size: 1rem;
+  color: var(--new_primary);
+}
+
 .quantity_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  width: auto;
+  font-size: 1rem;
+  box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+  border: 0;
+  padding: 3px 10px;
+  border-radius: 0.55rem;
+  background-color: var(--bg);
 }
 
 .selected_quantity {
   display: inline;
   font-weight: bold;
+  color: var(--new_primary);
 }
 
 .dropdown {
-  margin-top: 5px;
-  max-height: 100px;
-  overflow-y: auto;
-  outline: 1px solid #757575;
-  width: 68px;
+  margin-left: 5px;
+  display: flex;
+  overflow-x: scroll;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #b8b9be, -3px -3px 7px #fff;
+  width: 100px;
 }
