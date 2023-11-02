@@ -2,10 +2,9 @@ import { useParams, NavLink } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
-import ColorStarRating from "../../utilities/ColorStarRating"
-// import ButtonBack from "../../utilities/BackButtonToHomePage"
 import { useState } from "react"
 import { Product, useStoreContext } from "../../context/StoreContext"
+import { heartIconAddFavorites, heartIconRemoveFavorites } from "../../icons/icons"
 
 export default function ProductPage() {
   const { id } = useParams<{ id?: string }>()
@@ -35,21 +34,8 @@ export default function ProductPage() {
     return <>Loading...</>
   }
 
-  const heartIconAdd = (
-    <svg className={styles.heart_icon_add} height="2rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="orangered" fill="orangered">
-      <path d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" />
-    </svg>
-  )
-
-  const heartIconRemove = (
-    <svg className={styles.heart_icon_remove} height="2rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="orangered" fill="white">
-      <path d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" />
-    </svg>
-  )
-
   return (
     <div>
-      {/* <ButtonBack /> */}
       <div>
         <h3 className={styles.title_h3}>{product.title}</h3>
       </div>
@@ -86,7 +72,7 @@ export default function ProductPage() {
                 }
               }}
             >
-              {isProductInFavorites(product.id) ? heartIconAdd : heartIconRemove}
+              {isProductInFavorites(product.id) ? heartIconAddFavorites : heartIconRemoveFavorites}
             </button>
           </div>
         </div>
@@ -97,10 +83,7 @@ export default function ProductPage() {
               <div> Price: ${product.price}</div>
             </div>
 
-            <div className={styles.product_rating}>
-              Rating of {product.rating}
-              <ColorStarRating />
-            </div>
+            <div className={styles.product_rating}>Rating of {product.rating}</div>
 
             <div className={styles.product_description}>{product.description.replaceAll(/[_\-\.]/g, "")}</div>
             <div className={styles.brand}>{product.brand.replaceAll(/[_\-\.]/g, "")}</div>

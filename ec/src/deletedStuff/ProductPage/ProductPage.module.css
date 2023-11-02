@@ -11,15 +11,16 @@
 }
 
 .container {
-  margin: 0 5rem;
-  padding: 0 30px;
-  padding-bottom: 70px;
+  margin: 1rem 15rem;
+  /* padding: 0 30px; */
+  /* padding-bottom: 70px; */
   display: flex;
   justify-content: space-between;
   background-color: white;
   border-radius: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  background-color: red;
 }
 
 .container_images {

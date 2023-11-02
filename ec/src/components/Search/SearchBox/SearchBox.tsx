@@ -2,28 +2,28 @@ import { searchIcon } from "../../../icons/icons"
 import { useState, useEffect } from "react"
 import styles from "./SearchBox.module.css"
 import { SearchResultsType } from "../Search"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
   onQueryChange: (_: string) => void
-  results: SearchResultsType
+  query: string
 }
 
-export default function SearchBox({ onQueryChange, results }: Props) {
-  const [query, setQuery] = useState("")
-
+export default function SearchBox({ onQueryChange, query }: Props) {
+  const navigate = useNavigate()
   function handleChange(newQuery: string) {
-    setQuery(newQuery)
     onQueryChange(newQuery)
   }
 
-  useEffect(() => {
-    if (results === "NoQuery") setQuery("")
-  }, [results])
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    // navigate to the search page
+    if (!query) return
+    navigate("/search?q=" + query)
+  }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.search_icon}>{searchIcon}</div>
-
+    <form className={styles.container} onSubmit={(e) => onSubmit(e)}>
       <input
         className={styles.search_input}
         type="text"
@@ -31,6 +31,9 @@ export default function SearchBox({ onQueryChange, results }: Props) {
         value={query}
         onChange={(e) => handleChange(e.target.value)}
       />
-    </div>
+      <button type="submit" className={styles.search_icon}>
+        {searchIcon}
+      </button>
+    </form>
   )
 }

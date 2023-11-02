@@ -27,8 +27,8 @@ export function useCartContext() {
 }
 
 export default function CartProvider({ children }: CartProviderProps) {
-  // const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart", [])
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("cart", [])
+  // const [cartItems, setCartItems] = useState<CartItem[]>([])
   // const [totalQuantityCart, setTotalQuantityCart] = useState(0)
 
   const addToCart = (productId: number) => {
@@ -76,9 +76,6 @@ export default function CartProvider({ children }: CartProviderProps) {
   }
 
   const totalQuantityCart = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
-
-  // criar ActionContainer -> depois melhoro esta função:
-  // const totalQuantityCart = cartItems.reduce((total, item) => total + item.quantity, 0)
 
   return (
     <CartContext.Provider

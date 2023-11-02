@@ -1,12 +1,30 @@
 .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 5rem;
+  padding: 1rem 15rem;
   position: sticky;
   top: 0;
   background-color: var(--bg);
   z-index: 2;
+  /* outline: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.top_search {
+  flex: 1;
+}
+
+.bottom {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
@@ -23,4 +41,26 @@
   align-items: center;
   border-radius: 0.55rem;
   background-color: transparent;
+}
+
+@media (width < 1170px) {
+  .container {
+    padding: 1rem 10rem;
+  }
+}
+@media (width < 1000px) {
+  .container {
+    padding: 1rem 5rem;
+  }
+}
+@media (width < 900px) {
+  .container {
+    padding: 0.5rem;
+  }
+  .top_search {
+    display: none;
+  }
+  .bottom {
+    display: flex;
+  }
 }

@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Layout from "../layout/Layout"
-import CategoryPage from "../CategoryPage/CategoryPage"
-import HomePage from "../../pages/HomePage"
+import HomePage from "../../pages/HomePage/HomePage"
 import ProductPage from "../ProductPage/ProductPage"
-import CartPage from "../../pages/CartPage"
-import FavPage from "../../pages/FavPage"
+import CartPage from "../../pages/CartPage/CartPage"
+import FavPage from "../../pages/FavPage/FavPage"
 import StoreProvider from "../../context/StoreContext"
 import FavProvider from "../../context/FavContext"
 import CartProvider from "../../context/CartContext"
+import CategoriesPage from "../CategoryPage/CategoriesPage"
 
 export default function App() {
   return (
@@ -18,9 +18,9 @@ export default function App() {
             <Layout>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="category/:category" element={<CategoryPage />} />
+                <Route path="categories/:category" element={<CategoriesPage />} />
                 <Route path="product/:productId" element={<ProductPage />} />
-                <Route path="/shopping-cart" element={<CartPage />} />
+                <Route path="/cart" element={<CartPage />} />
                 <Route path="/favorites" element={<FavPage />} />
               </Routes>
             </Layout>

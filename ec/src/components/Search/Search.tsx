@@ -35,7 +35,7 @@ export default function Search() {
 
   return (
     <div className={styles.container}>
-      <SearchBox onQueryChange={onQueryChange} results={results} />
+      <SearchBox onQueryChange={onQueryChange} query="" />
       <SearchResults results={results} onProductSelected={onProductSelected} />
     </div>
   )

@@ -1,0 +1,8 @@
+.container {
+  color: var(--star_color);
+  fill: transparent;
+}
+
+.filled {
+  fill: var(--star_color);
+}

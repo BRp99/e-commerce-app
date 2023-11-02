@@ -1,21 +1,22 @@
-import { CategoryThumbnails } from "../../pages/HomePage"
-import styles from "./CardCategory.module.css"
+import { CategoryThumbnails } from "../../pages/HomePage/HomePage"
+import styles from "./CategoryCard.module.css"
 import { Product } from "../../context/StoreContext"
+import { NavLink } from "react-router-dom"
 
-interface CardCategoriesProps {
+interface Props {
   category: string
   thumbnail: CategoryThumbnails[string]["thumbnail"]
   product: Product
 }
 
-export default function Categories({ category, thumbnail, product }: CardCategoriesProps) {
+export default function CategoryCard({ category, thumbnail }: Props) {
   return (
-    <div className={styles.container}>
+    <NavLink key={category} to={`/categories/${category}`} className={styles.container}>
       <div key={category}>
         <img className={styles.thumbnail} src={thumbnail} alt={category} />
       </div>
 
       <div className={styles.category_name}>{category.replaceAll("-", " ")}</div>
-    </div>
+    </NavLink>
   )
 }

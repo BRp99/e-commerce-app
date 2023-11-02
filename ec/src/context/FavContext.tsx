@@ -52,10 +52,8 @@ export default function FavProvider({ children }: FavProviderProps) {
   // const [favorites, setFavorites] = useLocalStorage<FavItem[]>("favorites", [])
 
   const addToFav = (productId: number) => {
-    console.log(`Before add productId=${productId}`)
     const alreadyExists = favorites.find((item) => item.productId === productId)
     if (alreadyExists) {
-      console.log(`already exists`)
       return
     }
 
@@ -73,20 +71,19 @@ export default function FavProvider({ children }: FavProviderProps) {
       thumbnail: "",
       images: [],
     }
+    console.log("Novo favorito adicionado:", newItem)
 
     setFavorites((items) => {
-      console.log(`Adding ${productId} to favorites. Before:`, items)
       const newFavorites = [...items, newItem]
-      console.log(`Added ${productId} to favorites. After:`, newFavorites)
+      console.log("Favoritos atualizados:", newFavorites)
+
       return newFavorites
     })
   }
 
   function removeFavorite(productId: number) {
     setFavorites((items) => {
-      console.log(`Removing ${productId}. Before:`, items)
       const newItems = items.filter((item) => item.productId !== productId)
-      console.log("After:", newItems)
       return newItems
     })
   }

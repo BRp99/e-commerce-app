@@ -3,11 +3,11 @@ import { useCartContext } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
 import ColorStarRating from "../../utilities/ColorStarRating"
-import { heartIconAddProductAndCategoryPage, heartIconRemoveProductAndCategoryPage, loadingIcon } from "../../icons/icons"
 import { useStoreContext, Product } from "../../context/StoreContext"
 import { useEffect, useState } from "react"
 import BackButtonToCategoryPage from "../../utilities/BackButtonToCategoryPage"
-import { calculateDiscountedPrice } from "../../utilities/shareFunctions"
+import { calculateDiscountedPrice } from "../../utilities/sharedFunctions"
+import { heartIconAddFavorites, heartIconRemoveFavorites, loadingIcon } from "../../icons/icons"
 
 export default function ProductPage() {
   const { productId } = useParams<{ productId: string | undefined }>()
@@ -26,8 +26,7 @@ export default function ProductPage() {
       setCurrentProduct(null)
       setLoading(false)
     } else {
-      const productIdAsInt = parseInt(productId, 10)
-      const selectedProduct = products.find((p) => p.id === productIdAsInt)
+      const selectedProduct = products.find((p) => p.id === parseInt(productId))
 
       if (selectedProduct) {
         setCurrentProduct(selectedProduct)
@@ -98,7 +97,7 @@ export default function ProductPage() {
                   }
                 }}
               >
-                {isProductInFavorites(currentProduct.id) ? heartIconAddProductAndCategoryPage : heartIconRemoveProductAndCategoryPage}
+                {isProductInFavorites(currentProduct.id) ? heartIconAddFavorites : heartIconRemoveFavorites}
               </button>
             </div>
             <div className={styles.container_info_product}>
@@ -109,15 +108,13 @@ export default function ProductPage() {
                     <div className={styles.product_discount_info}> {currentProduct.discountPercentage}% off!</div>
                   </>
                 ) : (
-                  <div className={styles.container_price_without_discount}>
-                    <div> ${currentProduct.price} </div>
-                  </div>
+                  ""
                 )}
 
                 <div className={styles.title}>{currentProduct.title.replaceAll(/[_\-\.]/g, "")}</div>
                 <div className={styles.rating}>
                   Rating of {currentProduct.rating}
-                  <ColorStarRating />
+                  <ColorStarRating rating={currentProduct.rating} />
                 </div>
                 <div className={styles.description}> {currentProduct.description.replaceAll(/[_\-\.]/g, "")}</div>
 
@@ -132,7 +129,7 @@ export default function ProductPage() {
                       }
                     }}
                   >
-                    {isProductInCart(currentProduct.id) ? " Add item to cart" : " Add item to cart"}
+                    {isProductInCart(currentProduct.id) ? " Remove" : " Buy"}
                   </button>
                 </div>
               </div>
