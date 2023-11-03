@@ -12,6 +12,7 @@ interface Props {
 
 export default function CategoryCard({ category, thumbnail, product }: Props) {
   const { error, loadingFetchProducts } = useStoreContext()
+  const err = true
 
   if (error) {
     return (
@@ -21,9 +22,7 @@ export default function CategoryCard({ category, thumbnail, product }: Props) {
       </div>
     )
   }
-  console.error("Error:", error)
-
-  // const err = true
+  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (

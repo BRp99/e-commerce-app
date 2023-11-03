@@ -34,7 +34,7 @@
   font-weight: normal;
 }
 
-span {
+.circle {
   height: 93px;
   width: 100px;
   position: absolute;
@@ -42,7 +42,7 @@ span {
   /* outline: 1px solid red; */
 }
 
-span::before {
+.circle::before {
   content: "";
   position: absolute;
   height: 30px;

@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import styles from "./ProductPage.module.css"
@@ -7,13 +7,14 @@ import { useStoreContext, Product } from "../../context/StoreContext"
 import { useEffect, useState } from "react"
 import BackButtonToCategoryPage from "../../utilities/BackButtonToCategoryPage"
 import { calculateDiscountedPrice } from "../../utilities/sharedFunctions"
-import { heartIconAddFavorites, heartIconRemoveFavorites, loadingIcon } from "../../icons/icons"
+import { errorIcon, heartIconAddFavorites, heartIconRemoveFavorites, notFoundIcon } from "../../icons/icons"
 
 export default function ProductPage() {
+  const { products, error, loadingFetchProducts } = useStoreContext()
+
   const { productId } = useParams<{ productId: string | undefined }>()
 
   const { addToCart, cartItems, removeFromCart } = useCartContext()
-  const { products } = useStoreContext()
   const { addToFav, removeFavorite, favorites } = useFavContext()
 
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null)
@@ -34,28 +35,42 @@ export default function ProductPage() {
     }
   }, [productId, products])
 
+  const err = true
+
+  if (error) {
+    return (
+      <div className={styles.container_error}>
+        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
+        <div className={styles.oops}> Please try again later. </div>
+      </div>
+    )
+  }
+  // console.error("Error:", error)
+
+  if (loadingFetchProducts) {
+    return (
+      <div className={styles.nm_loading}>
+        <div className={styles.wrapper}>
+          <span className={styles.circle}></span>
+        </div>
+        <div className={styles.text}>
+          Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!products) {
+    return (
+      <div className={styles.not_found}>
+        <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
+        <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
+      </div>
+    )
+  }
+
   const isProductInFavorites = (productId: number) => (favorites || []).some((favItem) => favItem.productId === productId)
   const isProductInCart = (productId: number) => cartItems.some((cartItem) => cartItem.productId === productId)
-
-  // if (loading) {
-  //   return (
-  //     <div className={styles.loading_container}>
-  //       <div className={styles.loading_svg}>
-  //         {loadingIcon}
-
-  //         <div className={styles.loading_string}>Loading...</div>
-  //       </div>
-  //     </div>
-  //   )
-  // }
-
-  // if (!products) {
-  //   return (
-  //     <div className={styles.loading_container}>
-  //       <div className={styles.error_loading}>Error loading products. Try again later</div>
-  //     </div>
-  //   )
-  // }
 
   return (
     <div>

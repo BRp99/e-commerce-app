@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react"
 import { CartItem, useCartContext } from "../../context/CartContext"
 import { Product, useStoreContext } from "../../context/StoreContext"
-import { cartIconShoppingCartPage, garbageIcon, loadingIcon } from "../../icons/icons"
+import { cartIconShoppingCartPage, errorIcon, notFoundIcon } from "../../icons/icons"
 import BackButtonToHomePage from "../../utilities/BackButtonToHomePage"
 import { calculateDiscountedPrice } from "../../utilities/sharedFunctions"
 import styles from "./CartPage.module.css"
-import QuantitySelector from "../../components/QuantityButton/QuantityButtonResults/QuantityButtonResults"
-import FavCard from "../FavPage/FavCard/FavCard"
 import CartProduct from "./CartProduct/CartProduct"
 
 export default function ShoppingCartPage() {
-  const [loading, setLoading] = useState(true)
   const [totalPrice, setTotalPrice] = useState<number>(0)
 
-  const { cartItems, removeFromCart, setQuantity } = useCartContext()
-  const { products } = useStoreContext()
-
-  useEffect(() => {
-    setLoading(false)
-  }, [])
+  const { cartItems, setQuantity } = useCartContext()
+  const { products, error, loadingFetchProducts } = useStoreContext()
 
   useEffect(() => {
     if (products) {
@@ -27,22 +20,40 @@ export default function ShoppingCartPage() {
     }
   }, [cartItems, products])
 
-  if (loading) {
-    return (
-      <div className={styles.loading_container}>
-        <div className={styles.loading_svg}>
-          {loadingIcon}
+  const err = true
 
-          <div className={styles.loading_string}>Loading...</div>
+  if (error) {
+    return (
+      <div className={styles.container_error}>
+        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
+        <div className={styles.oops}> Please try again later. </div>
+      </div>
+    )
+  }
+  // console.error("Error:", error)
+
+  if (loadingFetchProducts) {
+    return (
+      <div className={styles.nm_loading}>
+        <div className={styles.wrapper}>
+          <span className={styles.circle}></span>
+        </div>
+        <div className={styles.text}>
+          Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
         </div>
       </div>
     )
   }
 
+  if (!cartItems) {
+    return <div className={styles.container_without_fproducts}></div>
+  }
+
   if (!products) {
     return (
-      <div className={styles.loading_container}>
-        <div className={styles.error_loading}> Error loading products. Try again later </div>
+      <div className={styles.not_found}>
+        <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
+        <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>
     )
   }

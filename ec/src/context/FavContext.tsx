@@ -71,11 +71,9 @@ export default function FavProvider({ children }: FavProviderProps) {
       thumbnail: "",
       images: [],
     }
-    console.log("Novo favorito adicionado:", newItem)
 
     setFavorites((items) => {
       const newFavorites = [...items, newItem]
-      console.log("Favoritos atualizados:", newFavorites)
 
       return newFavorites
     })

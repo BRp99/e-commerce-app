@@ -43,14 +43,14 @@
   display: block;
 }
 
-span {
+.circle {
   height: 186px;
   width: 220px;
   position: absolute;
   animation: rotate 5s linear infinite;
 }
 
-span::before {
+.circle::before {
   content: "";
   position: absolute;
   height: 30px;

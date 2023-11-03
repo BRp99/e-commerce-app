@@ -12,6 +12,8 @@ export default function HomePage() {
 
   const categoryThumbnails: CategoryThumbnails = {}
 
+  const err = true
+
   if (error) {
     return (
       <div className={styles.container_error}>
@@ -20,13 +22,13 @@ export default function HomePage() {
       </div>
     )
   }
-  console.error("Error:", error)
+  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (
       <div className={styles.nm_loading}>
         <div className={styles.wrapper}>
-          <span></span>
+          <span className={styles.circle}></span>
         </div>
         <div className={styles.text}>
           Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>

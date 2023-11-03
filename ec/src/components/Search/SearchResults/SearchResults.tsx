@@ -1,3 +1,4 @@
+import { Product } from "../../../context/StoreContext"
 import { SearchResultsType } from "../Search"
 import SearchResult from "./SearchResult/SearchResult"
 import styles from "./SearchResults.module.css"

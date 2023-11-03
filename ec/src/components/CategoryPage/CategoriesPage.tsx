@@ -4,44 +4,52 @@ import { useCartContext } from "../../context/CartContext"
 import { useFavContext } from "../../context/FavContext"
 import BackButtonToHomePage from "../../utilities/BackButtonToHomePage"
 import { Product, useStoreContext } from "../../context/StoreContext"
-import { useState, useEffect } from "react"
-import { loadingIcon } from "../../icons/icons"
-import ProductCard from "./ProductCard/ProductCard"
+import ProductCard from "../ProductCard/ProductCard"
+import { errorIcon, notFoundIcon } from "../../icons/icons"
 
 export default function CategoriesPage() {
-  const [loading, setLoading] = useState(true)
   const { category } = useParams<string>()
 
-  const { addToCart, cartItems, removeFromCart } = useCartContext()
-  const { products } = useStoreContext()
-  const { addToFav, removeFavorite, favorites } = useFavContext()
+  const { cartItems } = useCartContext()
+  const { products, error, loadingFetchProducts } = useStoreContext()
+  const { favorites } = useFavContext()
 
-  useEffect(() => {
-    setLoading(false)
-  }, [])
+  const err = true
 
-  if (loading) {
+  if (error) {
     return (
-      <div className={styles.loading_container}>
-        <div className={styles.loading_svg}>
-          {loadingIcon}
+      <div className={styles.container_error}>
+        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
+        <div className={styles.oops}> Please try again later. </div>
+      </div>
+    )
+  }
+  // console.error("Error:", error)
 
-          <div className={styles.loading_string}>Loading...</div>
+  if (loadingFetchProducts) {
+    return (
+      <div className={styles.nm_loading}>
+        <div className={styles.wrapper}>
+          <span className={styles.circle}></span>
         </div>
+        <div className={styles.text}>
+          Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!products) {
+    return (
+      <div className={styles.not_found}>
+        <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
+        <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>
     )
   }
 
   const isProductInFavorites = (productId: number) => (favorites || []).some((favItem) => favItem.productId === productId)
   const isProductInCart = (productId: number) => cartItems.some((cartItem) => cartItem.productId === productId)
-
-  if (!products) {
-    return (
-      <div className={styles.loading_container}>
-        <div className={styles.error_loading}> Error loading products. Try again later</div>
-      </div>
-    )
-  }
 
   const categoryProducts: Product[] = products.filter((product) => product.category === category)
 

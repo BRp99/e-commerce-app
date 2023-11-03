@@ -8,6 +8,7 @@ import StoreProvider from "../../context/StoreContext"
 import FavProvider from "../../context/FavContext"
 import CartProvider from "../../context/CartContext"
 import CategoriesPage from "../CategoryPage/CategoriesPage"
+import SearchPage from "../../pages/SearchPage/SearchPage"
 
 export default function App() {
   return (
@@ -20,6 +21,8 @@ export default function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="categories/:category" element={<CategoriesPage />} />
                 <Route path="product/:productId" element={<ProductPage />} />
+                <Route path="/search/:q" element={<SearchPage />} />
+
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/favorites" element={<FavPage />} />
               </Routes>

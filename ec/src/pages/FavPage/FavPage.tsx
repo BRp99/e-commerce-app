@@ -1,44 +1,48 @@
 import { useFavContext } from "../../context/FavContext"
 import { useStoreContext } from "../../context/StoreContext"
-import { useEffect, useState } from "react"
-import { heartIconNoFavPage, loadingIcon } from "../../icons/icons"
+import { errorIcon, heartIconNoFavPage, notFoundIcon } from "../../icons/icons"
 import BackButtonToHomePage from "../../utilities/BackButtonToHomePage"
 import styles from "./FavPage.module.css"
 import FavCard from "./FavCard/FavCard"
 
 export default function FavPage() {
-  const [loading, setLoading] = useState(true)
-  const { products } = useStoreContext()
-  const { favorites, removeFavorite } = useFavContext()
+  const { products, error, loadingFetchProducts } = useStoreContext()
+  const { favorites } = useFavContext()
 
-  useEffect(() => {
-    setLoading(false)
-  }, [])
+  const err = true
 
-  if (loading) {
+  if (error) {
     return (
-      <div className={styles.loading_container}>
-        <div className={styles.loading_svg}>
-          {loadingIcon}
+      <div className={styles.container_error}>
+        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
+        <div className={styles.oops}> Please try again later. </div>
+      </div>
+    )
+  }
+  // console.error("Error:", error)
 
-          <div className={styles.loading_string}>Loading...</div>
+  if (loadingFetchProducts) {
+    return (
+      <div className={styles.nm_loading}>
+        <div className={styles.wrapper}>
+          <span className={styles.circle}></span>
+        </div>
+        <div className={styles.text}>
+          Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
         </div>
       </div>
     )
   }
 
   if (!favorites) {
-    return (
-      <div className={styles.loading_container}>
-        <div className={styles.error_loading}>Error loading favorites</div>
-      </div>
-    )
+    return <div className={styles.container_without_fav}></div>
   }
 
   if (!products) {
     return (
-      <div className={styles.loading_container}>
-        <div className={styles.error_loading}>Error loading products. Try again later</div>
+      <div className={styles.not_found}>
+        <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
+        <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>
     )
   }
