@@ -1,24 +1,35 @@
 import { useStoreContext, Product } from "../../context/StoreContext"
 import styles from "./HomePage.module.css"
 import { getProductsWithMoreThan17Discount, getPromoProducts } from "../../utilities/sharedFunctions"
-import { loadingIcon } from "../../icons/icons"
 import PromotionCard from "../../components/PromotionCard/PromotionCard"
 import CategoryCard from "../../components/CategoriesCard/CategoryCard"
+import { errorIcon, notFoundIcon } from "../../icons/icons"
 
 export type CategoryThumbnails = Record<string, Product>
 
 export default function HomePage() {
-  const { products, loadingFetchProducts } = useStoreContext()
+  const { products, loadingFetchProducts, error } = useStoreContext()
 
   const categoryThumbnails: CategoryThumbnails = {}
 
+  if (error) {
+    return (
+      <div className={styles.container_error}>
+        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
+        <div className={styles.oops}> Please try again later. </div>
+      </div>
+    )
+  }
+  console.error("Error:", error)
+
   if (loadingFetchProducts) {
     return (
-      <div className={styles.loading_container}>
-        <div className={styles.loading_svg}>
-          {loadingIcon}
-
-          <div className={styles.loading_string}>Loading...</div>
+      <div className={styles.nm_loading}>
+        <div className={styles.wrapper}>
+          <span></span>
+        </div>
+        <div className={styles.text}>
+          Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
         </div>
       </div>
     )
@@ -26,8 +37,9 @@ export default function HomePage() {
 
   if (!products) {
     return (
-      <div>
-        <div className={styles.error_loading}> Error loading products. Try again later </div>
+      <div className={styles.not_found}>
+        <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
+        <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>
     )
   }

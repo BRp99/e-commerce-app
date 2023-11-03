@@ -1,23 +1,3 @@
-.loading_container {
-  padding: 1rem 15rem;
-  background-color: var(--bg);
-  border-radius: 10px;
-  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
-  font-weight: 600;
-  margin-top: 4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 40px 40px;
-}
-
-.loading_svg,
-.loading_string,
-.error_loading {
-  margin-bottom: 15px;
-}
-
 .header {
   display: flex;
   align-items: center;
@@ -45,8 +25,8 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  /* box-shadow: var(--nm_shadow);
-  border: var(--nm_border); */
+  box-shadow: var(--nm_shadow);
+  border: var(--nm_border);
 }
 
 .no_fav_heart {
@@ -59,10 +39,9 @@
 .no_fav_text {
   display: flex;
   justify-content: center;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
+  font-size: 2rem;
   position: relative;
-  color: var(--new_primary);
+  color: var(--new_secondary);
 }
 
 @media (width < 1200px) {

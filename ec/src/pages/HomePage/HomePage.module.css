@@ -1,24 +1,106 @@
-.container {
-  margin-top: 1rem;
-}
-
-.loading_container {
-  margin: 0rem 5rem;
-  border-radius: 10px;
-  box-shadow: 9px 9px 20px #d1d1d1, -9px -9px 20px #ffffff;
-  font-weight: 600;
+.nm_loading {
+  margin: 0rem 15rem;
+  border-radius: 0.55rem;
+  box-shadow: var(--nm_shadow);
+  border: var(--nm_border);
   margin-top: 4rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
+  gap: 2rem;
   padding: 40px 40px;
 }
 
-.loading_svg,
-.loading_string,
-.error_loading {
-  margin-bottom: 15px;
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  box-shadow: var(--nm_shadow_inset);
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: var(--nm_shadow_inset);
+}
+
+.text {
+  color: var(--new_primary);
+  font-size: 2.5rem;
+  display: block;
+}
+
+.second_text {
+  color: var(--new_secondary);
+  font-size: 1.5rem;
+  display: block;
+}
+
+span {
+  height: 186px;
+  width: 220px;
+  position: absolute;
+  animation: rotate 5s linear infinite;
+}
+
+span::before {
+  content: "";
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: var(--loading_color);
+  box-shadow: 0 5px 10px rgb(0 0 0 / 30%);
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.not_found,
+.container_error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0rem 15rem;
+  border-radius: 0.55rem;
+  box-shadow: var(--nm_shadow);
+  border: var(--nm_border);
+  margin-top: 4rem;
+  gap: 1rem;
+  padding: 40px 40px;
+}
+
+.icon {
+  font-size: 15rem;
+  display: flex;
+}
+
+.product_not_found,
+.message {
+  color: var(--new_primary);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.oops {
+  color: var(--new_secondary);
+  font-size: 1.5rem;
+}
+
+/* --------------------------------------------------------------------------------------------------------------- */
+.container {
+  margin-top: 1rem;
 }
 
 .hero {

@@ -18,6 +18,7 @@ export type Product = {
 type StoreContextType = {
   products: Product[] | undefined
   loadingFetchProducts: boolean
+  error: string | null
 }
 
 const initialState = {
@@ -33,6 +34,7 @@ export function useStoreContext() {
 export default function StoreProvider({ children }: { children: ReactNode }) {
   const [loadingFetchProducts, setLoadingFetchProducts] = useState(true)
   const [products, setProducts] = useState<Product[]>()
+  const [error, setError] = useState<string | null>(null)
 
   async function fetchProducts() {
     try {
@@ -48,6 +50,7 @@ export default function StoreProvider({ children }: { children: ReactNode }) {
       setLoadingFetchProducts(false)
     } catch (error) {
       console.error("Error fetching products:", error)
+      setError("Oops! Something went wrong. Please try again later.")
       setLoadingFetchProducts(false)
     }
   }
@@ -56,5 +59,5 @@ export default function StoreProvider({ children }: { children: ReactNode }) {
     fetchProducts()
   }, [])
 
-  return <StoreContext.Provider value={{ products, loadingFetchProducts }}>{children}</StoreContext.Provider>
+  return <StoreContext.Provider value={{ products, loadingFetchProducts, error }}>{children}</StoreContext.Provider>
 }

@@ -19,21 +19,17 @@ export default function ProductPage() {
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null)
   const [imgClic, setImgClic] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (productId === undefined || !products) {
       setCurrentProduct(null)
-      setLoading(false)
     } else {
       const selectedProduct = products.find((p) => p.id === parseInt(productId))
 
       if (selectedProduct) {
         setCurrentProduct(selectedProduct)
-        setLoading(false)
       } else {
         setCurrentProduct(null)
-        setLoading(false)
       }
     }
   }, [productId, products])
@@ -41,25 +37,25 @@ export default function ProductPage() {
   const isProductInFavorites = (productId: number) => (favorites || []).some((favItem) => favItem.productId === productId)
   const isProductInCart = (productId: number) => cartItems.some((cartItem) => cartItem.productId === productId)
 
-  if (loading) {
-    return (
-      <div className={styles.loading_container}>
-        <div className={styles.loading_svg}>
-          {loadingIcon}
+  // if (loading) {
+  //   return (
+  //     <div className={styles.loading_container}>
+  //       <div className={styles.loading_svg}>
+  //         {loadingIcon}
 
-          <div className={styles.loading_string}>Loading...</div>
-        </div>
-      </div>
-    )
-  }
+  //         <div className={styles.loading_string}>Loading...</div>
+  //       </div>
+  //     </div>
+  //   )
+  // }
 
-  if (!products) {
-    return (
-      <div className={styles.loading_container}>
-        <div className={styles.error_loading}>Error loading products. Try again later</div>
-      </div>
-    )
-  }
+  // if (!products) {
+  //   return (
+  //     <div className={styles.loading_container}>
+  //       <div className={styles.error_loading}>Error loading products. Try again later</div>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div>
