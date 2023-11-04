@@ -37,7 +37,7 @@ export default function SearchPage() {
   }, [q])
 
   if (!favorites) {
-    return <div className={styles.container_without_fav}></div>
+    return <></>
   }
 
   if (error) {
@@ -48,7 +48,6 @@ export default function SearchPage() {
       </div>
     )
   }
-  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (
@@ -73,14 +72,20 @@ export default function SearchPage() {
   }
 
   return (
-    <div className={styles.container}>
-      {/* <div className={styles.header}>
+    <div>
+      <div className={styles.header}>
         <div className={styles.back_button}>
           <BackButtonToHomePage />
         </div>
-      </div> */}
-      {filteredProducts.length > 0 && <h1>Possible results for: "{q}"</h1>}
-      <div>
+      </div>
+      <div className={styles.container}>
+        {filteredProducts.length > 0 && (
+          <div className={styles.results}>
+            {filteredProducts.length} results for: "{q}"
+          </div>
+        )}
+      </div>
+      <div className={styles.grid_items}>
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product: Product) => (
             <ProductCard
@@ -91,12 +96,14 @@ export default function SearchPage() {
             />
           ))
         ) : (
-          <div className={styles.not_found}>
-            <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_unavailable}> "{q}"</div>
-            <div className={styles.oops}> Seems like this product doesn't exist.</div>
-            <NavLink to={"/"} className={styles.nav_link}>
-              Click here to check our products!
-            </NavLink>
+          <div className={styles.container_product_not_found}>
+            <div className={styles.not_found}>
+              <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_unavailable}> "{q}"</div>
+              <div className={styles.oops}> Seems like this product doesn't exist.</div>
+              <NavLink to={"/"} className={styles.nav_link}>
+                Click here to check our products!
+              </NavLink>
+            </div>
           </div>
         )}
       </div>

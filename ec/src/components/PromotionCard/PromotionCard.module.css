@@ -7,7 +7,6 @@
   width: 290px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
-  /* outline: 1px solid black; */
 }
 
 .wrapper::before {
@@ -17,7 +16,6 @@
   height: 60px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
-  /* outline: 1px solid yellowgreen; */
 }
 
 .text {
@@ -39,7 +37,6 @@
   width: 100px;
   position: absolute;
   animation: rotate 5s linear infinite;
-  /* outline: 1px solid red; */
 }
 
 .circle::before {

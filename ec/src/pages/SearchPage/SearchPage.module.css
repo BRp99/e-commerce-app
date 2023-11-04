@@ -66,6 +66,11 @@
   }
 }
 
+.container_error {
+  box-shadow: var(--nm_shadow);
+  border: var(--nm_border);
+}
+
 .not_found,
 .container_error {
   display: flex;
@@ -74,8 +79,6 @@
   flex-direction: column;
   margin: 0rem 15rem;
   border-radius: 0.55rem;
-  box-shadow: var(--nm_shadow);
-  border: var(--nm_border);
   margin-top: 4rem;
   gap: 1rem;
   padding: 40px 40px;
@@ -116,13 +119,104 @@
   display: flex;
   justify-content: flex-start;
 }
-
+/* ----------------------------------------------- */
 .container {
-  margin: 1rem 15rem;
+  margin: 0rem 15rem;
   border-radius: 0.55rem;
+}
+
+.results {
+  color: var(--new_primary);
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.grid_items {
   display: grid;
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  margin: 1rem 15rem;
+  gap: 2rem 2rem;
+}
+
+.container_product_not_found {
+  /* margin: 1rem 15rem; */
   box-shadow: var(--nm_shadow);
   border: var(--nm_border);
+  border-radius: 0.55rem;
+}
+
+@media (width < 1270px) {
+  .grid_items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width < 1200px) {
+  .container {
+    margin: 0rem 15rem;
+  }
+  .header {
+    margin: 0rem 15rem;
+  }
+}
+
+@media (width < 1170px) {
+  .container {
+    margin: 0rem 10rem;
+  }
+  .header {
+    margin: 0rem 10rem;
+  }
+
+  .grid_items {
+    margin: 0rem 10rem;
+  }
+}
+
+@media (width < 1000px) {
+  .container {
+    margin: 0rem 5rem;
+  }
+  .header {
+    margin: 1rem 5rem;
+  }
+
+  .grid_items {
+    margin: 0rem 5rem;
+  }
+}
+
+@media (width < 900px) {
+  .container {
+    margin: 0rem 1rem;
+  }
+
+  .header {
+    margin: 1rem 1rem;
+  }
+
+  .grid_items {
+    margin: 0rem 1rem;
+  }
+}
+
+@media (width < 617px) {
+  .grid_items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width < 335px) {
+  .container {
+    margin: 0rem 0.5rem;
+  }
+}
+
+@media (width < 400px) {
+  .grid_items {
+    gap: 0;
+  }
 }
