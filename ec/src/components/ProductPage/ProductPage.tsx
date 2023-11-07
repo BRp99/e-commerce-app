@@ -35,8 +35,6 @@ export default function ProductPage() {
     }
   }, [productId, products])
 
-  const err = true
-
   if (error) {
     return (
       <div className={styles.container_error}>
@@ -45,7 +43,6 @@ export default function ProductPage() {
       </div>
     )
   }
-  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (

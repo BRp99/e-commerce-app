@@ -1,8 +1,122 @@
-.container {
+.nm_loading {
+  border-radius: 0.55rem;
+  box-shadow: var(--nm_shadow);
+  border: var(--nm_border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 20px 20px;
+  flex: 1;
+}
+.nm_loading > .text,
+.nm_loading > .second_text {
+  display: block;
+  align-items: center;
+  text-align: center;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  box-shadow: var(--nm_shadow_inset);
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: var(--nm_shadow_inset);
+}
+
+.text {
+  color: var(--new_primary);
+  font-size: 2rem;
+  display: block;
+  font-weight: bold;
+}
+
+.second_text {
+  color: var(--new_secondary);
+  font-size: 1.5rem;
+  display: block;
+  font-weight: normal;
+}
+
+.circle {
+  height: 90px;
+  width: 90px;
+  position: absolute;
+  animation: rotate 5s linear infinite;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: var(--loading_color);
+  box-shadow: 0 5px 10px rgb(0 0 0 / 30%);
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.nm_loading,
+.container_not_found,
+.container_error {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.55rem;
+  box-shadow: var(--nm_shadow);
+  border: var(--nm_border);
+  gap: 1rem;
+  padding: 20px 20px;
+  flex: 1;
+}
+
+.icon {
+  font-size: 15rem;
+  display: flex;
+}
+
+.product_not_found,
+.message {
+  color: var(--new_primary);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.oops {
+  color: var(--new_secondary);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* ------------------------------- */
+.container,
+.container_error {
   text-decoration: none;
   border-radius: 0.55rem;
   overflow: hidden;
   border: var(--nm_border);
+  display: flex;
+  height: 100%;
+  flex-direction: column;
 }
 
 .thumbnail {
@@ -16,12 +130,19 @@
 }
 
 .category_name {
-  /* margin-top: 0.5rem; */
   margin-bottom: 0.5rem;
-
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   text-align: center;
   font-weight: bold;
   text-transform: capitalize;
   color: var(--new_primary);
+}
+
+@media (width < 440px) {
+  .text {
+    font-size: 1rem;
+  }
+  .second_text {
+    font-size: 0.6rem;
+  }
 }

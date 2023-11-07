@@ -30,7 +30,6 @@ export default function ShoppingCartPage() {
       </div>
     )
   }
-  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (
@@ -46,12 +45,12 @@ export default function ShoppingCartPage() {
   }
 
   if (!cartItems) {
-    return <div className={styles.container_without_fproducts}></div>
+    return <></>
   }
 
   if (!products) {
     return (
-      <div className={styles.not_found}>
+      <div className={styles.container_not_found}>
         <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
         <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>
@@ -89,7 +88,7 @@ export default function ShoppingCartPage() {
         </div>
       </div>
 
-      <div className={styles.main_container}>
+      <div className={styles.main_container + (cartItems.length === 0 ? "${styles.emphty_cart_border}" : "")}>
         <div className={cartItems.length === 0 ? styles.container_without_products : styles.container_with_products}>
           {products && cartItems.length > 0 ? (
             cartItems.map((cartItem) => {
@@ -108,7 +107,6 @@ export default function ShoppingCartPage() {
         </div>
         {cartItems.length > 0 && (
           <div className={styles.container_order_summary}>
-            {/* <div className={styles.info}> */}
             <div className={styles.order_summary}>Order Summary:</div>
             <div className={styles.saved_with}>
               <div className={styles.saved}>with Promotions:</div>
@@ -126,7 +124,6 @@ export default function ShoppingCartPage() {
               <button className={styles.buy_btn}>Buy</button>
             </div>
           </div>
-          // </div>
         )}
       </div>
     </div>

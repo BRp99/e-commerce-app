@@ -26,8 +26,6 @@ export default function ProductCard({ product, inFavorites, inCart }: Props) {
     inCart ? removeFromCart(product.id) : addToCart(product.id)
   }
 
-  const err = true
-
   if (error) {
     return (
       <div className={styles.container_error}>
@@ -36,7 +34,6 @@ export default function ProductCard({ product, inFavorites, inCart }: Props) {
       </div>
     )
   }
-  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (

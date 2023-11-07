@@ -1,23 +1,23 @@
 .nm_loading {
-  margin: 0rem 15rem;
   border-radius: 0.55rem;
   box-shadow: var(--nm_shadow);
   border: var(--nm_border);
-  margin-top: 4rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  padding: 40px 40px;
+  padding: 20px 20px;
 }
 
 .wrapper {
+  margin-top: 1rem;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
-  width: 300px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
@@ -25,27 +25,31 @@
 .wrapper::before {
   content: "";
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
 
 .text {
   color: var(--new_primary);
-  font-size: 2.5rem;
+  font-size: 2rem;
   display: block;
+  flex: 1;
+  text-align: center;
 }
 
 .second_text {
   color: var(--new_secondary);
-  font-size: 1.5rem;
+  font-size: 1rem;
   display: block;
+  flex: 1;
+  text-align: center;
 }
 
 .circle {
-  height: 186px;
-  width: 220px;
+  height: 60px;
+  width: 60px;
   position: absolute;
   animation: rotate 5s linear infinite;
 }
@@ -53,8 +57,8 @@
 .circle::before {
   content: "";
   position: absolute;
-  height: 30px;
-  width: 30px;
+  height: 15px;
+  width: 15px;
   border-radius: 50%;
   background-color: var(--loading_color);
   box-shadow: 0 5px 10px rgb(0 0 0 / 30%);
@@ -66,23 +70,21 @@
   }
 }
 
-.not_found,
+.container_not_found,
 .container_error {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0rem 15rem;
   border-radius: 0.55rem;
   box-shadow: var(--nm_shadow);
   border: var(--nm_border);
-  margin-top: 4rem;
-  gap: 1rem;
-  padding: 40px 40px;
+  padding: 20px 20px;
+  flex: 1;
 }
 
 .icon {
-  font-size: 15rem;
+  font-size: 5rem;
   display: flex;
 }
 
@@ -91,11 +93,13 @@
   color: var(--new_primary);
   font-size: 2rem;
   font-weight: bold;
+  text-align: center;
 }
 
 .oops {
   color: var(--new_secondary);
   font-size: 1.5rem;
+  text-align: center;
 }
 
 /* ---------------------------------------------------------------------- */
@@ -183,7 +187,7 @@
 }
 
 .price {
-  color: gray;
+  color: var(--new_secondary);
   font-size: 1rem;
 
   text-decoration: line-through;
@@ -245,7 +249,7 @@
   box-shadow: var(--nm_shadow_inset);
 }
 
-@media (width >1285px) {
+@media (width < 1285px) {
   .rating {
     display: flex;
     justify-content: center;

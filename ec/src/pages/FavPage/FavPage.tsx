@@ -8,7 +8,6 @@ import FavCard from "./FavCard/FavCard"
 export default function FavPage() {
   const { products, error, loadingFetchProducts } = useStoreContext()
   const { favorites } = useFavContext()
-
   const err = true
 
   if (error) {
@@ -19,7 +18,6 @@ export default function FavPage() {
       </div>
     )
   }
-  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (
@@ -35,12 +33,12 @@ export default function FavPage() {
   }
 
   if (!favorites) {
-    return <div className={styles.container_without_fav}></div>
+    return <></>
   }
 
   if (!products) {
     return (
-      <div className={styles.not_found}>
+      <div className={styles.container_not_found}>
         <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
         <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>

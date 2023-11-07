@@ -48,8 +48,8 @@ export function useFavContext() {
 
 // React component that serves as the provider for the context. It receives a children components as props and manages the state of favorites
 export default function FavProvider({ children }: FavProviderProps) {
-  const [favorites, setFavorites] = useState<FavItem[]>([])
-  // const [favorites, setFavorites] = useLocalStorage<FavItem[]>("favorites", [])
+  // const [favorites, setFavorites] = useState<FavItem[]>([])
+  const [favorites, setFavorites] = useLocalStorage<FavItem[]>("favorites", [])
 
   const addToFav = (productId: number) => {
     const alreadyExists = favorites.find((item) => item.productId === productId)

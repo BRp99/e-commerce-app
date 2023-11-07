@@ -3,7 +3,7 @@ import ColorStarRating from "../../../utilities/ColorStarRating"
 import { calculateDiscountedPrice } from "../../../utilities/sharedFunctions"
 import styles from "./FavCard.module.css"
 import { Product, useStoreContext } from "../../../context/StoreContext"
-import { errorIcon, heartIconFavPage, notFoundIcon } from "../../../icons/icons"
+import { errorIcon, heartIconFavPage, heartIconNoFavPage, notFoundIcon } from "../../../icons/icons"
 import { FavItem, useFavContext } from "../../../context/FavContext"
 
 interface Props {
@@ -15,8 +15,6 @@ export default function FavCard({ product, favorites }: Props) {
   const { removeFavorite } = useFavContext()
   const { error, loadingFetchProducts } = useStoreContext()
 
-  const err = true
-
   if (error) {
     return (
       <div className={styles.container_error}>
@@ -25,7 +23,6 @@ export default function FavCard({ product, favorites }: Props) {
       </div>
     )
   }
-  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (
@@ -41,7 +38,7 @@ export default function FavCard({ product, favorites }: Props) {
   }
 
   if (!favorites) {
-    return <div className={styles.container_without_fav}></div>
+    return <></>
   }
 
   if (!product) {

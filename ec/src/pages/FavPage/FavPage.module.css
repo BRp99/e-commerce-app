@@ -1,14 +1,12 @@
 .nm_loading {
   margin: 0rem 15rem;
   border-radius: 0.55rem;
-  box-shadow: var(--nm_shadow);
-  border: var(--nm_border);
-  margin-top: 4rem;
   display: flex;
+  margin-top: 4rem;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  padding: 40px 40px;
+  padding: 20px 20px;
 }
 
 .wrapper {
@@ -16,8 +14,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
-  width: 300px;
+  height: 150px;
+  width: 150px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
@@ -25,8 +23,8 @@
 .wrapper::before {
   content: "";
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
@@ -35,17 +33,23 @@
   color: var(--new_primary);
   font-size: 2.5rem;
   display: block;
+  text-align: center;
+  font-weight: bold;
+  flex: 1;
 }
 
 .second_text {
   color: var(--new_secondary);
   font-size: 1.5rem;
   display: block;
+  text-align: center;
+  font-weight: normal;
+  flex: 1;
 }
 
 .circle {
-  height: 186px;
-  width: 220px;
+  height: 90px;
+  width: 100px;
   position: absolute;
   animation: rotate 5s linear infinite;
 }
@@ -53,8 +57,8 @@
 .circle::before {
   content: "";
   position: absolute;
-  height: 30px;
-  width: 30px;
+  height: 15px;
+  width: 15px;
   border-radius: 50%;
   background-color: var(--loading_color);
   box-shadow: 0 5px 10px rgb(0 0 0 / 30%);
@@ -66,7 +70,7 @@
   }
 }
 
-.not_found,
+.container_not_found,
 .container_error {
   display: flex;
   justify-content: center;
@@ -74,8 +78,6 @@
   flex-direction: column;
   margin: 0rem 15rem;
   border-radius: 0.55rem;
-  box-shadow: var(--nm_shadow);
-  border: var(--nm_border);
   margin-top: 4rem;
   gap: 1rem;
   padding: 40px 40px;
@@ -125,8 +127,6 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  box-shadow: var(--nm_shadow);
-  border: var(--nm_border);
 }
 
 .no_fav_heart {
@@ -183,10 +183,27 @@
   .header {
     margin: 1rem;
   }
+
+  .nm_loading {
+    flex-direction: column;
+  }
+
+  .text {
+    font-size: 1.3rem;
+  }
+  .second_text {
+    font-size: 1rem;
+  }
+}
+
+@media (width < 440px) {
+  .no_fav_text {
+    font-size: 1.5rem;
+  }
 }
 
 @media (width < 375px) {
   .no_fav_text {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 }

@@ -14,8 +14,6 @@ export default function PromotionCard({ thumbnail, brand, product }: Props) {
   const { loadingFetchProducts, error } = useStoreContext()
   const discountedPrice = product.price - (product.price * product.discountPercentage) / 100
 
-  const err = true
-
   if (error) {
     return (
       <div className={styles.container_error}>
@@ -24,7 +22,6 @@ export default function PromotionCard({ thumbnail, brand, product }: Props) {
       </div>
     )
   }
-  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (
@@ -41,7 +38,7 @@ export default function PromotionCard({ thumbnail, brand, product }: Props) {
 
   if (!product) {
     return (
-      <div className={styles.not_found}>
+      <div className={styles.container_not_found}>
         <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
         <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>

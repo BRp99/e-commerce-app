@@ -1,4 +1,5 @@
 .container {
+  display: flex;
   color: var(--star_color);
   fill: transparent;
 }

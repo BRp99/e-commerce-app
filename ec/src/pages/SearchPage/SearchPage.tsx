@@ -6,7 +6,6 @@ import ProductCard from "../../components/ProductCard/ProductCard"
 import { useFavContext } from "../../context/FavContext"
 import { useCartContext } from "../../context/CartContext"
 import { errorIcon, notFoundIcon } from "../../icons/icons"
-import BackButtonToHomePage from "../../utilities/BackButtonToHomePage"
 
 export default function SearchPage() {
   const { q } = useParams<string>()
@@ -36,10 +35,22 @@ export default function SearchPage() {
     }
   }, [q])
 
+  if (filteredProducts.length === 0) {
+    return (
+      <div className={styles.container_not_found}>
+        <div className={styles.icon}>{notFoundIcon}</div>
+        <div className={styles.product_not_found}>No results for "{q}"</div>
+        <div className={styles.oops}>Oops! Looks like this products is currently unavailable. Please check again later!</div>
+        <NavLink to={"/"} className={styles.nav_link}>
+          Go back
+        </NavLink>
+      </div>
+    )
+  }
+
   if (!favorites) {
     return <></>
   }
-
   if (error) {
     return (
       <div className={styles.container_error}>
@@ -62,22 +73,8 @@ export default function SearchPage() {
     )
   }
 
-  if (!products) {
-    return (
-      <div className={styles.not_found}>
-        <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
-        <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
-      </div>
-    )
-  }
-
   return (
     <div>
-      <div className={styles.header}>
-        <div className={styles.back_button}>
-          <BackButtonToHomePage />
-        </div>
-      </div>
       <div className={styles.container}>
         {filteredProducts.length > 0 && (
           <div className={styles.results}>
@@ -86,7 +83,7 @@ export default function SearchPage() {
         )}
       </div>
       <div className={styles.grid_items}>
-        {filteredProducts.length > 0 ? (
+        {filteredProducts && filteredProducts.length > 0 ? (
           filteredProducts.map((product: Product) => (
             <ProductCard
               key={product.id}
@@ -99,7 +96,7 @@ export default function SearchPage() {
           <div className={styles.container_product_not_found}>
             <div className={styles.not_found}>
               <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_unavailable}> "{q}"</div>
-              <div className={styles.oops}> Seems like this product doesn't exist.</div>
+              <div className={styles.oops}> Seems like this products doesn't exist.</div>
               <NavLink to={"/"} className={styles.nav_link}>
                 Click here to check our products!
               </NavLink>

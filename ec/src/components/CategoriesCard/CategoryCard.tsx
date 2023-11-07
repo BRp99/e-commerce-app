@@ -22,13 +22,12 @@ export default function CategoryCard({ category, thumbnail, product }: Props) {
       </div>
     )
   }
-  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (
       <div className={styles.nm_loading}>
         <div className={styles.wrapper}>
-          <span></span>
+          <span className={styles.circle}></span>
         </div>
         <div className={styles.text}>
           Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
@@ -39,7 +38,7 @@ export default function CategoryCard({ category, thumbnail, product }: Props) {
 
   if (!product) {
     return (
-      <div className={styles.not_found}>
+      <div className={styles.container_not_found}>
         <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
         <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>

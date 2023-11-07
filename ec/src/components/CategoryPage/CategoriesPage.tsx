@@ -14,6 +14,8 @@ export default function CategoriesPage() {
   const { products, error, loadingFetchProducts } = useStoreContext()
   const { favorites } = useFavContext()
 
+  const err = true
+
   if (error) {
     return (
       <div className={styles.container_error}>
@@ -38,7 +40,7 @@ export default function CategoriesPage() {
 
   if (!products) {
     return (
-      <div className={styles.not_found}>
+      <div className={styles.container_not_found}>
         <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
         <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>

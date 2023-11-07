@@ -1,9 +1,8 @@
 import { useStoreContext, Product } from "../../context/StoreContext"
 import styles from "./HomePage.module.css"
-import { getProductsWithMoreThan17Discount, getPromoProducts } from "../../utilities/sharedFunctions"
-import PromotionCard from "../../components/PromotionCard/PromotionCard"
 import CategoryCard from "../../components/CategoriesCard/CategoryCard"
 import { errorIcon, notFoundIcon } from "../../icons/icons"
+import Hero from "./Hero/Hero"
 
 export type CategoryThumbnails = Record<string, Product>
 
@@ -22,7 +21,6 @@ export default function HomePage() {
       </div>
     )
   }
-  // console.error("Error:", error)
 
   if (loadingFetchProducts) {
     return (
@@ -39,7 +37,7 @@ export default function HomePage() {
 
   if (!products) {
     return (
-      <div className={styles.not_found}>
+      <div className={styles.container_not_found}>
         <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
         <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>
@@ -52,27 +50,9 @@ export default function HomePage() {
     }
   })
 
-  const productsWithMoreThan17Discount: Product[] = getProductsWithMoreThan17Discount(products)
-
-  const promoProducts: Product[] = getPromoProducts(productsWithMoreThan17Discount, 4)
-
   return (
     <div className={styles.container}>
-      <div className={styles.hero}>
-        <div className={styles.hero_section}>
-          {/* <div className={styles.hero_logo}>{logoIcon}</div> */}
-          {/* <div className={styles.hero_logo}>あ</div> */}
-          <div className={styles.hero_text}>it's the simple things</div>
-          <div className={styles.glow_pink} />
-          <div className={styles.glow_blue} />
-          <div className={styles.glow_yellow} />
-        </div>
-        <div className={styles.container_promotions}>
-          {promoProducts.map((product, i) => (
-            <PromotionCard key={i} id={product.id} thumbnail={product.thumbnail} brand={product.brand} product={product as Product} />
-          ))}
-        </div>
-      </div>
+      <Hero products={products} />
 
       {/* CARDCATEGORY */}
       <div className={styles.container_categories}>
