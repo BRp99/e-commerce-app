@@ -8,7 +8,6 @@ import FavCard from "./FavCard/FavCard"
 export default function FavPage() {
   const { products, error, loadingFetchProducts } = useStoreContext()
   const { favorites } = useFavContext()
-  const err = true
 
   if (error) {
     return (
@@ -59,7 +58,7 @@ export default function FavPage() {
             const product = products.find((p) => p.id === favorite.productId)
             if (!product) return
             if (product) {
-              return <FavCard key={product.id} product={product} favorites={favorite} />
+              return <FavCard key={product.id} product={product} />
             }
           })
         ) : (

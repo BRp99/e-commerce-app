@@ -7,13 +7,7 @@ interface Props {
 }
 
 export default function QuantityButtonResult({ value, selectedQuantity, onSelect }: Props) {
-  // className={`${styles.result} ${selectedQuantity === value ? styles.selected : ""}`} onClick={() => setSelectedQuantity(value)}
-
   const isSelected = value === selectedQuantity
 
-  return (
-    <div className={`${styles.result} ${isSelected ? styles.selected : ""}`} onClick={() => onSelect(value)}>
-      {value}
-    </div>
-  )
+  return <></>
 }

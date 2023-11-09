@@ -10,7 +10,7 @@ import { errorIcon, notFoundIcon } from "../../icons/icons"
 export default function SearchPage() {
   const { q } = useParams<string>()
   const [filteredProducts, setFilteredProducts] = useState([])
-  const { error, loadingFetchProducts, products } = useStoreContext()
+  const { error, loadingFetchProducts } = useStoreContext()
   const { favorites } = useFavContext()
   const { cartItems } = useCartContext()
 
@@ -35,6 +35,19 @@ export default function SearchPage() {
     }
   }, [q])
 
+  if (loadingFetchProducts) {
+    return (
+      <div className={styles.nm_loading}>
+        <div className={styles.wrapper}>
+          <span className={styles.circle}></span>
+        </div>
+        <div className={styles.text}>
+          Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
+        </div>
+      </div>
+    )
+  }
+
   if (filteredProducts.length === 0) {
     return (
       <div className={styles.container_not_found}>
@@ -56,19 +69,6 @@ export default function SearchPage() {
       <div className={styles.container_error}>
         <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
         <div className={styles.oops}> Please try again later. </div>
-      </div>
-    )
-  }
-
-  if (loadingFetchProducts) {
-    return (
-      <div className={styles.nm_loading}>
-        <div className={styles.wrapper}>
-          <span className={styles.circle}></span>
-        </div>
-        <div className={styles.text}>
-          Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
-        </div>
       </div>
     )
   }

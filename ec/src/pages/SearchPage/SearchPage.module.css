@@ -128,6 +128,7 @@
   grid-template-rows: 1fr;
   margin: 1rem 15rem;
   gap: 2rem 2rem;
+  flex: 1;
 }
 
 @media (width < 1270px) {
@@ -205,14 +206,20 @@
   }
 }
 
+@media (width < 460px) {
+  .grid_items {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+/* 
+@media (width < 415px) {
+  .grid_items {
+    margin: 0rem 1rem;
+  }
+}
+
 @media (width < 335px) {
   .container {
     margin: 0rem 0.5rem;
   }
-}
-
-@media (width < 400px) {
-  .grid_items {
-    gap: 0;
-  }
-}
+} */

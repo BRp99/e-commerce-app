@@ -1,108 +1,3 @@
-.nm_loading {
-  border-radius: 0.55rem;
-  box-shadow: var(--nm_shadow);
-  border: var(--nm_border);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-  padding: 20px 20px;
-}
-
-.wrapper {
-  margin-top: 1rem;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  box-shadow: var(--nm_shadow_inset);
-}
-
-.wrapper::before {
-  content: "";
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  box-shadow: var(--nm_shadow_inset);
-}
-
-.text {
-  color: var(--new_primary);
-  font-size: 2rem;
-  display: block;
-  flex: 1;
-  text-align: center;
-}
-
-.second_text {
-  color: var(--new_secondary);
-  font-size: 1rem;
-  display: block;
-  flex: 1;
-  text-align: center;
-}
-
-.circle {
-  height: 60px;
-  width: 60px;
-  position: absolute;
-  animation: rotate 5s linear infinite;
-}
-
-.circle::before {
-  content: "";
-  position: absolute;
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  background-color: var(--loading_color);
-  box-shadow: 0 5px 10px rgb(0 0 0 / 30%);
-}
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.container_not_found,
-.container_error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 0.55rem;
-  box-shadow: var(--nm_shadow);
-  border: var(--nm_border);
-  padding: 20px 20px;
-  flex: 1;
-}
-
-.icon {
-  font-size: 5rem;
-  display: flex;
-}
-
-.product_not_found,
-.message {
-  color: var(--new_primary);
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-.oops {
-  color: var(--new_secondary);
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-/* ---------------------------------------------------------------------- */
 .container {
   text-decoration: none;
   outline: var(--nm_border);
@@ -230,6 +125,7 @@
 .add_btn_cart {
   border: var(--nm_border);
   box-shadow: var(--nm_shadow);
+  color: var(--new_primary);
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.9rem;
@@ -242,6 +138,7 @@
 
 .add_btn_cart_are_in_cart {
   opacity: 0.8;
+  color: var(--new_primary);
 }
 
 .container_heart_icon:hover,

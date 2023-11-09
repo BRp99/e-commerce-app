@@ -151,7 +151,7 @@
 .container_with_products {
   border-radius: 0.55rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit minmax(130px, 1fr));
 }
 
 .container_order_summary {
@@ -225,6 +225,7 @@
 .buy_btn {
   border: var(--nm_border);
   box-shadow: var(--nm_shadow);
+  color: var(--new_primary);
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.9rem;
@@ -239,6 +240,7 @@
   cursor: pointer;
   box-shadow: inset -3px -3px 6px #fff, inset 3px 3px 6px #b8b9be;
 }
+
 @media (width <1790px) {
   .container_order_summary {
     width: 190px;
@@ -337,7 +339,7 @@
   .container_with_products,
   .container_without_products,
   .container_order_summary {
-    margin: 0rem 1rem;
+    margin: 0rem 0.5rem;
   }
 
   .header {
@@ -372,19 +374,33 @@
 
   .container_order_summary {
     width: 300px;
-    height: 170px;
+    height: 190px;
     padding: 15px 15px;
+    margin-bottom: 1rem;
   }
-  .order_summary {
-    font-size: 1.25rem;
-  }
-
+  .order_summary,
   .number_total {
     font-size: 1.25rem;
   }
 
   .icon {
     font-size: 5rem;
+  }
+  .money_save,
+  .saved_with,
+  .total_items,
+  .total_price,
+  .all_taxes {
+    font-size: 1rem;
+  }
+  .all_taxes {
+    font-size: 1rem;
+  }
+}
+
+@media (width < 400px) {
+  .container_order_summary {
+    width: 280px;
   }
 }
 

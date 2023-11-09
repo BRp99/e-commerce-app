@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+  flex: 1;
+  min-height: 50px;
+}
+
+.container:first-child {
+  display: block;
+  margin-top: 30px;
+}
+
+.tooltip {
+  background-color: var(--bg);
+  border-radius: 0.55rem;
+}
+
+.tooltip > * {
+  display: inline;
+}
+
+.text_quantity,
+.stock_available {
+  font-size: 1rem;
+  color: var(--new_primary);
+}
+
+.quantity_input {
+  border: var(--nm_border);
+  box-shadow: var(--nm_shadow);
+  width: 50px;
+  text-align: center;
+  color: var(--new_primary);
+  background-color: var(--bg);
+  border-radius: 0.55rem;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.quantity_input:hover {
+  box-shadow: var(--nm_shadow_inset);
+}
+
+.quantity_input:focus {
+  outline: none;
+}
+
+.invalid,
+.invalidTooltip {
+  background-color: var(--text_warning);
+  border-radius: 0.55rem;
+  opacity: 0.7;
+}

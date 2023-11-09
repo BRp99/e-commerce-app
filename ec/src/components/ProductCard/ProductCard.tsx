@@ -1,11 +1,11 @@
 import styles from "./ProductCard.module.css"
-import { Product, useStoreContext } from "../../context/StoreContext"
+import { Product } from "../../context/StoreContext"
 import { NavLink } from "react-router-dom"
 import { calculateDiscountedPrice } from "../../utilities/sharedFunctions"
 import { useFavContext } from "../../context/FavContext"
 import { useCartContext } from "../../context/CartContext"
 import ColorStarRating from "../../utilities/ColorStarRating"
-import { errorIcon, heartIconAddFavorites, heartIconRemoveFavorites, notFoundIcon } from "../../icons/icons"
+import { heartIconAddFavorites, heartIconRemoveFavorites } from "../../icons/icons"
 
 interface Props {
   product: Product
@@ -16,7 +16,6 @@ interface Props {
 export default function ProductCard({ product, inFavorites, inCart }: Props) {
   const { addToFav, removeFavorite } = useFavContext()
   const { addToCart, removeFromCart } = useCartContext()
-  const { error, loadingFetchProducts } = useStoreContext()
 
   function onFavClick() {
     inFavorites ? removeFavorite(product.id) : addToFav(product.id)
@@ -24,37 +23,6 @@ export default function ProductCard({ product, inFavorites, inCart }: Props) {
 
   function onCartClick() {
     inCart ? removeFromCart(product.id) : addToCart(product.id)
-  }
-
-  if (error) {
-    return (
-      <div className={styles.container_error}>
-        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
-        <div className={styles.oops}> Please try again later. </div>
-      </div>
-    )
-  }
-
-  if (loadingFetchProducts) {
-    return (
-      <div className={styles.nm_loading}>
-        <div className={styles.wrapper}>
-          <span className={styles.circle}></span>
-        </div>
-        <div className={styles.text}>
-          Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
-        </div>
-      </div>
-    )
-  }
-
-  if (!product) {
-    return (
-      <div className={styles.not_found}>
-        <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
-        <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
-      </div>
-    )
   }
 
   return (

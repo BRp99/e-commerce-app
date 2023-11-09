@@ -104,8 +104,7 @@
   flex: 1;
 }
 
-/* --------------------------------------------------------------------------------------------------------------- */
-
+/* -------------------------------------------------------------- */
 .container_categories {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -114,7 +113,7 @@
   background-color: var(--bg);
   justify-content: space-between;
 }
-
+/* --------------------------------------------------------------- */
 @media (width < 2320px) {
   .container_categories {
     grid-template-columns: repeat(3, 1fr);

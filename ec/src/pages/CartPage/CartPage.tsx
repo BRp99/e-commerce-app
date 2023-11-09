@@ -20,8 +20,6 @@ export default function ShoppingCartPage() {
     }
   }, [cartItems, products])
 
-  const err = true
-
   if (error) {
     return (
       <div className={styles.container_error}>
