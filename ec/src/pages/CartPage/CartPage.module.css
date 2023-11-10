@@ -151,12 +151,12 @@
 .container_with_products {
   border-radius: 0.55rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fit minmax(200px, 1fr));
 }
 
 .container_order_summary {
   display: grid;
-  grid-template-columns: repeat(auto-fit minmax(90px, 1fr));
+  grid-template-columns: repeat(auto-fit minmax(200px, 1fr));
   border-radius: 0.55rem;
   height: 200px;
   padding: 15px 15px;
@@ -341,11 +341,9 @@
   .container_order_summary {
     margin: 0rem 0.5rem;
   }
-
   .header {
     margin: 1rem;
   }
-
   .nm_loading {
     flex-direction: column;
   }
@@ -359,7 +357,6 @@
   .product_not_found {
     font-size: 1.3rem;
   }
-
   .second_text,
   .oops {
     font-size: 1rem;

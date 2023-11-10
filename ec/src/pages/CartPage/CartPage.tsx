@@ -117,7 +117,7 @@ export default function ShoppingCartPage() {
             <div className={styles.total_price}>
               Total price: <div className={styles.number_total}> ${totalPrice.toFixed(2)} </div>
             </div>
-            <div className={styles.all_taxes}>(all taxes includes)</div>
+            <div className={styles.all_taxes}>(all taxes include)</div>
             <div className={styles.container_buy_btn}>
               <button className={styles.buy_btn}>Buy</button>
             </div>

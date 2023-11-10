@@ -1,11 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap");
 
 :root {
-  /* --primary: hsl(190, 100%, 25%);
-  --secondary: #027184;
-  --btn_bg: #027184;
-  --btn_bg_hover: hsl(189, 97%, 30%); */
-
   --new_primary: #31344b;
   --new_secondary: #44476a;
   --new_soft_secondary: #44466b;

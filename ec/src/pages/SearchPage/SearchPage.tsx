@@ -9,12 +9,15 @@ import { errorIcon, notFoundIcon } from "../../icons/icons"
 
 export default function SearchPage() {
   const { q } = useParams<string>()
-  const [filteredProducts, setFilteredProducts] = useState([])
-  const { error, loadingFetchProducts } = useStoreContext()
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
   const { favorites } = useFavContext()
   const { cartItems } = useCartContext()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const fetchSearchResults = (query: string) => {
+    setError(null)
+    setLoading(true)
     fetch(`https://dummyjson.com/products/search?q=${query}`)
       .then((response) => response.json())
       .then((data) => {
@@ -26,7 +29,11 @@ export default function SearchPage() {
       })
       .catch((error) => {
         console.error("Error find data:", error)
+        setError("Error")
         setFilteredProducts([])
+      })
+      .finally(() => {
+        setLoading(false)
       })
   }
   useEffect(() => {
@@ -35,7 +42,7 @@ export default function SearchPage() {
     }
   }, [q])
 
-  if (loadingFetchProducts) {
+  if (loading) {
     return (
       <div className={styles.nm_loading}>
         <div className={styles.wrapper}>

@@ -144,7 +144,10 @@ export default function ProductPage() {
             </div>
           </div>
         ) : (
-          <div>Product not found</div>
+          <div className={styles.not_found}>
+            <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
+            <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
+          </div>
         )}
       </div>
     </div>

@@ -1,7 +1,6 @@
 import { Product } from "../../../context/StoreContext"
-import QuantityButtonResult from "../QuantityButtonResult/QuantityButtonResult"
 import styles from "./QuantitySelector.module.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface Props {
   product: Product
@@ -14,7 +13,7 @@ export default function QuantitySelector({ product, quantity, setQuantity }: Pro
   const [invalidQuantity, setInvalidQuantity] = useState(false)
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = Math.max(0, parseInt(event.target.value))
+    const newQuantity = Math.max(1, parseInt(event.target.value) || 1)
     setQuantity(newQuantity)
 
     if (newQuantity > product.stock) {
@@ -23,6 +22,10 @@ export default function QuantitySelector({ product, quantity, setQuantity }: Pro
       setInvalidQuantity(false)
     }
   }
+
+  useEffect(() => {
+    setInvalidQuantity(quantity > product.stock)
+  }, [product.stock, quantity])
 
   return (
     <div>
@@ -40,11 +43,6 @@ export default function QuantitySelector({ product, quantity, setQuantity }: Pro
         {tooltipVisible && (
           <div className={`${styles.stock_available} ${invalidQuantity ? styles.invalidTooltip : ""}`}>Stock available: {product.stock}</div>
         )}
-        <div>
-          {Array.from({ length: product.stock }).map((_, id) => (
-            <QuantityButtonResult key={id} value={id + 1} selectedQuantity={quantity} onSelect={(value: number) => setQuantity(value)} />
-          ))}
-        </div>
       </div>
     </div>
   )
