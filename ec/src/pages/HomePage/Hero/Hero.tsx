@@ -13,7 +13,6 @@ export default function Hero({ products }: Props) {
   const { error, loadingFetchProducts } = useStoreContext()
 
   const promoProducts: Product[] = getPromoProducts(productsWithMoreThan17Discount, 4)
-
   if (error) {
     return (
       <div className={styles.container_error}>
@@ -38,7 +37,7 @@ export default function Hero({ products }: Props) {
 
   if (!products) {
     return (
-      <div className={styles.not_found}>
+      <div className={styles.container_not_found}>
         <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
         <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>

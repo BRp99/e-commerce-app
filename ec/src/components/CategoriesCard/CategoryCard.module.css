@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   padding: 20px 20px;
   flex: 1;
 }
@@ -21,8 +21,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 150px;
-  width: 150px;
+  height: 120px;
+  width: 120px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
@@ -30,29 +30,29 @@
 .wrapper::before {
   content: "";
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
 
 .text {
   color: var(--new_primary);
-  font-size: 2rem;
+  font-size: 1rem;
   display: block;
   font-weight: bold;
 }
 
 .second_text {
   color: var(--new_secondary);
-  font-size: 1.5rem;
+  font-size: 1rem;
   display: block;
   font-weight: normal;
 }
 
 .circle {
-  height: 90px;
-  width: 90px;
+  height: 60px;
+  width: 60px;
   position: absolute;
   animation: rotate 5s linear infinite;
 }
@@ -86,6 +86,7 @@
   gap: 1rem;
   padding: 20px 20px;
   flex: 1;
+  margin-bottom: 1rem;
 }
 
 .icon {
@@ -96,20 +97,19 @@
 .product_not_found,
 .message {
   color: var(--new_primary);
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: bold;
   text-align: center;
 }
 
 .oops {
   color: var(--new_secondary);
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-align: center;
 }
 
 /* ------------------------------- */
-.container,
-.container_error {
+.container {
   text-decoration: none;
   border-radius: 0.55rem;
   overflow: hidden;
@@ -138,11 +138,8 @@
   color: var(--new_primary);
 }
 
-@media (width < 440px) {
-  .text {
-    font-size: 1rem;
-  }
-  .second_text {
-    font-size: 0.6rem;
+@media (width < 480px) {
+  .icon {
+    font-size: 5rem;
   }
 }

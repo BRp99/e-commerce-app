@@ -12,8 +12,10 @@
   grid-column: 1;
   grid-row: 1;
   object-fit: cover;
+  flex: 1;
   height: 180px;
   border-radius: 0.55rem;
+  min-width: 100px;
 }
 
 .img_thumb {
@@ -35,6 +37,7 @@
 
 .container_info_product > div {
   display: flex;
+  flex: 1;
 }
 
 .price_with_promo {
@@ -96,4 +99,15 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+}
+
+@media (width < 510px) {
+  .container {
+    display: flex;
+  }
+
+  .container_thumbnail,
+  .img_thumb {
+    display: none;
+  }
 }

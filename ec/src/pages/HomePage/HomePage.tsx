@@ -11,8 +11,6 @@ export default function HomePage() {
 
   const categoryThumbnails: CategoryThumbnails = {}
 
-  const err = true
-
   if (error) {
     return (
       <div className={styles.container_error}>
@@ -54,7 +52,6 @@ export default function HomePage() {
     <div className={styles.container}>
       <Hero products={products} />
 
-      {/* CARDCATEGORY */}
       <div className={styles.container_categories}>
         {Object.keys(categoryThumbnails).map((category) => (
           <CategoryCard

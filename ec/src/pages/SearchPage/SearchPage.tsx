@@ -1,6 +1,6 @@
 import { NavLink, useParams } from "react-router-dom"
 import styles from "./SearchPage.module.css"
-import { Product, useStoreContext } from "../../context/StoreContext"
+import { Product } from "../../context/StoreContext"
 import { useEffect, useState } from "react"
 import ProductCard from "../../components/ProductCard/ProductCard"
 import { useFavContext } from "../../context/FavContext"

@@ -59,7 +59,7 @@ export default function ProductPage() {
 
   if (!products) {
     return (
-      <div className={styles.not_found}>
+      <div className={styles.container_not_found}>
         <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
         <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
       </div>
@@ -76,37 +76,22 @@ export default function ProductPage() {
       <div className={styles.container}>
         {currentProduct ? (
           <div className={styles.container_of_others_containers}>
-            <div>
-              <div className={`${styles.product_images} ${currentProduct.images.length > 3 ? `${styles.overscroll_container}` : ""}`}>
-                {currentProduct.images.map((image, index) => (
-                  <img
-                    key={`image-${index}`}
-                    className={`${styles.images} ${selectedImage === image ? styles.selected : ""}`}
-                    src={image}
-                    alt={`Product Image ${index}`}
-                    onClick={() => {
-                      setImgClic(true)
-                      setSelectedImage(image)
-                    }}
-                  />
-                ))}
-              </div>
+            <div className={`${styles.product_images} ${currentProduct.images.length > 3 ? `${styles.overscroll_container}` : ""}`}>
+              {currentProduct.images.map((image, index) => (
+                <img
+                  key={`image-${index}`}
+                  className={`${styles.images} ${selectedImage === image ? styles.selected : ""}`}
+                  src={image}
+                  alt={`Product Image ${index}`}
+                  onClick={() => {
+                    setImgClic(true)
+                    setSelectedImage(image)
+                  }}
+                />
+              ))}
             </div>
             <div className={styles.container_thumbnail}>
               <img className={styles.img_thumbnail} src={selectedImage || currentProduct.thumbnail} alt={currentProduct.title} />
-
-              <button
-                className={styles.container_heart_icon}
-                onClick={() => {
-                  if (isProductInFavorites(currentProduct.id)) {
-                    removeFavorite(currentProduct.id)
-                  } else {
-                    addToFav(currentProduct.id)
-                  }
-                }}
-              >
-                {isProductInFavorites(currentProduct.id) ? heartIconAddFavorites : heartIconRemoveFavorites}
-              </button>
             </div>
             <div className={styles.container_info_product}>
               <div className={styles.info_product}>
@@ -121,12 +106,25 @@ export default function ProductPage() {
 
                 <div className={styles.title}>{currentProduct.title.replaceAll(/[_\-\.]/g, "")}</div>
                 <div className={styles.rating}>
-                  Rating of {currentProduct.rating}
                   <ColorStarRating rating={currentProduct.rating} />
+                  <div className={styles.number_rating}> {currentProduct.rating}</div>
                 </div>
                 <div className={styles.description}> {currentProduct.description.replaceAll(/[_\-\.]/g, "")}</div>
 
-                <div>
+                <div className={styles.buttons}>
+                  <button
+                    className={styles.container_heart_icon}
+                    onClick={() => {
+                      if (isProductInFavorites(currentProduct.id)) {
+                        removeFavorite(currentProduct.id)
+                      } else {
+                        addToFav(currentProduct.id)
+                      }
+                    }}
+                  >
+                    {isProductInFavorites(currentProduct.id) ? heartIconAddFavorites : heartIconRemoveFavorites}
+                  </button>
+
                   <button
                     className={`${styles.add_btn_cart} ${isProductInCart(currentProduct.id) ? styles.add_btn_cart_are_in_cart : ""} `}
                     onClick={() => {

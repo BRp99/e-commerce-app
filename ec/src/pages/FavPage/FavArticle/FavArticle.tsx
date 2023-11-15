@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom"
 import ColorStarRating from "../../../utilities/ColorStarRating"
 import { calculateDiscountedPrice } from "../../../utilities/sharedFunctions"
-import styles from "./FavCard.module.css"
+import styles from "./FavArticle.module.css"
 import { Product } from "../../../context/StoreContext"
 import { heartIconFavPage } from "../../../icons/icons"
 import { useFavContext } from "../../../context/FavContext"
@@ -10,7 +10,7 @@ interface Props {
   product: Product
 }
 
-export default function FavCard({ product }: Props) {
+export default function FavArticle({ product }: Props) {
   const { removeFavorite } = useFavContext()
 
   return (
@@ -18,15 +18,6 @@ export default function FavCard({ product }: Props) {
       <NavLink to={`/product/${product.id}`} className={styles.nav_link}>
         <div className={styles.container_thumb}>
           <img src={product.thumbnail} alt={product.title} className={styles.thumb} />
-          <button
-            className={styles.heart_icon}
-            onClick={(e) => {
-              e.preventDefault()
-              removeFavorite(product.id)
-            }}
-          >
-            {heartIconFavPage}
-          </button>
         </div>
       </NavLink>
 
@@ -53,6 +44,15 @@ export default function FavCard({ product }: Props) {
         </div>
 
         <div className={styles.description}>{product.description.replaceAll(/[_\-\.]/g, "")}</div>
+        <button
+          className={styles.heart_icon}
+          onClick={(e) => {
+            e.preventDefault()
+            removeFavorite(product.id)
+          }}
+        >
+          {heartIconFavPage}
+        </button>
       </div>
     </div>
   )

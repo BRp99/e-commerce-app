@@ -3,7 +3,7 @@ import { useStoreContext } from "../../context/StoreContext"
 import { errorIcon, heartIconNoFavPage, notFoundIcon } from "../../icons/icons"
 import BackButtonToHomePage from "../../utilities/BackButtonToHomePage"
 import styles from "./FavPage.module.css"
-import FavCard from "./FavCard/FavCard"
+import FavArticle from "./FavArticle/FavArticle"
 
 export default function FavPage() {
   const { products, error, loadingFetchProducts } = useStoreContext()
@@ -58,7 +58,7 @@ export default function FavPage() {
             const product = products.find((p) => p.id === favorite.productId)
             if (!product) return
             if (product) {
-              return <FavCard key={product.id} product={product} />
+              return <FavArticle key={product.id} product={product} />
             }
           })
         ) : (

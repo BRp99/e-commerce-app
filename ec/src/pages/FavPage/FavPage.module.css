@@ -1,12 +1,14 @@
-.nm_loading {
-  margin: 0rem 15rem;
-  border-radius: 0.55rem;
+.nm_loading,
+.container_not_found,
+.container_error {
   display: flex;
-  margin-top: 4rem;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 2rem;
-  padding: 20px 20px;
+  text-align: center;
+  flex-direction: column;
+  border-radius: 0.55rem;
+  gap: 1rem;
+  padding: 40px 40px;
 }
 
 .wrapper {
@@ -14,8 +16,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 150px;
-  width: 150px;
+  height: 120px;
+  width: 120px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
@@ -23,15 +25,15 @@
 .wrapper::before {
   content: "";
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
 
 .text {
   color: var(--new_primary);
-  font-size: 2.5rem;
+  font-size: 1rem;
   display: block;
   text-align: center;
   font-weight: bold;
@@ -40,7 +42,7 @@
 
 .second_text {
   color: var(--new_secondary);
-  font-size: 1.5rem;
+  font-size: 1rem;
   display: block;
   text-align: center;
   font-weight: normal;
@@ -48,8 +50,8 @@
 }
 
 .circle {
-  height: 90px;
-  width: 100px;
+  height: 60px;
+  width: 60px;
   position: absolute;
   animation: rotate 5s linear infinite;
 }
@@ -70,19 +72,6 @@
   }
 }
 
-.container_not_found,
-.container_error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 0rem 15rem;
-  border-radius: 0.55rem;
-  margin-top: 4rem;
-  gap: 1rem;
-  padding: 40px 40px;
-}
-
 .icon {
   font-size: 15rem;
   display: flex;
@@ -91,13 +80,13 @@
 .product_not_found,
 .message {
   color: var(--new_primary);
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .oops {
   color: var(--new_secondary);
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 /* ---------------------------------------------------------- */
 .header {
@@ -111,7 +100,7 @@
   display: flex;
   justify-content: flex-start;
 }
-
+/*------------------------------------------------------------------- */
 .container_with_fav,
 .container_without_fav {
   margin: 1rem 15rem;
@@ -183,27 +172,10 @@
   .header {
     margin: 1rem;
   }
-
-  .nm_loading {
-    flex-direction: column;
-  }
-
-  .text {
-    font-size: 1.3rem;
-  }
-  .second_text {
-    font-size: 1rem;
-  }
-}
-
-@media (width < 440px) {
-  .no_fav_text {
-    font-size: 1.5rem;
-  }
 }
 
 @media (width < 375px) {
-  .no_fav_text {
-    font-size: 1.3rem;
+  .icon {
+    font-size: 5rem;
   }
 }

@@ -1,12 +1,18 @@
-.nm_loading {
-  margin: 0rem 15rem;
-  border-radius: 0.55rem;
-  margin-top: 4rem;
+.nm_loading,
+.container_not_found,
+.container_error {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  flex-direction: column;
+  border-radius: 0.55rem;
+  gap: 1rem;
+  padding: 40px 40px;
+}
+
+.nm_loading {
   gap: 2rem;
-  padding: 20px 20px;
 }
 
 .wrapper {
@@ -14,8 +20,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 150px;
-  width: 150px;
+  height: 120px;
+  width: 120px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
@@ -23,15 +29,15 @@
 .wrapper::before {
   content: "";
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   box-shadow: var(--nm_shadow_inset);
 }
 
 .text {
   color: var(--new_primary);
-  font-size: 2.5rem;
+  font-size: 1rem;
   display: block;
   text-align: center;
   font-weight: bold;
@@ -40,7 +46,7 @@
 
 .second_text {
   color: var(--new_secondary);
-  font-size: 1.5rem;
+  font-size: 1rem;
   display: block;
   text-align: center;
   font-weight: normal;
@@ -49,7 +55,7 @@
 
 .circle {
   height: 90px;
-  width: 100px;
+  width: 90px;
   position: absolute;
   animation: rotate 5s linear infinite;
 }
@@ -70,19 +76,6 @@
   }
 }
 
-.container_not_found,
-.container_error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 0rem 15rem;
-  border-radius: 0.55rem;
-  margin-top: 4rem;
-  gap: 1rem;
-  padding: 40px 40px;
-}
-
 .icon {
   font-size: 15rem;
   display: flex;
@@ -91,14 +84,14 @@
 .product_not_found,
 .message {
   color: var(--new_primary);
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: bold;
   text-align: center;
 }
 
 .oops {
   color: var(--new_secondary);
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-align: center;
 }
 
@@ -134,7 +127,7 @@
 .no_products_text {
   display: flex;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1rem;
   position: relative;
   color: var(--new_secondary);
 }
@@ -150,15 +143,12 @@
 
 .container_with_products {
   border-radius: 0.55rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit minmax(200px, 1fr));
 }
 
 .container_order_summary {
-  display: grid;
-  grid-template-columns: repeat(auto-fit minmax(200px, 1fr));
   border-radius: 0.55rem;
-  height: 200px;
+  height: 100%;
+  box-sizing: border-box;
   padding: 15px 15px;
   color: var(--new_soft_secondary);
   box-shadow: var(--nm_shadow);
@@ -166,7 +156,9 @@
 }
 
 .container_order_summary > div {
-  padding-bottom: 5px;
+  padding-bottom: 10px;
+  display: block;
+  text-align: center;
 }
 
 .order_summary {
@@ -200,7 +192,13 @@
   font-weight: bold;
 }
 
+.money_save,
 .total_items,
+.number_total {
+  margin-top: 5px;
+}
+
+.number_items,
 .total_price {
   display: flex;
   justify-content: space-between;
@@ -232,57 +230,12 @@
   font-weight: bold;
   height: 2.2rem;
   padding: 0 1rem;
-  margin: 10px;
   background-color: var(--bg);
 }
 
 .buy_btn:hover {
   cursor: pointer;
   box-shadow: inset -3px -3px 6px #fff, inset 3px 3px 6px #b8b9be;
-}
-
-@media (width <1790px) {
-  .container_order_summary {
-    width: 190px;
-    height: 270px;
-    padding: 15px 15px;
-  }
-
-  .number_total {
-    font-size: 1rem;
-  }
-}
-
-@media (width < 1510px) {
-  .container_order_summary {
-    width: 200px;
-    height: 250px;
-    padding: 15px 15px;
-  }
-}
-
-@media (width < 1360px) {
-  .container_order_summary {
-    width: 150px;
-    height: 200px;
-    padding: 15px 15px;
-  }
-  .order_summary {
-    font-size: 0.8rem;
-  }
-  .money_save,
-  .saved_with,
-  .total_items,
-  .total_price,
-  .all_taxes {
-    font-size: 0.6rem;
-  }
-  .number_total {
-    font-size: 0.8rem;
-  }
-  .all_taxes {
-    font-size: 0.6rem;
-  }
 }
 
 @media (width < 1200px) {
@@ -337,8 +290,7 @@
 @media (width < 900px) {
   .main_container,
   .container_with_products,
-  .container_without_products,
-  .container_order_summary {
+  .container_without_products {
     margin: 0rem 0.5rem;
   }
   .header {
@@ -370,34 +322,11 @@
   }
 
   .container_order_summary {
-    width: 300px;
-    height: 190px;
-    padding: 15px 15px;
     margin-bottom: 1rem;
-  }
-  .order_summary,
-  .number_total {
-    font-size: 1.25rem;
   }
 
   .icon {
     font-size: 5rem;
-  }
-  .money_save,
-  .saved_with,
-  .total_items,
-  .total_price,
-  .all_taxes {
-    font-size: 1rem;
-  }
-  .all_taxes {
-    font-size: 1rem;
-  }
-}
-
-@media (width < 400px) {
-  .container_order_summary {
-    width: 280px;
   }
 }
 

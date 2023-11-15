@@ -5,7 +5,7 @@ import { cartIconShoppingCartPage, errorIcon, notFoundIcon } from "../../icons/i
 import BackButtonToHomePage from "../../utilities/BackButtonToHomePage"
 import { calculateDiscountedPrice } from "../../utilities/sharedFunctions"
 import styles from "./CartPage.module.css"
-import CartProduct from "./CartProduct/CartProduct"
+import CartArticle from "./CartArticle/CartArticle"
 
 export default function ShoppingCartPage() {
   const [totalPrice, setTotalPrice] = useState<number>(0)
@@ -93,7 +93,7 @@ export default function ShoppingCartPage() {
               const product = products.find((v) => v.id === cartItem.productId)
               if (!product) return null
               if (product) {
-                return <CartProduct key={product.id} product={product} cartItem={cartItem} setQuantity={setQuantity} />
+                return <CartArticle key={product.id} product={product} cartItem={cartItem} setQuantity={setQuantity} />
               }
             })
           ) : (
@@ -111,8 +111,8 @@ export default function ShoppingCartPage() {
               <div className={styles.money_save}> ${calculateSavings(products, cartItems).toFixed(2)} </div>
             </div>
 
-            <div className={styles.total_items}>
-              Total items: <div>{totalItems}</div>
+            <div className={styles.number_items}>
+              Total items: <div className={styles.total_items}>{totalItems}</div>
             </div>
             <div className={styles.total_price}>
               Total price: <div className={styles.number_total}> ${totalPrice.toFixed(2)} </div>

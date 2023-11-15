@@ -14,8 +14,6 @@ export default function CategoriesPage() {
   const { products, error, loadingFetchProducts } = useStoreContext()
   const { favorites } = useFavContext()
 
-  const err = true
-
   if (error) {
     return (
       <div className={styles.container_error}>

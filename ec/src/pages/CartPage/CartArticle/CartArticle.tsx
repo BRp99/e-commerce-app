@@ -1,9 +1,10 @@
+import { NavLink } from "react-router-dom"
 import QuantitySelector from "../../../components/QuantityButton/QuantitySelector/QuantitySelector"
 import { CartItem, useCartContext } from "../../../context/CartContext"
 import { Product } from "../../../context/StoreContext"
 import { garbageIcon } from "../../../icons/icons"
 import { calculateDiscountedPrice } from "../../../utilities/sharedFunctions"
-import styles from "./CartProduct.module.css"
+import styles from "./CartArticle.module.css"
 
 interface Props {
   product: Product
@@ -11,14 +12,16 @@ interface Props {
   setQuantity: (productId: number, quantity: number) => void
 }
 
-export default function CartProduct({ product, cartItem, setQuantity }: Props) {
+export default function CartArticle({ product, cartItem, setQuantity }: Props) {
   const { removeFromCart } = useCartContext()
 
   return (
     <div key={product.id} className={styles.container}>
-      <div className={styles.container_thumbnail}>
-        <img className={styles.img_thumb} src={product.thumbnail} alt={product.title} />
-      </div>
+      <NavLink to={`/product/${product.id}`} className={styles.nav_link}>
+        <div className={styles.container_thumbnail}>
+          <img className={styles.img_thumb} src={product.thumbnail} alt={product.title} />
+        </div>
+      </NavLink>
       <div className={styles.container_info_product}>
         {product.discountPercentage > 0 ? (
           <>
