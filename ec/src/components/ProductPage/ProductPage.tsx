@@ -10,7 +10,7 @@ import { calculateDiscountedPrice } from "../../utilities/sharedFunctions"
 import { errorIcon, heartIconAddFavorites, heartIconRemoveFavorites, notFoundIcon } from "../../icons/icons"
 
 export default function ProductPage() {
-  const { products, error, loadingFetchProducts } = useStoreContext()
+  const { products, loadingFetchProducts } = useStoreContext()
 
   const { productId } = useParams<{ productId: string | undefined }>()
 
@@ -20,6 +20,34 @@ export default function ProductPage() {
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null)
   const [imgClic, setImgClic] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
+
+  const fetchProducts = () => {
+    setError(null)
+    setLoading(true)
+    fetch(`https://dummyjson.com/products`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && Array.isArray(data.products)) {
+          setFilteredProducts(data.products)
+        } else {
+          setFilteredProducts([])
+        }
+      })
+      .catch((error) => {
+        console.error("Error find data:", error)
+        setError("Error")
+        setFilteredProducts([])
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+  useEffect(() => {
+    fetchProducts()
+  }, [])
 
   useEffect(() => {
     if (productId === undefined || !products) {

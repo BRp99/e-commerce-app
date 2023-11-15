@@ -14,15 +14,6 @@ export default function PromotionCard({ thumbnail, brand, product }: Props) {
   const { loadingFetchProducts, error } = useStoreContext()
   const discountedPrice = product.price - (product.price * product.discountPercentage) / 100
 
-  if (error) {
-    return (
-      <div className={styles.container_error}>
-        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
-        <div className={styles.oops}> Please try again later. </div>
-      </div>
-    )
-  }
-
   if (loadingFetchProducts) {
     return (
       <div className={styles.nm_loading}>
@@ -35,12 +26,20 @@ export default function PromotionCard({ thumbnail, brand, product }: Props) {
       </div>
     )
   }
-
   if (!product) {
     return (
       <div className={styles.container_not_found}>
         <div className={styles.icon}>{notFoundIcon}</div> <div className={styles.product_not_found}>Product not found!</div>
         <div className={styles.oops}> Oops! Looks like this product is currently unavailable. Please check again later!</div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className={styles.container_error}>
+        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
+        <div className={styles.oops}> Please try again later. </div>
       </div>
     )
   }

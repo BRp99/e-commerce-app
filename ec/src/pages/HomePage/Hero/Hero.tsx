@@ -14,15 +14,6 @@ export default function Hero({ products }: Props) {
 
   const promoProducts: Product[] = getPromoProducts(productsWithMoreThan17Discount, 4)
 
-  if (error) {
-    return (
-      <div className={styles.container_error}>
-        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
-        <div className={styles.oops}> Please try again later. </div>
-      </div>
-    )
-  }
-
   if (loadingFetchProducts) {
     return (
       <div className={styles.nm_loading}>
@@ -32,6 +23,15 @@ export default function Hero({ products }: Props) {
         <div className={styles.text}>
           Loading in progress! <div className={styles.second_text}>Feel free to twiddle your thumbs and we'll have everything sorted shortly.</div>
         </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className={styles.container_error}>
+        <div className={styles.icon}>{errorIcon}</div> <div className={styles.message}> Oops! Something went wrong.</div>
+        <div className={styles.oops}> Please try again later. </div>
       </div>
     )
   }
