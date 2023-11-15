@@ -307,6 +307,7 @@
     border-radius: 0;
   }
   .img_thumbnail {
+    margin: 0 0.5rem;
     width: 100vw;
     height: 300px;
     border-radius: 0;
@@ -332,27 +333,8 @@
     max-width: none;
     order: 0;
   }
-}
 
-@media (width < 475px) {
-  .images {
-    width: 400px;
-  }
-}
-
-@media (width < 435px) {
-  .images {
-    width: 360px;
-  }
-}
-
-@media (width < 390px) {
-  .images {
-    width: 300px;
-  }
-}
-@media (width < 325px) {
-  .images {
-    width: 260px;
+  .container {
+    margin: 0 0.5rem;
   }
 }

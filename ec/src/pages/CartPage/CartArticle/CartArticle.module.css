@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 2fr;
   border-radius: 0.55rem;
   margin-bottom: 30px;
-  height: 180px;
+  height: 200px;
   box-shadow: var(--nm_shadow);
   border: var(--nm_border);
 }
@@ -13,14 +13,14 @@
   grid-row: 1;
   object-fit: cover;
   flex: 1;
-  height: 180px;
+  height: 200px;
   border-radius: 0.55rem;
   min-width: 100px;
 }
 
 .img_thumb {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
   display: flex;
   align-items: center;

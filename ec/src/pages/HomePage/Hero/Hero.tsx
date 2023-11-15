@@ -13,6 +13,7 @@ export default function Hero({ products }: Props) {
   const { error, loadingFetchProducts } = useStoreContext()
 
   const promoProducts: Product[] = getPromoProducts(productsWithMoreThan17Discount, 4)
+
   if (error) {
     return (
       <div className={styles.container_error}>

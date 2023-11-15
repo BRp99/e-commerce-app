@@ -20,7 +20,6 @@
   border-radius: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  background-color: red;
 }
 
 .container_images {
@@ -223,4 +222,10 @@
   transform: translateX(-5px);
   box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
   transform: translateY(-2px);
+}
+
+@media (width < 685px) {
+  .container {
+    margin: 0 0.5rem;
+  }
 }

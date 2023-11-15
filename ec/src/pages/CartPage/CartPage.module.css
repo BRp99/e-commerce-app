@@ -290,7 +290,8 @@
 @media (width < 900px) {
   .main_container,
   .container_with_products,
-  .container_without_products {
+  .container_without_products,
+  .container_order_summary {
     margin: 0rem 0.5rem;
   }
   .header {
@@ -321,17 +322,7 @@
     justify-content: flex-start;
   }
 
-  .container_order_summary {
-    margin-bottom: 1rem;
-  }
-
   .icon {
     font-size: 5rem;
-  }
-}
-
-@media (width < 375px) {
-  .no_products_text {
-    font-size: 1rem;
   }
 }

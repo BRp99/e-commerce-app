@@ -7,9 +7,11 @@
   text-align: center;
   flex-direction: column;
   border-radius: 0.55rem;
-  /* margin-top: 2rem; */
   gap: 1rem;
   padding: 40px 40px;
+}
+.nm_loading {
+  gap: 2rem;
 }
 
 .wrapper {
