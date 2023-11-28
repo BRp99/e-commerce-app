@@ -27,3 +27,8 @@ Welcome to my e-commerce app! Here you will find information about this project 
 - I created my own hook to store information in Local Storage, providing not only additional functionality, but also a deeper understanding of how data persistence can be managed efficiently;
 - Learn about the importance of giving objects meaningful names to make code more readable;
 - Choice of style: neumorphic style, because it is no longer used and I wanted to understand this style better.
+
+##Contact
+Fell free to contact me
+
+**Email:** [bp111199@gmail.com](mailto:bp111199@gmail.com)
