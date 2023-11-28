@@ -29,5 +29,6 @@ Welcome to my e-commerce app! Here you will find information about this project 
 - Choice of style: neumorphic style, because it is no longer used and I wanted to understand this style better.
 
 ##Contact
+Fell free to contact me
 
-**Email:** [bp111199@gmail.com](mailto:bp111199@gmail.com)
+Email: [bp111199@gmail.com](mailto:bp111199@gmail.com)
