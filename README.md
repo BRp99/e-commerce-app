@@ -12,7 +12,8 @@ Welcome to my e-commerce app! Here you will find information about this project 
 ## Goal
 - Learn how to fetch;
 - Try context and build an application that follows a solid architecture, based on reusable and scalable components for future evolutions;
-- Learn how to make React suspense without using React.Suspense.
+- Learn how to make React suspense without using React.Suspense;
+- Learn how to do mobile phone responsive.
 
 ## Code structure
 - Folders organized into logical folders to facilitate code maintenance and navigation;
