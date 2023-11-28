@@ -3,7 +3,7 @@
 Welcome to my e-commerce app! Here you will find information about this project that I created as a Frontend Developer.
 
 ## Technnologies
-- React.js
+- React.JS
 - JavaScript
 - Typescript
 - HTML
@@ -13,6 +13,7 @@ Welcome to my e-commerce app! Here you will find information about this project 
 - Learn how to fetch;
 - Try context and build an application that follows a solid architecture, based on reusable and scalable components for future evolutions;
 - Learn how to make React suspense without using React.Suspense;
+- Use Dynamic Routing with React Router;
 - Learn how to do mobile phone responsive.
 
 ## Code structure
