@@ -10,7 +10,9 @@ Welcome to my e-commerce app! Here you will find information about this project 
 - CSS
 
 ## Goal
-Learn how to fetch, use context and build an application that follows a solid architecture, based on reusable and scalable components for future evolutions.
+- Learn how to fetch;
+- Try context and build an application that follows a solid architecture, based on reusable and scalable components for future evolutions;
+- Learn how to make React suspense without using React.Suspense.
 
 ## Code structure
 - Folders organized into logical folders to facilitate code maintenance and navigation;
