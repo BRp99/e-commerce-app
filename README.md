@@ -2,7 +2,7 @@
 
 Welcome to my e-commerce app! Here you will find information about this project that I created as a Frontend Developer.
 
-## Technnologies
+## Technologies
 - React.JS
 - JavaScript
 - Typescript
@@ -10,15 +10,15 @@ Welcome to my e-commerce app! Here you will find information about this project 
 - CSS
 
 ## Goal
-- Learn how to fetch;
-- Try context and build an application that follows a solid architecture, based on reusable and scalable components for future evolutions;
-- Learn how to make React suspense without using React.Suspense;
+- Learn how to use the Fetch API;
+- Learn how to use the React Context API and build an application based on reusable and scalable components for future evolutions;
+- Learn how to make suspense components without using React.Suspense;
 - Use Dynamic Routing with React Router;
-- Learn how to do mobile phone responsive;
+- Learn how to build a responsive application;
 - Start using GitHub.
 
 ## Code structure
-- Folders organized into logical folders to facilitate code maintenance and navigation;
+- Folders organized into a logical structure to facilitate code maintenance and IDE navigation;
 - I use ESLint configured for Typescript to reduce the incidence of bugs.
 
 ## Features
