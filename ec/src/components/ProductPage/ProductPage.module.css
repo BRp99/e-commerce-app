@@ -337,4 +337,7 @@
   .container {
     margin: 0 0.5rem;
   }
+  .container_info_product {
+    border-radius: 0;
+  }
 }
