@@ -8,6 +8,7 @@ Welcome to my e-commerce app! Here you will find information about this project 
 - Typescript
 - HTML
 - CSS
+- Cypress
 
 ## Goal
 - Learn how to use the Fetch API;
@@ -15,7 +16,8 @@ Welcome to my e-commerce app! Here you will find information about this project 
 - Learn how to make suspense components without using React.Suspense;
 - Use Dynamic Routing with React Router;
 - Learn how to build a responsive application;
-- Start using GitHub.
+- Start using GitHub;
+- Learn Cypress.
 
 ## Code structure
 - Folders organized into a logical structure to facilitate code maintenance and IDE navigation;
