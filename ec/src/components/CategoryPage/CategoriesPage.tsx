@@ -53,16 +53,24 @@ export default function CategoriesPage() {
   return (
     <div>
       <div className={styles.header}>
-        <div className={styles.back_button}>
+        <div data-cy="cypress-back-button" className={styles.back_button}>
           <BackButtonToHomePage />
         </div>
 
-        <h3 className={styles.category_title}>{category?.replaceAll(/[-]/g, " ")} </h3>
+        <h3 data-cy="cypress-category-title" className={styles.category_title}>
+          {category?.replaceAll(/[-]/g, " ")}{" "}
+        </h3>
       </div>
       <div className={styles.container}>
         <div className={styles.product_summary}>
           {categoryProducts.map((product) => (
-            <ProductCard key={product.id} product={product} inFavorites={isProductInFavorites(product.id)} inCart={isProductInCart(product.id)} />
+            <ProductCard
+              data-cy="cypress-product-card"
+              key={product.id}
+              product={product}
+              inFavorites={isProductInFavorites(product.id)}
+              inCart={isProductInCart(product.id)}
+            />
           ))}
         </div>
       </div>

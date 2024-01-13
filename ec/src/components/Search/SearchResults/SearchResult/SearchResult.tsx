@@ -9,7 +9,7 @@ interface Props {
 
 export default function SearchResult({ result, onProductSelected }: Props) {
   return (
-    <NavLink to={"product/" + result.id} onClick={onProductSelected} className={styles.container}>
+    <NavLink className={styles.container} to={"product/" + result.id} onClick={onProductSelected}>
       {result.title}
     </NavLink>
   )

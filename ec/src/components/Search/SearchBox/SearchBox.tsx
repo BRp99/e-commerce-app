@@ -22,15 +22,16 @@ export default function SearchBox({ onQueryChange, query }: Props) {
   }
 
   return (
-    <form className={styles.container} onSubmit={(e) => onSubmit(e)}>
+    <form data-testid="search-box-form" className={styles.container} onSubmit={(e) => onSubmit(e)}>
       <input
+        data-testid="search-box-input"
         className={styles.search_input}
         type="text"
         placeholder="What are you looking for?"
         value={query}
         onChange={(e) => handleChange(e.target.value)}
       />
-      <button type="submit" className={styles.search_icon}>
+      <button data-testid="search-box-button" type="submit" className={styles.search_icon}>
         {searchIcon}
       </button>
     </form>
